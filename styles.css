@@ -33,11 +33,11 @@ body, html {
 }
 
 .coin-text {
-    margin-right: 5px;
-}
+    margin-right: -500px;
+}   margin-left: -50px;
 
 .coin-amount {
-    margin-right: 10px;
+    margin-right: -490px;
 }
 
 .coin-info img {
