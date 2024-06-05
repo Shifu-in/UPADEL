@@ -211,3 +211,10 @@ body, html {
     text-align: center;
     margin-top: 20px;
 }
+
+.text-container-store {
+    width: 90%;
+    max-width: 300px;
+    position: relative;
+    margin-top: -300px; /* Поднимаем контейнер на 300 пикселей вверх */
+}
