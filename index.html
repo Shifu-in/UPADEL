@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Splash Screen</title>
+    <title>Main Screen</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         @font-face {
@@ -13,10 +13,37 @@
     </style>
 </head>
 <body>
-    <div class="splash-screen">
-        <div class="icon" id="icon"><!-- Icon placeholder --></div>
-        <div class="title" id="title">SIMU LIFE</div>
-        <div class="version" id="version">Version 1.0</div>
+    <div class="main-screen">
+        <div class="header">
+            <div class="toggle-switch">
+                <input type="checkbox" id="switch" /><label for="switch"></label>
+            </div>
+            <div class="coin-info">
+                <span>Young coin</span>
+                <span id="coin-amount">4884401</span>
+                <img src="assets/images/coins.svg" alt="Coins">
+            </div>
+        </div>
+        <div class="content">
+            <!-- Main content goes here -->
+        </div>
+        <div class="navigation">
+            <div class="nav-item" id="nav-store">
+                <img src="assets/images/store.svg" alt="Store">
+            </div>
+            <div class="nav-item" id="nav-wallet">
+                <img src="assets/images/wallet.svg" alt="Wallet">
+            </div>
+            <div class="nav-item selected" id="nav-home">
+                <img src="assets/images/home.svg" alt="Home">
+            </div>
+            <div class="nav-item" id="nav-stats">
+                <img src="assets/images/stats-up-square.svg" alt="Stats">
+            </div>
+            <div class="nav-item" id="nav-fun">
+                <img src="assets/images/fun.svg" alt="Fun">
+            </div>
+        </div>
     </div>
 </body>
 </html>
