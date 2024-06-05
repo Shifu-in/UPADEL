@@ -93,6 +93,7 @@ body, html {
 .button {
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 .page-controls {
@@ -133,6 +134,7 @@ body, html {
     align-items: center;
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 .nav-item img {
