@@ -1,254 +1,134 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Убираем прокрутку */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000000;
-    font-family: 'Discovery', Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Screen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'Discovery';
+            src: url('assets/fonts/discovery%20font.woff') format('woff');
+        }
+    </style>
+</head>
+<body>
+    <div class="main-screen" id="home-page">
+        <div class="header">
+            <div class="coin-info">
+                <span class="coin-text">Young coin</span>
+                <span class="coin-amount">4884401</span>
+                <img src="assets/images/coins.svg" alt="Coins">
+            </div>
+        </div>
+        <div class="content">
+            <img src="assets/images/Ai.svg" alt="Character" class="character">
+            <div class="text-container">
+                <div class="text-background">
+                    <p class="text-main">Your game welcome instruction</p>
+                    <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-.main-screen {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: absolute;
-}
+    <div class="main-screen" id="store-page" style="display: none;">
+        <div class="content-group">
+            <div class="upgrades">
+                <h2>UPGRADES</h2>
+                <div class="upgrade-item">
+                    <div class="upgrade-icon">
+                        <img src="assets/images/апгрейд 1.svg" alt="GYM">
+                    </div>
+                    <div class="upgrade-details">
+                        <h3>GYM</h3>
+                        <p>500 | level 0/10<br>1 Young coin - sec</p>
+                    </div>
+                    <button class="upgrade-button">BUY</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-icon">
+                        <img src="assets/images/апгрейд 2.svg" alt="AI-TAP">
+                    </div>
+                    <div class="upgrade-details">
+                        <h3>AI-TAP</h3>
+                        <p>50,000 | level 0/10<br>5 Young coin - sec</p>
+                    </div>
+                    <button class="upgrade-button">BUY</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-icon">
+                        <img src="assets/images/апгрейд 3.svg" alt="AIRDROP">
+                    </div>
+                    <div class="upgrade-details">
+                        <h3>AIRDROP</h3>
+                        <p>500,000 | level 0/10<br>15 Young coin - sec</p>
+                    </div>
+                    <button class="upgrade-button">BUY</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-icon">
+                        <img src="assets/images/апгрейд 4.svg" alt="DeFi">
+                    </div>
+                    <div class="upgrade-details">
+                        <h3>DeFi</h3>
+                        <p>1,000,000 | level 0/10<br>30 Young coin - sec</p>
+                    </div>
+                    <button class="upgrade-button">BUY</button>
+                </div>
+            </div>
+            <div class="text-container-store">
+                <div class="text-background">
+                    <p class="text-main">Upgrades? instruction</p>
+                    <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-.header {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    padding: 20px;
-    position: relative;
-}
+    <div class="main-screen" id="wallet-page" style="display: none;">
+        <p class="coming-soon">Coming Soon</p>
+    </div>
 
-.coin-info {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    position: absolute;
-    top: 20px;
-    right: 20px; /* Разместим текст справа */
-}
+    <div class="main-screen" id="stats-page" style="display: none;">
+        <div class="background-room">
+            <div class="text-container-room">
+                <div class="text-background">
+                    <p class="text-main">Это дом вашего персонажа</p>
+                    <p class="text-sub">Персонаж скоро вернётся домой и ваше приключение начнётся...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-.coin-text {
-    margin-right: 5px;
-}
+    <div class="main-screen" id="fun-page" style="display: none;">
+        <p class="coming-soon">Coming Soon</p>
+    </div>
 
-.coin-amount {
-    margin-right: 10px;
-}
+    <div class="navigation">
+        <div class="nav-item" id="nav-store">
+            <img src="assets/images/store.svg" alt="Store">
+        </div>
+        <div class="nav-item" id="nav-wallet">
+            <img src="assets/images/wallet.svg" alt="Wallet">
+        </div>
+        <div class="nav-item" id="nav-home">
+            <img src="assets/images/home.svg" alt="Home">
+        </div>
+        <div class="nav-item" id="nav-stats">
+            <img src="assets/images/stats-up-square.svg" alt="Stats">
+        </div>
+        <div class="nav-item" id="nav-fun">
+            <img src="assets/images/fun.svg" alt="Fun">
+        </div>
+    </div>
 
-.coin-info img {
-    width: 24px;
-    height: 24px;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-grow: 1;
-}
-
-.character {
-    width: 440px; /* Размер изображения персонажа */
-    height: auto;
-    margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
-    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
-    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
-}
-
-.text-container {
-    width: 90%;
-    max-width: 300px;
-    position: relative;
-}
-
-.text-background {
-    background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
-    background-size: cover;
-    padding: 20px;
-    border-radius: 20px;
-    color: #fff;
-    text-align: center;
-}
-
-.text-main {
-    font-size: 18px;
-    margin: 0;
-}
-
-.text-sub {
-    font-size: 14px;
-    margin: 10px 0 20px 0;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-}
-
-.button {
-    width: 50px;
-    height: 50px;
-}
-
-/* Убираем элементы dots */
-.page-controls {
-    display: none;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background-color: #f0f0f0;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 400px;
-    position: absolute;
-    bottom: 20px;
-}
-
-.nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-}
-
-.nav-item img {
-    width: 24px;
-    height: 24px;
-}
-
-.upgrades {
-    width: 100%;
-    max-width: 400px;
-    background-color: #1c1c1e;
-    border-radius: 20px;
-    padding: 20px;
-}
-
-.upgrades h2 {
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 20px;
-}
-
-.upgrade-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.upgrade-item:last-child {
-    margin-bottom: 0;
-}
-
-.upgrade-icon {
-    width: 50px;
-    height: 50px;
-    background-color: #2c2c2e;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.upgrade-icon img {
-    width: 30px;
-    height: 30px;
-}
-
-.upgrade-details {
-    flex-grow: 1;
-    margin-left: 20px;
-}
-
-.upgrade-details h3 {
-    color: #fff;
-    margin: 0;
-    font-size: 16px;
-}
-
-.upgrade-details p {
-    color: #888;
-    margin: 5px 0 0;
-    font-size: 14px;
-}
-
-.upgrade-button {
-    background-color: #ff3b30;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.upgrade-button:hover {
-    background-color: #ff5e57;
-}
-
-.coming-soon {
-    color: #fff;
-    font-size: 24px;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.text-container-store {
-    width: 90%;
-    max-width: 300px;
-    position: relative;
-    margin: 0 auto; /* Центрирование по горизонтали */
-    margin-top: 20px; /* Adjust the margin as needed */
-    margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
-    text-align: center;
-}
-
-.content-group {
-    margin-top: 150px; /* Lower the group of containers by 150px */
-}
-
-.background-room {
-    background: url('assets/images/Фон%20комната.svg') no-repeat center center;
-    background-size: cover; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.text-container-room {
-    width: 90%;
-    max-width: 300px;
-    margin-top: 420px; /* Опустить контейнер текста на 200 пикселей */
-    margin-left: 20px; /* Сдвиг правее на 20 пикселей */
-}
-
-/* Updated styles for stats-page */
-#stats-page {
-    background: url('assets/images/Фон%20комната.svg') no-repeat center center;
-    background-size: cover; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    <script src="script.js"></script>
+</body>
+</html>
