@@ -61,9 +61,9 @@ body, html {
 .character {
     width: 440px; /* Размер изображения персонажа */
     height: auto;
-    margin-bottom: -30px; /* Соприкосновение с фоном текста */
-    margin-top: 30px;
-    margin-left: -40px; /* Сдвиг влево на 40 пикселей */
+    margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
+    margin-top: 25px; /* Перемещение вверх на 5 пикселей */
+    margin-left: -30px; /* Сдвиг вправо на 10 пикселей */
 }
 
 .text-container {
