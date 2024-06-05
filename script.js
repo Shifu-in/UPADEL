@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const character = document.getElementById('character'); // Получаем элемент персонажа
 
     let coins = 0; // Инициализация баланса монет с 0
+    let autoClickers = {
+        gym: { level: 0, basePrice: 50, increment: 1 },
+        aiTap: { level: 0, basePrice: 50, increment: 5 },
+        airdrop: { level: 0, basePrice: 500000, increment: 15 },
+        defi: { level: 0, basePrice: 1000000, increment: 30 },
+    };
 
     const pages = {
         'home-page': homePage,
@@ -43,15 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
     upgradeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const upgradeItem = button.parentElement;
-            const priceText = upgradeItem.querySelector('.upgrade-details p').textContent;
-            const price = parseInt(priceText.split('|')[0].trim().replace(/,/g, ''));
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
 
             if (coins >= price) {
                 coins -= price;
                 coinAmountSpan.textContent = coins;
-                alert('Upgrade purchased!');
-            } else {
-                alert('Not enough coins!');
+                autoClickers[upgradeType].level++;
+                if (autoClickers[upgradeType].level === 1) {
+                    startAutoClicker(upgradeType);
+                }
+                updateUpgradePrices();
             }
         });
     });
@@ -77,6 +85,36 @@ document.addEventListener("DOMContentLoaded", () => {
         // Удаление анимации монеты после завершения анимации
         coinAnimation.addEventListener('animationend', () => {
             coinAnimation.remove();
+        });
+    };
+
+    const getUpgradePrice = (upgradeType) => {
+        const basePrice = autoClickers[upgradeType].basePrice;
+        const level = autoClickers[upgradeType].level;
+        return Math.floor(basePrice * Math.pow(1.5, level));
+    };
+
+    const startAutoClicker = (upgradeType) => {
+        setInterval(() => {
+            coins += autoClickers[upgradeType].increment;
+            coinAmountSpan.textContent = coins;
+        }, 1000);
+    };
+
+    const updateUpgradePrices = () => {
+        upgradeButtons.forEach(button => {
+            const upgradeItem = button.parentElement;
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
+            const priceText = upgradeItem.querySelector('.upgrade-details p');
+            const [pricePart, restText] = priceText.textContent.split('|');
+            priceText.innerHTML = `${price} | ${restText}`;
+            
+            if (coins >= price) {
+                button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
+            } else {
+                button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
+            }
         });
     };
 
