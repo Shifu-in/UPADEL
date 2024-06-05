@@ -57,27 +57,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Добавляем обработчик события клика на персонажа
-    character.addEventListener('click', () => {
+    character.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(); // Показ анимации монеты
+        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
     });
 
     // Функция для отображения анимации монеты
-    const showCoinAnimation = () => {
+    const showCoinAnimation = (x, y) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
-        coinAnimation.textContent = '+1';
+        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
         document.body.appendChild(coinAnimation);
 
-        // Позиционирование анимации монеты рядом с персонажем
-        const characterRect = character.getBoundingClientRect();
-        coinAnimation.style.left = `${characterRect.right + 10}px`;
-        coinAnimation.style.top = `${characterRect.top}px`;
+        // Позиционирование анимации монеты рядом с местом клика
+        coinAnimation.style.left = `${x}px`;
+        coinAnimation.style.top = `${y}px`;
 
         // Удаление анимации монеты после завершения анимации
         coinAnimation.addEventListener('animationend', () => {
             coinAnimation.remove();
         });
     };
+
+    // Предотвращаем зум и скролл на мобильных устройствах
+    document.addEventListener('gesturestart', (e) => e.preventDefault());
+    document.addEventListener('gesturechange', (e) => e.preventDefault());
+    document.addEventListener('gestureend', (e) => e.preventDefault());
+
+    // Предотвращаем двойной тап для зума
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (event) => {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
 });
