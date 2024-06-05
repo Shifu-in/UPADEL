@@ -66,6 +66,7 @@ body, html {
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
     margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
+    cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
 .text-container {
@@ -251,4 +252,24 @@ body, html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+/* Стили для анимации монет */
+.coin-animation {
+    position: absolute;
+    color: #ffd700; /* Золотой цвет для монет */
+    font-size: 18px;
+    font-weight: bold;
+    animation: coin-fall 1s ease-out forwards;
+}
+
+@keyframes coin-fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
 }
