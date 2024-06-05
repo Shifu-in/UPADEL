@@ -16,7 +16,7 @@ body, html {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     position: absolute;
 }
@@ -216,5 +216,5 @@ body, html {
     width: 90%;
     max-width: 300px;
     position: relative;
-    margin-top: 10px; /* Adjust the margin as needed */
+    margin-top: 20px; /* Adjust the margin as needed */
 }
