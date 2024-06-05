@@ -254,34 +254,4 @@ body, html {
     background-size: cover; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* Стили для анимации монет */
-.coin-animation {
-    position: absolute;
-    color: #ffd700; /* Золотой цвет для монет */
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    animation: coin-fall 1s ease-out forwards;
-}
-
-.coin-animation img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-@keyframes coin-fall {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-}
+    align
