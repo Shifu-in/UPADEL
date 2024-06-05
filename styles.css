@@ -212,9 +212,8 @@ body, html {
     margin-top: 20px;
 }
 
-.text-container-store {
+.text-container {
     width: 90%;
     max-width: 300px;
     position: relative;
-    margin-top: -300px; /* Поднимаем контейнер на 300 пикселей вверх */
 }
