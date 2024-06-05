@@ -9,6 +9,10 @@ body, html {
     align-items: center;
     background-color: #000000;
     font-family: 'Discovery', Arial, sans-serif;
+    -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
+    -ms-user-select: none; /* Запрещаем выделение текста на IE */
+    user-select: none; /* Запрещаем выделение текста на всех браузерах */
+    touch-action: manipulation; /* Запрещаем жесты масштабирования */
 }
 
 .main-screen {
@@ -260,7 +264,15 @@ body, html {
     color: #ffd700; /* Золотой цвет для монет */
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
     animation: coin-fall 1s ease-out forwards;
+}
+
+.coin-animation img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 
 @keyframes coin-fall {
