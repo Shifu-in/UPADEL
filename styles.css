@@ -55,7 +55,7 @@ body, html {
 }
 
 .character {
-    width: 150px;
+    width: 200px;
     height: auto;
     margin-bottom: 20px;
 }
@@ -67,10 +67,9 @@ body, html {
 }
 
 .text-background {
-    background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
-    background-size: cover;
+    background-color: #3a3a3a; /* Изменен фон на более темный цвет */
+    border-radius: 20px; /* Закругленные углы */
     padding: 20px;
-    border-radius: 20px;
     color: #fff;
     text-align: center;
 }
@@ -93,6 +92,8 @@ body, html {
 .button {
     width: 50px;
     height: 50px;
+    background-color: #ff4b4b; /* Цвет кнопки */
+    border-radius: 25px;
     cursor: pointer;
 }
 
@@ -119,8 +120,8 @@ body, html {
 .navigation {
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    background-color: #f0f0f0;
+    padding: 10px;
+    background-color: #202020; /* Цвет фона навигации */
     border-radius: 20px;
     width: 100%;
     max-width: 400px;
@@ -134,7 +135,6 @@ body, html {
     align-items: center;
     width: 50px;
     height: 50px;
-    cursor: pointer;
 }
 
 .nav-item img {
