@@ -55,10 +55,10 @@ body, html {
 }
 
 .character {
-    width: 150px; /* Измените это значение для увеличения */
+    width: 350px; /* Измените это значение для увеличения */
     height: auto;
     margin-bottom: 20px;
-    margin-top: -30px; /* Пример перемещения вверх */
+    margin-top: 30px; /* Пример перемещения вверх */
 }
 
 .text-container {
