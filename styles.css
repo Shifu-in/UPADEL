@@ -215,8 +215,10 @@ body, html {
     width: 90%;
     max-width: 300px;
     position: relative;
+    margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 20px; /* Adjust the margin as needed */
     margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
+    text-align: center;
 }
 
 .content-group {
