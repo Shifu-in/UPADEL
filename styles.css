@@ -243,8 +243,7 @@ body, html {
 /* Updated styles for stats-page */
 #stats-page {
     background: url('assets/images/фон-комната.png') no-repeat center center;
-    background-size: 33%; /* Уменьшить размер фонового изображения */
-    background-position: center; /* Центрировать фоновое изображение */
+    background-size: contain; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -254,6 +253,6 @@ body, html {
 .text-container-room {
     width: 90%;
     max-width: 300px;
-    margin-top: 170px; /* Опустить контейнер текста на 150 пикселей */
+    margin-top: 370px; /* Опустить контейнер текста на 200 пикселей */
     margin-left: 20px; /* Сдвиг правее на 20 пикселей */
 }
