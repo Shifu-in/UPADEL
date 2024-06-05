@@ -139,7 +139,6 @@ body, html {
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
-    margin-top: 20px; /* Сдвигаем вниз на 20 пикселей */
 }
 
 .upgrades h2 {
@@ -218,4 +217,8 @@ body, html {
     position: relative;
     margin-top: 20px; /* Adjust the margin as needed */
     margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
+}
+
+.content-group {
+    margin-top: 150px; /* Lower the group of containers by 150px */
 }
