@@ -24,15 +24,16 @@ body, html {
     justify-content: flex-end;
     width: 100%;
     padding: 20px;
+    position: relative;
 }
 
 .coin-info {
     display: flex;
     align-items: center;
     color: #fff;
-    position: absolute; /* Добавлено для фиксации позиции */
-    top: 20px; /* Позиционируем сверху */
-    right: 20px; /* Позиционируем справа */
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Разместим текст справа */
 }
 
 .coin-text {
@@ -58,10 +59,11 @@ body, html {
 }
 
 .character {
-    width: 440px; /* Изменен размер изображения персонажа */
+    width: 440px; /* Размер изображения персонажа */
     height: auto;
-    margin-bottom: -30px; /* Перемещено вниз для соприкосновения с фоном текста */
+    margin-bottom: -30px; /* Соприкосновение с фоном текста */
     margin-top: 30px;
+    margin-left: -10px; /* Сдвиг влево на 10 пикселей */
 }
 
 .text-container {
