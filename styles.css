@@ -58,7 +58,7 @@ body, html {
 }
 
 .text-background {
-    background: url('assets/images/Фон для текста.svg') no-repeat center center;
+    background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
     background-size: cover;
     padding: 20px;
     border-radius: 20px;
@@ -89,40 +89,3 @@ body, html {
 .page-controls {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
-    border-radius: 50%;
-    margin: 0 4px;
-    opacity: 0.5;
-}
-
-.dot.active {
-    opacity: 1;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background-color: #f0f0f0;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 400px;
-}
-
-.nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-}
-
-.nav-item img {
-    width: 24
