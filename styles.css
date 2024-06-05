@@ -30,15 +30,17 @@ body, html {
     display: flex;
     align-items: center;
     color: #fff;
+    position: absolute; /* Добавлено для фиксации позиции */
+    top: 20px; /* Позиционируем сверху */
+    right: 20px; /* Позиционируем справа */
 }
 
 .coin-text {
-    margin-right: -500px;
-    margin-left: -50px;
+    margin-right: 5px;
 }
 
 .coin-amount {
-    margin-right: -490px;
+    margin-right: 10px;
 }
 
 .coin-info img {
@@ -56,10 +58,10 @@ body, html {
 }
 
 .character {
-    width: 490px; /* Увеличен размер изображения персонажа */
+    width: 440px; /* Изменен размер изображения персонажа */
     height: auto;
-    margin-bottom: 20px;
-    margin-top: 80px; /* Перемещено вниз */
+    margin-bottom: -30px; /* Перемещено вниз для соприкосновения с фоном текста */
+    margin-top: 30px;
 }
 
 .text-container {
