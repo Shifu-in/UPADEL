@@ -63,7 +63,7 @@ body, html {
     height: auto;
     margin-bottom: -30px; /* Соприкосновение с фоном текста */
     margin-top: 30px;
-    margin-left: -10px; /* Сдвиг влево на 10 пикселей */
+    margin-left: -40px; /* Сдвиг влево на 40 пикселей */
 }
 
 .text-container {
