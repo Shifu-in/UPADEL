@@ -132,17 +132,17 @@ body, html {
     align-items: center;
     width: 50px;
     height: 50px;
+    background-color: transparent;
+}
+
+.nav-item.active {
+    background-color: #555555;
+    border-radius: 10px;
 }
 
 .nav-item img {
     width: 24px;
     height: 24px;
-}
-
-.nav-item.active img {
-    filter: brightness(1.5); /* Подсвечиваем активный элемент навигации */
-    background-color: rgba(255, 255, 255, 0.1); /* Фоновое выделение */
-    border-radius: 50%; /* Круглая форма */
 }
 
 .upgrades {
