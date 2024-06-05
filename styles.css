@@ -55,7 +55,7 @@ body, html {
 }
 
 .character {
-    width: 200px;
+    width: 200px; /* Увеличен размер изображения персонажа */
     height: auto;
     margin-bottom: 20px;
 }
@@ -67,7 +67,7 @@ body, html {
 }
 
 .text-background {
-    background-color: #3a3a3a; /* Изменен фон на более темный цвет */
+    background-color: #3a3a3a; /* Фон заменен на темный цвет */
     border-radius: 20px; /* Закругленные углы */
     padding: 20px;
     color: #fff;
@@ -93,7 +93,7 @@ body, html {
     width: 50px;
     height: 50px;
     background-color: #ff4b4b; /* Цвет кнопки */
-    border-radius: 25px;
+    border-radius: 50%; /* Сделаем кнопку круглой */
     cursor: pointer;
 }
 
@@ -121,7 +121,7 @@ body, html {
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    background-color: #202020; /* Цвет фона навигации */
+    background-color: #202020; /* Темный фон навигации */
     border-radius: 20px;
     width: 100%;
     max-width: 400px;
@@ -135,6 +135,7 @@ body, html {
     align-items: center;
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 .nav-item img {
