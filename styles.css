@@ -33,13 +33,11 @@ body, html {
 }
 
 .coin-text {
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
-.coin-text span:first-child {
-    margin-bottom: 5px;
+.coin-amount {
+    margin-right: 10px;
 }
 
 .coin-info img {
@@ -125,6 +123,8 @@ body, html {
     border-radius: 20px;
     width: 100%;
     max-width: 400px;
+    position: absolute;
+    bottom: 20px;
 }
 
 .nav-item {
