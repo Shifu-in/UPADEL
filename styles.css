@@ -222,3 +222,20 @@ body, html {
 .content-group {
     margin-top: 150px; /* Lower the group of containers by 150px */
 }
+
+.background-room {
+    background: url('assets/images/фон%20комната.svg') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text-container-room {
+    width: 90%;
+    max-width: 300px;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
