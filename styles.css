@@ -239,3 +239,9 @@ body, html {
     max-width: 300px;
     margin-top: 20px; /* Adjust the margin as needed */
 }
+
+/* Updated styles for stats-page */
+#stats-page {
+    background: url('path/to/stats-up-square.svg') no-repeat center center;
+    background-size: cover;
+}
