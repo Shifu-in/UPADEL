@@ -139,7 +139,7 @@ body, html {
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 120px; /* Сдвигаем вниз на 100 пикселей */
 }
 
 .upgrades h2 {
@@ -203,4 +203,11 @@ body, html {
 
 .upgrade-button:hover {
     background-color: #ff5e57;
+}
+
+.coming-soon {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
 }
