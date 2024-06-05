@@ -33,12 +33,12 @@ body, html {
 }
 
 .coin-text {
-    margin-right: -500px; /* Изменено для перемещения */
-    margin-left: -50px;  /* Исправлено: неправильное закрытие блока кода */
+    margin-right: -500px;
+    margin-left: -50px;
 }
 
 .coin-amount {
-    margin-right: -490px; /* Изменено для перемещения */
+    margin-right: -490px;
 }
 
 .coin-info img {
@@ -56,10 +56,10 @@ body, html {
 }
 
 .character {
-    width: 350px; /* Увеличен размер изображения персонажа */
+    width: 490px; /* Увеличен размер изображения персонажа */
     height: auto;
     margin-bottom: 20px;
-    margin-top: 30px; /* Перемещено вниз */
+    margin-top: 80px; /* Перемещено вниз */
 }
 
 .text-container {
