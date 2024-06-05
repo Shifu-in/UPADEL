@@ -10,25 +10,81 @@ body, html {
     font-family: 'Discovery', Arial, sans-serif;
 }
 
-.splash-screen {
-    text-align: center;
+.main-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px auto;
-    background: url('assets/images/icon.png') no-repeat center center;
-    background-size: contain;
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 }
 
-.title {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 10px;
+.toggle-switch input[type="checkbox"] {
+    display: none;
 }
 
-.version {
-    color: grey;
-    font-size: 12px;
+.toggle-switch label {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle-switch label::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label::before {
+    transform: translateX(20px);
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.coin-info img {
+    margin-left: 10px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+
+.nav-item img {
+    width: 24px;
+    height: 24px;
+}
+
+.nav-item.selected {
+    background-color: #3f3f3f;
+    border-radius: 15px;
 }
