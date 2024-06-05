@@ -138,6 +138,10 @@ body, html {
     height: 24px;
 }
 
+.nav-item.active img {
+    filter: brightness(1.5); /* Подсвечиваем активный элемент навигации */
+}
+
 .upgrades {
     width: 100%;
     max-width: 400px;
