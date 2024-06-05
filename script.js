@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const navFun = document.getElementById('nav-fun');
     const upgradeButtons = document.querySelectorAll('.upgrade-button');
     const coinAmountSpan = document.querySelector('.coin-amount');
+    const character = document.getElementById('character'); // Получаем элемент персонажа
 
-    let coins = parseInt(coinAmountSpan.textContent);
+    let coins = 0; // Инициализация баланса монет с 0
 
     const pages = {
         'home-page': homePage,
@@ -54,4 +55,29 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // Добавляем обработчик события клика на персонажа
+    character.addEventListener('click', () => {
+        coins += 1; // Увеличиваем баланс монет на 1
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(); // Показ анимации монеты
+    });
+
+    // Функция для отображения анимации монеты
+    const showCoinAnimation = () => {
+        const coinAnimation = document.createElement('div');
+        coinAnimation.classList.add('coin-animation');
+        coinAnimation.textContent = '+1';
+        document.body.appendChild(coinAnimation);
+
+        // Позиционирование анимации монеты рядом с персонажем
+        const characterRect = character.getBoundingClientRect();
+        coinAnimation.style.left = `${characterRect.right + 10}px`;
+        coinAnimation.style.top = `${characterRect.top}px`;
+
+        // Удаление анимации монеты после завершения анимации
+        coinAnimation.addEventListener('animationend', () => {
+            coinAnimation.remove();
+        });
+    };
 });
