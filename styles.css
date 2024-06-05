@@ -55,9 +55,10 @@ body, html {
 }
 
 .character {
-    width: 150px;
+    width: 150px; /* Измените это значение для увеличения */
     height: auto;
     margin-bottom: 20px;
+    margin-top: -30px; /* Пример перемещения вверх */
 }
 
 .text-container {
