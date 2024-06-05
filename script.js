@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let coins = 0; // Инициализация баланса монет с 0
     let autoClickers = {
-        gym: { level: 0, basePrice: 50, increment: 1 },
-        aiTap: { level: 0, basePrice: 50, increment: 5 },
-        airdrop: { level: 0, basePrice: 500000, increment: 15 },
-        defi: { level: 0, basePrice: 1000000, increment: 30 },
+        gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
+        aiTap: { level: 0, basePrice: 50, increment: 5, currentRate: 0 },
+        airdrop: { level: 0, basePrice: 500000, increment: 15, currentRate: 0 },
+        defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
 
     const pages = {
@@ -38,6 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const showPage = (pageId) => {
         hideAllPages();
         pages[pageId].style.display = 'flex';
+        updateNavigation(pageId);
+    };
+
+    const updateNavigation = (activePageId) => {
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.classList.remove('active');
+        });
+        document.getElementById(`nav-${activePageId.split('-')[0]}`).classList.add('active');
     };
 
     navHome.addEventListener('click', () => showPage('home-page'));
@@ -56,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 coins -= price;
                 coinAmountSpan.textContent = coins;
                 autoClickers[upgradeType].level++;
+                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
                 if (autoClickers[upgradeType].level === 1) {
                     startAutoClicker(upgradeType);
                 }
@@ -69,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        updateUpgradePrices();
     });
 
     // Функция для отображения анимации монеты
@@ -96,8 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startAutoClicker = (upgradeType) => {
         setInterval(() => {
-            coins += autoClickers[upgradeType].increment;
+            coins += autoClickers[upgradeType].currentRate;
             coinAmountSpan.textContent = coins;
+            updateUpgradePrices();
         }, 1000);
     };
 
@@ -107,8 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
             const price = getUpgradePrice(upgradeType);
             const priceText = upgradeItem.querySelector('.upgrade-details p');
-            const [pricePart, restText] = priceText.textContent.split('|');
-            priceText.innerHTML = `${price} | ${restText}`;
+            const level = autoClickers[upgradeType].level;
+            const rate = autoClickers[upgradeType].currentRate;
+            priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin - sec`;
             
             if (coins >= price) {
                 button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
@@ -123,8 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
 
-    // Предотвращаем двойной тап для зума
-    let lastTouchEnd = 0;
+    // Предотвращаем двойной тап для зума и масштабирования
+    document.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+
     document.addEventListener('touchend', (event) => {
         const now = (new Date()).getTime();
         if (now - lastTouchEnd <= 300) {
