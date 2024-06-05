@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <div class="main-screen">
+    <div class="main-screen" id="home-page">
         <div class="header">
             <div class="coin-info">
                 <span class="coin-text">Young coin</span>
@@ -33,6 +33,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="main-screen" id="store-page" style="display: none;">
         <div class="upgrades">
             <h2>UPGRADES</h2>
             <div class="upgrade-item">
@@ -76,23 +79,26 @@
                 <button class="upgrade-button">BUY</button>
             </div>
         </div>
-        <div class="navigation">
-            <div class="nav-item" id="nav-store">
-                <img src="assets/images/store.svg" alt="Store">
-            </div>
-            <div class="nav-item" id="nav-wallet">
-                <img src="assets/images/wallet.svg" alt="Wallet">
-            </div>
-            <div class="nav-item" id="nav-home">
-                <img src="assets/images/home.svg" alt="Home">
-            </div>
-            <div class="nav-item" id="nav-stats">
-                <img src="assets/images/stats-up-square.svg" alt="Stats">
-            </div>
-            <div class="nav-item" id="nav-fun">
-                <img src="assets/images/fun.svg" alt="Fun">
-            </div>
+    </div>
+
+    <div class="navigation">
+        <div class="nav-item" id="nav-store">
+            <img src="assets/images/store.svg" alt="Store">
+        </div>
+        <div class="nav-item" id="nav-wallet">
+            <img src="assets/images/wallet.svg" alt="Wallet">
+        </div>
+        <div class="nav-item" id="nav-home">
+            <img src="assets/images/home.svg" alt="Home">
+        </div>
+        <div class="nav-item" id="nav-stats">
+            <img src="assets/images/stats-up-square.svg" alt="Stats">
+        </div>
+        <div class="nav-item" id="nav-fun">
+            <img src="assets/images/fun.svg" alt="Fun">
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
