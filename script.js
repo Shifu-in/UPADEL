@@ -1,25 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loading');
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
+    const upgradeButtons = document.querySelectorAll('.upgrade-button');
     const characterHer = document.getElementById('character-her');
     const characterHim = document.getElementById('character');
-    const upgradeButtons = document.querySelectorAll('.upgrade-button');
-    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
+    const genderSwitchInputs = document.querySelectorAll('.gender-switch input[type="radio"]');
 
-    let coins = 0; // Инициализация баланса монет с 0
-    let autoClickers = {
-        gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
-        aiTap: { level: 0, basePrice: 50000, increment: 5, currentRate: 0 },
-        airdrop: { level: 0, basePrice: 500000, increment: 15, currentRate: 0 },
-        defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
+    let coins = 0;
+
+    const autoClickers = {
+        'gym': { level: 0, basePrice: 50, currentRate: 1, increment: 1 },
+        'ai-tap': { level: 0, basePrice: 50000, currentRate: 5, increment: 5 },
+        'airdrop': { level: 0, basePrice: 500000, currentRate: 15, increment: 15 },
+        'defi': { level: 0, basePrice: 1000000, currentRate: 30, increment: 30 }
     };
 
-    // Функция для скрытия экрана загрузки и показа основного контента
     const showContent = () => {
-        document.getElementById('loading').style.display = 'none';
+        loadingScreen.style.display = 'none';
         pages.forEach(page => page.style.display = 'flex');
         document.querySelector('.navigation').style.display = 'flex';
     };
@@ -88,55 +89,31 @@ document.addEventListener("DOMContentLoaded", () => {
     characterHim.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
-        updateUpgradePrices();
+        showCoinAnimation(event.clientX, event.clientY);
     });
 
     characterHer.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
-        updateUpgradePrices();
+        showCoinAnimation(event.clientX, event.clientY);
     });
 
     const showCoinAnimation = (x, y) => {
         const coinAnimation = document.createElement('div');
-        coinAnimation.classList.add('coin-animation');
-        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
-        document.body.appendChild(coinAnimation);
-
-        // Позиционирование анимации монеты рядом с местом клика
+        coinAnimation.className = 'coin-animation';
         coinAnimation.style.left = `${x}px`;
         coinAnimation.style.top = `${y}px`;
+        coinAnimation.innerHTML = '<img src="assets/images/coin.svg" alt="Coin"> +1';
+        document.body.appendChild(coinAnimation);
 
-        // Удаление анимации монеты после завершения анимации
-        coinAnimation.addEventListener('animationend', () => {
-            coinAnimation.remove();
-        });
+        setTimeout(() => {
+            document.body.removeChild(coinAnimation);
+        }, 1000);
     };
 
-    upgradeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const upgradeItem = button.parentElement;
-            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
-            const price = getUpgradePrice(upgradeType);
-
-            if (coins >= price) {
-                coins -= price;
-                coinAmountSpan.textContent = coins;
-                autoClickers[upgradeType].level++;
-                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
-                if (autoClickers[upgradeType].level === 1) {
-                    startAutoClicker(upgradeType);
-                }
-                updateUpgradePrices();
-            }
-        });
-    });
-
     genderSwitchInputs.forEach(input => {
-        input.addEventListener('change', (event) => {
-            if (event.target.value === 'her') {
+        input.addEventListener('change', () => {
+            if (input.value === 'her') {
                 contentHer.style.display = 'flex';
                 contentHim.style.display = 'none';
             } else {
@@ -146,7 +123,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Изначально показываем контент для "him"
-    contentHer.style.display = 'none';
-    contentHim.style.display = 'flex';
+    upgradeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const upgradeItem = button.parentElement;
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
+
+            if (coins >= price && autoClickers[upgradeType].level < 10) {
+                coins -= price;
+                autoClickers[upgradeType].level++;
+                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
+                coinAmountSpan.textContent = coins;
+                startAutoClicker(upgradeType);
+                updateUpgradePrices();
+            }
+        });
+    });
+
+    showPage('home-page');
 });
