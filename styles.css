@@ -119,15 +119,14 @@ body, html {
 
 .text-container {
     width: 270px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 270px;
+    max-width: 300px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
-    margin-bottom: 20px; /* Добавлено чтобы не перекрывало навигацию */
     text-align: left;
 }
 
 .content-group {
-    margin-top: 140px; /* Опущен на 150 пикселей */
+    margin-top: 120px; /* Опущен на 150 пикселей */
 }
 
 .text-background {
