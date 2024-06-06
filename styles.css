@@ -28,7 +28,7 @@ body, html {
 
 .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; /* Размещаем элементы по краям */
     width: 100%;
     padding: 20px;
     position: relative;
@@ -40,7 +40,7 @@ body, html {
     color: #fff;
     position: absolute;
     top: 20px;
-    right: 20px; /* Разместим текст справа */
+    left: 20px; /* Разместим текст слева */
 }
 
 .coin-text {
@@ -54,6 +54,37 @@ body, html {
 .coin-info img {
     width: 24px;
     height: 24px;
+}
+
+.gender-switch {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    padding: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Разместим переключатель справа */
+}
+
+.gender-switch input[type="radio"] {
+    display: none;
+}
+
+.gender-switch label {
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.gender-switch input[type="radio"]:checked + label {
+    background-color: #555555;
+    color: #ffffff;
+}
+
+.gender-switch label:not(:checked) {
+    background-color: #f0f0f0;
+    color: #000000;
 }
 
 .content {
