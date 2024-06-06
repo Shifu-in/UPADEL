@@ -124,6 +124,7 @@ body, html {
     width: 90%;
     max-width: 300px;
     position: relative;
+    text-align: left; /* Выравнивание текста по левому краю */
 }
 
 .text-background {
@@ -132,7 +133,7 @@ body, html {
     padding: 20px;
     border-radius: 20px;
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 .text-main {
@@ -276,7 +277,7 @@ body, html {
     margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 20px; /* Adjust the margin as needed */
     margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
-    text-align: center;
+    text-align: left;
 }
 
 .content-group {
@@ -299,6 +300,7 @@ body, html {
     max-width: 300px;
     margin-top: 420px; /* Опустить контейнер текста на 200 пикселей */
     margin-left: 20px; /* Сдвиг правее на 20 пикселей */
+    text-align: left;
 }
 
 /* Updated styles for stats-page */
