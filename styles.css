@@ -38,9 +38,6 @@ body, html {
     display: flex;
     align-items: center;
     color: #fff;
-    position: absolute;
-    top: 20px;
-    left: 20px; /* Разместим текст слева */
 }
 
 .coin-text {
@@ -62,9 +59,6 @@ body, html {
     background-color: #f0f0f0;
     border-radius: 25px;
     padding: 5px;
-    position: absolute;
-    top: 20px;
-    right: 20px; /* Разместим переключатель справа */
 }
 
 .gender-switch input[type="radio"] {
