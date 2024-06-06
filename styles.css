@@ -102,6 +102,7 @@ body, html {
 .character {
     width: 420px; /* Уменьшено на 10 пикселей */
     height: auto;
+    position: absolute;
     margin-bottom: -35px;
     margin-top: 15px;
     margin-left: -20px;
@@ -195,7 +196,7 @@ body, html {
 }
 
 .upgrades {
-    width: 320px; /* Уменьшен контейнер на 10 пикселей */
+    width: 300px; /* Уменьшен контейнер на 10 пикселей */
     max-width: 320px;
     background-color: #1c1c1e;
     border-radius: 20px;
