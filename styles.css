@@ -109,7 +109,7 @@ body, html {
 }
 
 .character-her {
-    width: 322px; /* Уменьшенный размер на 20% + 10 пикселей */
+    width: 382px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
@@ -117,7 +117,7 @@ body, html {
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
-.text-container-store {
+.text-container {
     width: 270px; /* Уменьшен контейнер на 10 пикселей */
     max-width: 270px;
     position: relative;
@@ -127,7 +127,7 @@ body, html {
 }
 
 .content-group {
-    margin-top: 150px; /* Опущен на 150 пикселей */
+    margin-top: 140px; /* Опущен на 150 пикселей */
 }
 
 .text-background {
