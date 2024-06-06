@@ -120,11 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
     genderSwitchInputs.forEach(input => {
         input.addEventListener('change', () => {
             if (input.value === 'her') {
-                contentHer.style.display = 'block';
+                contentHer.style.display = 'flex';
                 contentHim.style.display = 'none';
             } else {
                 contentHer.style.display = 'none';
-                contentHim.style.display = 'block';
+                contentHim.style.display = 'flex';
             }
         });
     });
