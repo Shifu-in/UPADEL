@@ -13,7 +13,10 @@
     </style>
 </head>
 <body>
-    <div class="main-screen" id="home-page">
+    <div id="loading">
+        <img src="assets/images/loading.gif" alt="Loading...">
+    </div>
+    <div class="main-screen" id="home-page" style="display: none;">
         <div class="header">
             <div class="coin-info">
                 <span class="coin-text">Young coin</span>
@@ -29,20 +32,24 @@
         </div>
         <div class="content" id="content-her" style="display: none;">
             <img src="assets/images/Adel.png" alt="Character" class="character character-her" id="character-her">
-            <div class="text-container text-container-her">
+            <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Your game welcome instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
             </div>
         </div>
         <div class="content" id="content-him">
             <img src="assets/images/Ai.svg" alt="Character" class="character" id="character">
-            <div class="text-container text-container-him">
+            <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Your game welcome instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
             </div>
@@ -98,6 +105,8 @@
                 <div class="text-background">
                     <p class="text-main">Upgrades? instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
             </div>
@@ -123,7 +132,7 @@
         <p class="coming-soon">Coming Soon</p>
     </div>
 
-    <div class="navigation">
+    <div class="navigation" style="display: none;">
         <div class="nav-item" id="nav-home" data-page="home-page">
             <img src="assets/images/home.svg" alt="Home">
         </div>
