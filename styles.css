@@ -44,6 +44,9 @@ body, html {
     display: flex;
     align-items: center;
     color: #fff;
+    position: relative;
+    top: 5px;
+    left: 5px;
 }
 
 .coin-text {
@@ -65,6 +68,9 @@ body, html {
     background-color: #f0f0f0;
     border-radius: 25px;
     padding: 5px;
+    position: relative;
+    top: 5px;
+    right: 5px;
 }
 
 .gender-switch input[type="radio"] {
@@ -97,7 +103,7 @@ body, html {
 }
 
 .character {
-    width: 440px; /* Размер изображения персонажа */
+    width: 430px; /* Уменьшенный размер на 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
@@ -106,7 +112,7 @@ body, html {
 }
 
 .character-her {
-    width: 332px; /* Уменьшенный размер на 20% + 10 пикселей */
+    width: 322px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
@@ -186,8 +192,8 @@ body, html {
 }
 
 .upgrades {
-    width: 100%;
-    max-width: 400px;
+    width: 380px; /* Уменьшен контейнер на 20 пикселей */
+    max-width: 380px;
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
@@ -264,8 +270,8 @@ body, html {
 }
 
 .text-container-store {
-    width: 90%;
-    max-width: 300px;
+    width: 280px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 280px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 20px; /* Adjust the margin as needed */
