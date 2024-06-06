@@ -1,17 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const homePage = document.getElementById('home-page');
-    const storePage = document.getElementById('store-page');
-    const walletPage = document.getElementById('wallet-page');
-    const statsPage = document.getElementById('stats-page');
-    const funPage = document.getElementById('fun-page');
-    const navHome = document.getElementById('nav-home');
-    const navStore = document.getElementById('nav-store');
-    const navWallet = document.getElementById('nav-wallet');
-    const navStats = document.getElementById('nav-stats');
-    const navFun = document.getElementById('nav-fun');
-    const upgradeButtons = document.querySelectorAll('.upgrade-button');
+    const pages = document.querySelectorAll('.main-screen');
+    const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
     const character = document.getElementById('character'); // Получаем элемент персонажа
+    const upgradeButtons = document.querySelectorAll('.upgrade-button');
 
     let coins = 0; // Инициализация баланса монет с 0
     let autoClickers = {
@@ -21,82 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
 
-    const pages = {
-        'home-page': homePage,
-        'store-page': storePage,
-        'wallet-page': walletPage,
-        'stats-page': statsPage,
-        'fun-page': funPage
-    };
-
     const hideAllPages = () => {
-        Object.values(pages).forEach(page => {
+        pages.forEach(page => {
             page.style.display = 'none';
         });
     };
 
     const showPage = (pageId) => {
         hideAllPages();
-        pages[pageId].style.display = 'flex';
+        document.getElementById(pageId).style.display = 'flex';
         updateNavigation(pageId);
     };
 
     const updateNavigation = (activePageId) => {
-        document.querySelectorAll('.nav-item').forEach(navItem => {
+        navItems.forEach(navItem => {
             navItem.classList.remove('active');
-        });
-        document.getElementById(`nav-${activePageId.split('-')[0]}`).classList.add('active');
-    };
-
-    navHome.addEventListener('click', () => showPage('home-page'));
-    navStore.addEventListener('click', () => showPage('store-page'));
-    navWallet.addEventListener('click', () => showPage('wallet-page'));
-    navStats.addEventListener('click', () => showPage('stats-page'));
-    navFun.addEventListener('click', () => showPage('fun-page'));
-
-    upgradeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const upgradeItem = button.parentElement;
-            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
-            const price = getUpgradePrice(upgradeType);
-
-            if (coins >= price) {
-                coins -= price;
-                coinAmountSpan.textContent = coins;
-                autoClickers[upgradeType].level++;
-                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
-                if (autoClickers[upgradeType].level === 1) {
-                    startAutoClicker(upgradeType);
-                }
-                updateUpgradePrices();
+            if (navItem.dataset.page === activePageId) {
+                navItem.classList.add('active');
             }
         });
-    });
-
-    // Добавляем обработчик события клика на персонажа
-    character.addEventListener('click', (event) => {
-        coins += 1; // Увеличиваем баланс монет на 1
-        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
-        updateUpgradePrices();
-    });
-
-    // Функция для отображения анимации монеты
-    const showCoinAnimation = (x, y) => {
-        const coinAnimation = document.createElement('div');
-        coinAnimation.classList.add('coin-animation');
-        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
-        document.body.appendChild(coinAnimation);
-
-        // Позиционирование анимации монеты рядом с местом клика
-        coinAnimation.style.left = `${x}px`;
-        coinAnimation.style.top = `${y}px`;
-
-        // Удаление анимации монеты после завершения анимации
-        coinAnimation.addEventListener('animationend', () => {
-            coinAnimation.remove();
-        });
     };
+
+    navItems.forEach(navItem => {
+        navItem.addEventListener('click', () => {
+            showPage(navItem.dataset.page);
+        });
+    });
 
     const getUpgradePrice = (upgradeType) => {
         const basePrice = autoClickers[upgradeType].basePrice;
@@ -130,6 +72,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    character.addEventListener('click', (event) => {
+        coins += 1; // Увеличиваем баланс монет на 1
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        updateUpgradePrices();
+    });
+
+    const showCoinAnimation = (x, y) => {
+        const coinAnimation = document.createElement('div');
+        coinAnimation.classList.add('coin-animation');
+        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
+        document.body.appendChild(coinAnimation);
+
+        // Позиционирование анимации монеты рядом с местом клика
+        coinAnimation.style.left = `${x}px`;
+        coinAnimation.style.top = `${y}px`;
+
+        // Удаление анимации монеты после завершения анимации
+        coinAnimation.addEventListener('animationend', () => {
+            coinAnimation.remove();
+        });
+    };
+
+    upgradeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const upgradeItem = button.parentElement;
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
+
+            if (coins >= price) {
+                coins -= price;
+                coinAmountSpan.textContent = coins;
+                autoClickers[upgradeType].level++;
+                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
+                if (autoClickers[upgradeType].level === 1) {
+                    startAutoClicker(upgradeType);
+                }
+                updateUpgradePrices();
+            }
+        });
+    });
+
     // Предотвращаем зум и скролл на мобильных устройствах
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
@@ -149,4 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         lastTouchEnd = now;
     }, false);
+
+    showPage('home-page'); // Показать домашнюю страницу по умолчанию
 });
