@@ -20,8 +20,25 @@
                 <span class="coin-amount">0</span>
                 <img src="assets/images/coins.svg" alt="Coins">
             </div>
+            <div class="gender-switch">
+                <input type="radio" id="for-her" name="gender" value="her" checked>
+                <label for="for-her">For her</label>
+                <input type="radio" id="for-him" name="gender" value="him">
+                <label for="for-him">For him</label>
+            </div>
         </div>
-        <div class="content">
+        <div class="content" id="content-her" style="display: none;">
+            <div class="text-container">
+                <div class="text-background">
+                    <p class="text-main">Your game welcome instruction</p>
+                    <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" id="content-him">
             <img src="assets/images/Ai.svg" alt="Character" class="character" id="character">
             <div class="text-container">
                 <div class="text-background">
