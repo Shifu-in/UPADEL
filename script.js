@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
-    const character = document.getElementById('character'); // Получаем элемент персонажа
+    const characterHer = document.getElementById('character-her');
+    const characterHim = document.getElementById('character');
     const upgradeButtons = document.querySelectorAll('.upgrade-button');
     const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
     const contentHer = document.getElementById('content-her');
@@ -75,7 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    character.addEventListener('click', (event) => {
+    characterHim.addEventListener('click', (event) => {
+        coins += 1; // Увеличиваем баланс монет на 1
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        updateUpgradePrices();
+    });
+
+    characterHer.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
