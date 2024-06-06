@@ -76,14 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    characterHim.addEventListener('click', (event) => {
+    characterHim.addEventListener('mousedown', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
         updateUpgradePrices();
     });
 
-    characterHer.addEventListener('click', (event) => {
+    characterHer.addEventListener('mousedown', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
