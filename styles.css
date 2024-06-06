@@ -97,10 +97,9 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Изменено с center на flex-start */
+    justify-content: center; /* Центрируем по вертикали */
     position: relative;
     flex-grow: 1;
-    margin-top: 50px; /* Добавлено для отодвигания от навигации */
 }
 
 .character {
@@ -126,7 +125,7 @@ body, html {
     max-width: 300px;
     position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: 150px; /* Поднимаем текстовый контейнер */
+    margin-top: 20px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-background {
@@ -277,7 +276,7 @@ body, html {
     max-width: 270px;
     position: relative;
     margin: 0 auto;
-    margin-top: 120px; /* Поднимаем текстовый контейнер */
+    margin-top: 20px; /* Поднимаем текстовый контейнер */
     margin-bottom: 20px;
     text-align: left;
 }
