@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let coins = parseInt(localStorage.getItem('coins')) || 0;
     coinAmountSpan.textContent = coins;
 
+    let clickStrength = 1;
+
     let autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
         aiTap: { level: 0, basePrice: 50000, increment: 5, currentRate: 0 },
@@ -29,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const autoIncrementCoins = () => {
         let incrementAmount = 0;
         for (let key in autoClickers) {
-            incrementAmount += autoClickers[key].currentRate;
+            if (key !== 'gym') {
+                incrementAmount += autoClickers[key].currentRate;
+            }
         }
         coins += incrementAmount;
         updateCoinAmount();
@@ -43,7 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (coins >= price) {
             coins -= price;
             upgrade.level++;
-            upgrade.currentRate += upgrade.increment * 1.5; // Увеличение доходности на 50%
+            if (upgradeKey === 'gym') {
+                clickStrength += upgrade.increment;
+            } else {
+                upgrade.currentRate += upgrade.increment * 1.5; // Увеличение доходности на 50%
+            }
             updateUpgradeDetails(upgradeKey);
             updateCoinAmount();
             saveUpgrades();
@@ -148,10 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
 
     // Add click event to the characters
-    const createCoinAnimation = (character) => {
+    const createCoinAnimation = (character, clickStrength) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
-        coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> +1`;
+        coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> <span class="coin-value">+${clickStrength}</span>`;
         coinAnimation.style.left = `${Math.random() * 80}%`;
         coinAnimation.style.top = `${Math.random() * 80}%`;
         character.appendChild(coinAnimation);
@@ -161,14 +169,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     characterHer.addEventListener('click', () => {
-        coins++;
+        coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(characterHer);
+        createCoinAnimation(characterHer, clickStrength);
     });
 
     characterHim.addEventListener('click', () => {
-        coins++;
+        coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(characterHim);
+        createCoinAnimation(characterHim, clickStrength);
     });
 });
