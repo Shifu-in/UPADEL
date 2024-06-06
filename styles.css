@@ -267,7 +267,6 @@ body, html {
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 70px; /* Опущен на 50 пикселей */
-    margin-bottom: 20px; /* Добавлено чтобы не перекрывало навигацию */
     text-align: left;
 }
 
