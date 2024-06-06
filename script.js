@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
 
+    setTimeout(showContent, 4000); // Показываем основной контент через 4 секунды
+
     const hideAllPages = () => {
         pages.forEach(page => {
             page.style.display = 'none';
