@@ -120,17 +120,10 @@ body, html {
 }
 
 .text-container {
-    width: 270px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 270px;
-    position: relative;
-    margin: 0 auto; /* Центрирование по горизонтали */
-    margin-top: 70px; /* Опущен на 50 пикселей */
-    margin-bottom: 20px; /* Добавлено чтобы не перекрывало навигацию */
-    text-align: left;
-}
-
-.content-group {
-    margin-top: 150px; /* Опущен на 150 пикселей */
+  margin-top: 150px;
+  width: 200px; /* Adjust the width of the text container */
+  text-align: center; /* Change the text alignment */
+  padding: 20px; /* Add padding to the text container */
 }
 
 .text-background {
