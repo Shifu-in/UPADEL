@@ -126,7 +126,7 @@ body, html {
     max-width: 300px;
     position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: 50px; /* Добавлено для отодвигания от навигации */
+    margin-top: 150px; /* Поднимаем текстовый контейнер */
 }
 
 .text-background {
@@ -195,8 +195,8 @@ body, html {
 }
 
 .upgrades {
-    width: 360px; /* Уменьшен контейнер на 20 пикселей */
-    max-width: 360px;
+    width: 350px; /* Уменьшен контейнер на 5 пикселей с каждой стороны */
+    max-width: 350px;
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
@@ -273,17 +273,17 @@ body, html {
 }
 
 .text-container-store {
-    width: 270px; /* Уменьшен контейнер на 10 пикселей */
+    width: 270px;
     max-width: 270px;
     position: relative;
-    margin: 0 auto; /* Центрирование по горизонтали */
-    margin-top: 20px; /* Adjust the margin as needed */
-    margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
+    margin: 0 auto;
+    margin-top: 120px; /* Поднимаем текстовый контейнер */
+    margin-bottom: 20px;
     text-align: left;
 }
 
 .content-group {
-    margin-top: 150px; /* Lower the group of containers by 150px */
+    margin-top: 150px; /* Поднимаем группу контейнеров */
 }
 
 .background-room {
