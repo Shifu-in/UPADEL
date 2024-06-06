@@ -39,12 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const buyUpgrade = (upgradeKey) => {
         const upgrade = autoClickers[upgradeKey];
-        const price = upgrade.basePrice * Math.pow(1.2, upgrade.level);
+        const price = Math.floor(upgrade.basePrice * Math.pow(1.2, upgrade.level));
         if (coins >= price) {
             coins -= price;
             upgrade.level++;
             upgrade.currentRate += upgrade.increment;
             updateCoinAmount();
+            saveUpgrades();
         }
     };
 
@@ -54,6 +55,40 @@ document.addEventListener("DOMContentLoaded", () => {
             buyUpgrade(upgradeKeys[index]);
         });
     });
+
+    // Загрузка сохраненных данных об апгрейдах из localStorage
+    const loadUpgrades = () => {
+        const savedUpgrades = JSON.parse(localStorage.getItem('autoClickers')) || autoClickers;
+        for (let key in savedUpgrades) {
+            if (autoClickers[key]) {
+                autoClickers[key] = savedUpgrades[key];
+            }
+        }
+    };
+
+    // Сохранение данных об апгрейдах в localStorage
+    const saveUpgrades = () => {
+        localStorage.setItem('autoClickers', JSON.stringify(autoClickers));
+    };
+
+    // Загрузка баланса и апгрейдов из localStorage
+    const loadGameState = () => {
+        coins = parseInt(localStorage.getItem('coins')) || 0;
+        coinAmountSpan.textContent = coins;
+        loadUpgrades();
+    };
+
+    // Сохранение баланса и апгрейдов в localStorage
+    const saveGameState = () => {
+        localStorage.setItem('coins', coins);
+        saveUpgrades();
+    };
+
+    // Инициализация состояния игры
+    loadGameState();
+
+    // Автоматическое сохранение состояния игры каждые 5 секунд
+    setInterval(saveGameState, 5000);
 
     const switchPage = (pageId) => {
         pages.forEach(page => page.style.display = 'none');
