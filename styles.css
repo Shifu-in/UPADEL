@@ -348,6 +348,10 @@ body, html {
     margin-right: 5px;
 }
 
+.coin-value {
+    color: #ffd700; /* Золотой цвет для значения монет */
+}
+
 @keyframes coin-fall {
     0% {
         opacity: 1;
