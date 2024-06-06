@@ -121,11 +121,11 @@ body, html {
 }
 
 .text-container {
-    width: 90%;
-    max-width: 300px;
+    width: 70%;
+    max-width: 200px;
     position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: 170px; /* Добавлено для отодвигания от навигации */
+    margin-top: 20px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-container-him {
