@@ -36,7 +36,7 @@ body, html {
     display: flex;
     justify-content: space-between; /* Размещаем элементы по краям */
     width: 100%;
-    padding: 20px;
+    padding: 25px; /* Увеличено на 5 пикселей */
     position: relative;
 }
 
@@ -45,8 +45,8 @@ body, html {
     align-items: center;
     color: #fff;
     position: relative;
-    top: 5px;
-    left: 5px;
+    top: 10px; /* Увеличено на 5 пикселей */
+    left: 10px; /* Увеличено на 5 пикселей */
 }
 
 .coin-text {
@@ -67,10 +67,10 @@ body, html {
     align-items: center;
     background-color: #f0f0f0;
     border-radius: 25px;
-    padding: 5px;
+    padding: 10px; /* Увеличено на 5 пикселей */
     position: relative;
-    top: 5px;
-    right: 5px;
+    top: 10px; /* Увеличено на 5 пикселей */
+    right: 10px; /* Увеличено на 5 пикселей */
 }
 
 .gender-switch input[type="radio"] {
@@ -97,17 +97,18 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Изменено с center на flex-start */
     position: relative;
     flex-grow: 1;
+    margin-top: 50px; /* Добавлено для отодвигания от навигации */
 }
 
 .character {
-    width: 430px; /* Уменьшенный размер на 10 пикселей */
+    width: 420px; /* Уменьшено на 10 пикселей */
     height: auto;
-    margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
-    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
-    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
+    margin-bottom: -35px;
+    margin-top: 15px;
+    margin-left: -20px;
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
@@ -125,6 +126,7 @@ body, html {
     max-width: 300px;
     position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
+    margin-top: 50px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-background {
@@ -193,8 +195,8 @@ body, html {
 }
 
 .upgrades {
-    width: 380px; /* Уменьшен контейнер на 20 пикселей */
-    max-width: 380px;
+    width: 360px; /* Уменьшен контейнер на 20 пикселей */
+    max-width: 360px;
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
@@ -271,8 +273,8 @@ body, html {
 }
 
 .text-container-store {
-    width: 280px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 280px;
+    width: 270px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 270px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 20px; /* Adjust the margin as needed */
