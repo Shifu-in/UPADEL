@@ -116,7 +116,7 @@ body, html {
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
-    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
+    margin-left: -20px; /* Сдвиг правее на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
@@ -125,7 +125,7 @@ body, html {
     max-width: 300px;
     position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: 20px; /* Добавлено для отодвигания от навигации */
+    margin-top: 170px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-background {
@@ -194,11 +194,12 @@ body, html {
 }
 
 .upgrades {
-    width: 350px; /* Уменьшен контейнер на 5 пикселей с каждой стороны */
-    max-width: 350px;
+    width: 370px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 370px;
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
+    margin-top: 150px; /* Опущен на 150 пикселей */
 }
 
 .upgrades h2 {
@@ -272,17 +273,17 @@ body, html {
 }
 
 .text-container-store {
-    width: 270px;
+    width: 270px; /* Уменьшен контейнер на 10 пикселей */
     max-width: 270px;
     position: relative;
-    margin: 0 auto;
-    margin-top: 20px; /* Поднимаем текстовый контейнер */
-    margin-bottom: 20px;
+    margin: 0 auto; /* Центрирование по горизонтали */
+    margin-top: 70px; /* Опущен на 50 пикселей */
+    margin-bottom: 20px; /* Добавлено чтобы не перекрывало навигацию */
     text-align: left;
 }
 
 .content-group {
-    margin-top: 150px; /* Поднимаем группу контейнеров */
+    margin-top: 150px; /* Опущен на 150 пикселей */
 }
 
 .background-room {
@@ -299,7 +300,7 @@ body, html {
 .text-container-room {
     width: 90%;
     max-width: 300px;
-    margin-top: 420px; /* Опустить контейнер текста на 200 пикселей */
+    margin-top: 420px; /* Опущен контейнер текста на 200 пикселей */
     margin-left: 20px; /* Сдвиг правее на 20 пикселей */
     text-align: left;
 }
