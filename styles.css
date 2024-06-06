@@ -273,6 +273,10 @@ body, html {
     background-color: #ff5e57;
 }
 
+.upgrade-button.active {
+    background-color: #28a745; /* Зелёный цвет при достаточном балансе */
+}
+
 .coming-soon {
     color: #fff;
     font-size: 24px;
