@@ -122,7 +122,7 @@ body, html {
 
 .text-container {
     width: 270px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 300px;
+    max-width: 340px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
     text-align: left;
@@ -149,21 +149,6 @@ body, html {
 .text-sub {
     font-size: 14px;
     margin: 10px 0 20px 0;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-}
-
-.button {
-    width: 50px;
-    height: 50px;
-}
-
-/* Убираем элементы dots */
-.page-controls {
-    display: none;
 }
 
 .navigation {
