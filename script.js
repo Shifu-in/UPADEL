@@ -137,26 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Предотвращаем зум и скролл на мобильных устройствах
+    // Предотвращаем зум на мобильных устройствах
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
-
-    // Предотвращаем двойной тап для зума и масштабирования
-    let lastTouchEnd = 0;
-    document.addEventListener('touchstart', function(event) {
-        if (event.touches.length > 1) {
-            event.preventDefault();
-        }
-    }, { passive: false });
-
-    document.addEventListener('touchend', (event) => {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, false);
 
     showPage('home-page'); // Показать домашнюю страницу по умолчанию
 });
