@@ -46,10 +46,6 @@ body, html {
     background-size: cover;
 }
 
-.main-screen#stats-page {
-    background: none; /* Убираем общий фон на странице статистики */
-}
-
 .header {
     display: flex;
     justify-content: space-between; /* Размещаем элементы по краям */
@@ -147,10 +143,6 @@ body, html {
     text-align: left;
 }
 
-.content-group {
-    margin-top: 50px; /* Опущен на 150 пикселей */
-}
-
 .text-background {
     background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
     background-size: cover;
@@ -207,7 +199,7 @@ body, html {
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
-    margin-top: -150px; /* Опущен на 150 пикселей */
+    margin-top: 100px; /* Опущен на 150 пикселей */
 }
 
 .upgrades h2 {
@@ -287,10 +279,6 @@ body, html {
     margin: 0 auto; /* Центрирование по горизонтали */
     margin-top: 70px; /* Опущен на 50 пикселей */
     text-align: left;
-}
-
-.content-group {
-    margin-top: 150px; /* Опущен на 150 пикселей */
 }
 
 .background-room {
