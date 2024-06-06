@@ -39,14 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const buyUpgrade = (upgradeKey) => {
         const upgrade = autoClickers[upgradeKey];
-        const price = Math.floor(upgrade.basePrice * Math.pow(1.2, upgrade.level));
+        const price = Math.floor(upgrade.basePrice * Math.pow(1.5, upgrade.level));
         if (coins >= price) {
             coins -= price;
             upgrade.level++;
-            upgrade.currentRate += upgrade.increment;
+            upgrade.currentRate += upgrade.increment * 1.5; // Увеличение доходности на 50%
+            updateUpgradeDetails(upgradeKey);
             updateCoinAmount();
             saveUpgrades();
         }
+    };
+
+    const updateUpgradeDetails = (upgradeKey) => {
+        const upgrade = autoClickers[upgradeKey];
+        const upgradeItem = document.querySelector(`.upgrade-item:nth-child(${Object.keys(autoClickers).indexOf(upgradeKey) + 1})`);
+        upgradeItem.querySelector('.upgrade-level').textContent = upgrade.level;
+        upgradeItem.querySelector('.upgrade-rate').textContent = upgrade.currentRate.toFixed(1);
     };
 
     upgradeButtons.forEach((button, index) => {
@@ -56,12 +64,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const updateButtonState = () => {
+        upgradeButtons.forEach((button, index) => {
+            const upgradeKey = Object.keys(autoClickers)[index];
+            const upgrade = autoClickers[upgradeKey];
+            const price = Math.floor(upgrade.basePrice * Math.pow(1.5, upgrade.level));
+            if (coins >= price) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+    };
+
+    setInterval(updateButtonState, 100);
+
     // Загрузка сохраненных данных об апгрейдах из localStorage
     const loadUpgrades = () => {
         const savedUpgrades = JSON.parse(localStorage.getItem('autoClickers')) || autoClickers;
         for (let key in savedUpgrades) {
             if (autoClickers[key]) {
                 autoClickers[key] = savedUpgrades[key];
+                updateUpgradeDetails(key);
             }
         }
     };
