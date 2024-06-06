@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let coins = 0; // Инициализация баланса монет с 0
     let autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
-        aiTap: { level: 0, basePrice: 50, increment: 5, currentRate: 0 },
+        aiTap: { level: 0, basePrice: 50000, increment: 5, currentRate: 0 },
         airdrop: { level: 0, basePrice: 500000, increment: 15, currentRate: 0 },
         defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
@@ -143,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('gestureend', (e) => e.preventDefault());
 
     // Предотвращаем двойной тап для зума и масштабирования
+    let lastTouchEnd = 0;
     document.addEventListener('touchstart', function(event) {
         if (event.touches.length > 1) {
             event.preventDefault();
