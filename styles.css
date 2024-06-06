@@ -46,7 +46,7 @@ body, html {
     color: #fff;
     position: relative;
     top: 10px; /* Увеличено на 5 пикселей */
-    left: 10px; /* Увеличено на 5 пикселей */
+    left: 15px; /* Увеличено на 5 пикселей */
 }
 
 .coin-text {
@@ -66,7 +66,7 @@ body, html {
     display: flex;
     align-items: center;
     background-color: #f0f0f0;
-    border-radius: 25px;
+    border-radius: 20px;
     padding: 10px; /* Увеличено на 5 пикселей */
     position: relative;
     top: 10px; /* Увеличено на 5 пикселей */
@@ -103,10 +103,10 @@ body, html {
 }
 
 .character {
-    width: 430px; /* Уменьшено на 10 пикселей */
+    width: 420px; /* Уменьшено на 10 пикселей */
     height: auto;
     margin-bottom: -35px;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: -20px;
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
