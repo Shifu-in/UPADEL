@@ -52,21 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateUpgradeDetails = (upgradeKey) => {
         const upgrade = autoClickers[upgradeKey];
-        const upgradeItem = document.querySelector(`.upgrade-item:nth-child(${Object.keys(autoClickers).indexOf(upgradeKey) + 1})`);
+        const upgradeItem = document.querySelector(`.upgrade-button[data-upgrade="${upgradeKey}"]`).parentElement;
         upgradeItem.querySelector('.upgrade-level').textContent = upgrade.level;
         upgradeItem.querySelector('.upgrade-rate').textContent = upgrade.currentRate.toFixed(1);
     };
 
-    upgradeButtons.forEach((button, index) => {
+    upgradeButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const upgradeKeys = Object.keys(autoClickers);
-            buyUpgrade(upgradeKeys[index]);
+            const upgradeKey = button.getAttribute('data-upgrade');
+            buyUpgrade(upgradeKey);
         });
     });
 
     const updateButtonState = () => {
-        upgradeButtons.forEach((button, index) => {
-            const upgradeKey = Object.keys(autoClickers)[index];
+        upgradeButtons.forEach(button => {
+            const upgradeKey = button.getAttribute('data-upgrade');
             const upgrade = autoClickers[upgradeKey];
             const price = Math.floor(upgrade.basePrice * Math.pow(1.5, upgrade.level));
             if (coins >= price) {
