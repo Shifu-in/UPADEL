@@ -121,8 +121,8 @@ body, html {
 }
 
 .text-container {
-    width: 270px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 340px;
+    width: 250px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 380px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
     text-align: left;
