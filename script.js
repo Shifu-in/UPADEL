@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
 
+    // Функция для скрытия экрана загрузки и показа основного контента
+    const showContent = () => {
+        document.getElementById('loading').style.display = 'none';
+        pages.forEach(page => page.style.display = 'flex');
+        document.querySelector('.navigation').style.display = 'flex';
+    };
+
     setTimeout(showContent, 4000); // Показываем основной контент через 4 секунды
 
     const hideAllPages = () => {
@@ -78,14 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    characterHim.addEventListener('mousedown', (event) => {
+    characterHim.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
         updateUpgradePrices();
     });
 
-    characterHer.addEventListener('mousedown', (event) => {
+    characterHer.addEventListener('click', (event) => {
         coins += 1; // Увеличиваем баланс монет на 1
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
         showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
@@ -128,8 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     genderSwitchInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            if (input.value === 'her') {
+        input.addEventListener('change', (event) => {
+            if (event.target.value === 'her') {
                 contentHer.style.display = 'flex';
                 contentHim.style.display = 'none';
             } else {
@@ -139,10 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Предотвращаем зум на мобильных устройствах
-    document.addEventListener('gesturestart', (e) => e.preventDefault());
-    document.addEventListener('gesturechange', (e) => e.preventDefault());
-    document.addEventListener('gestureend', (e) => e.preventDefault());
-
-    showPage('home-page'); // Показать домашнюю страницу по умолчанию
+    // Изначально показываем контент для "him"
+    contentHer.style.display = 'none';
+    contentHim.style.display = 'flex';
 });
