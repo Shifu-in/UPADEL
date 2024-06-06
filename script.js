@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const coinAmountSpan = document.querySelector('.coin-amount');
     const character = document.getElementById('character'); // Получаем элемент персонажа
     const upgradeButtons = document.querySelectorAll('.upgrade-button');
+    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
+    const contentHer = document.getElementById('content-her');
+    const contentHim = document.getElementById('content-him');
 
     let coins = 0; // Инициализация баланса монет с 0
     let autoClickers = {
@@ -110,6 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     startAutoClicker(upgradeType);
                 }
                 updateUpgradePrices();
+            }
+        });
+    });
+
+    genderSwitchInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            if (input.value === 'her') {
+                contentHer.style.display = 'block';
+                contentHim.style.display = 'none';
+            } else {
+                contentHer.style.display = 'none';
+                contentHim.style.display = 'block';
             }
         });
     });
