@@ -102,7 +102,6 @@ body, html {
 .character {
     width: 420px; /* Уменьшено на 10 пикселей */
     height: auto;
-    position: absolute;
     margin-bottom: -35px;
     margin-top: 15px;
     margin-left: -20px;
@@ -119,15 +118,17 @@ body, html {
 }
 
 .text-container {
-    width: 70%;
-    max-width: 300px;
+    width: 270px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 270px;
     position: relative;
-    text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: -60px; /* Добавлено для отодвигания от навигации */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    margin-top: 70px; /* Опущен на 50 пикселей */
+    margin-bottom: 20px; /* Добавлено чтобы не перекрывало навигацию */
+    text-align: left;
 }
 
-.text-container-him {
-    margin-top: -60px; /* Добавлено для отодвигания от навигации */
+.content-group {
+    margin-top: 150px; /* Опущен на 150 пикселей */
 }
 
 .text-background {
