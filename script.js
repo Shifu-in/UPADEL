@@ -148,13 +148,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
 
     // Add click event to the characters
+    const createCoinAnimation = (character) => {
+        const coinAnimation = document.createElement('div');
+        coinAnimation.classList.add('coin-animation');
+        coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> +1`;
+        character.appendChild(coinAnimation);
+        setTimeout(() => {
+            coinAnimation.remove();
+        }, 1000);
+    };
+
     characterHer.addEventListener('click', () => {
         coins++;
         updateCoinAmount();
+        createCoinAnimation(characterHer);
     });
 
     characterHim.addEventListener('click', () => {
         coins++;
         updateCoinAmount();
+        createCoinAnimation(characterHim);
     });
 });
