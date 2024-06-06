@@ -163,9 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
         coinAnimation.style.left = `${Math.random() * 80}%`;
         coinAnimation.style.top = `${Math.random() * 80}%`;
         character.appendChild(coinAnimation);
-        setTimeout(() => {
+        coinAnimation.addEventListener('animationend', () => {
             coinAnimation.remove();
-        }, 1000);
+        });
     };
 
     characterHer.addEventListener('click', () => {
