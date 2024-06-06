@@ -128,6 +128,10 @@ body, html {
     margin-top: 170px; /* Добавлено для отодвигания от навигации */
 }
 
+.text-container-him {
+    margin-top: 170px; /* Добавлено для отодвигания от навигации */
+}
+
 .text-background {
     background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
     background-size: cover;
