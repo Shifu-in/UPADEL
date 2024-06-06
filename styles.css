@@ -24,6 +24,12 @@ body, html {
     align-items: center;
     position: absolute;
     overflow: hidden; /* Убираем прокрутку */
+    background: url('assets/images/Фон%20общий.png') no-repeat center center;
+    background-size: cover;
+}
+
+.main-screen#stats-page {
+    background: none; /* Убираем общий фон на странице статистики */
 }
 
 .header {
@@ -100,7 +106,7 @@ body, html {
 }
 
 .character-her {
-    width: 342px; /* Уменьшенный размер на 20% + 10 пикселей */
+    width: 332px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
