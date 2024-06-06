@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             coins -= price;
             upgrade.level++;
             if (upgradeKey === 'gym') {
-                clickStrength += upgrade.increment;
+                clickStrength += upgrade.increment * 1.5; // Увеличение силы клика на 50%
             } else {
                 upgrade.currentRate += upgrade.increment * 1.5; // Увеличение доходности на 50%
             }
