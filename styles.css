@@ -103,10 +103,10 @@ body, html {
 }
 
 .character {
-    width: 420px; /* Уменьшено на 10 пикселей */
+    width: 400px; /* Уменьшено на 10 пикселей */
     height: auto;
     margin-bottom: -35px;
-    margin-top: 25px;
+    margin-top: 15px;
     margin-left: -20px;
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
