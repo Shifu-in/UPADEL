@@ -99,6 +99,15 @@ body, html {
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
+.character-her {
+    width: 352px; /* Уменьшенный размер на 20% */
+    height: auto;
+    margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
+    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
+    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
+    cursor: pointer; /* Указываем, что элемент кликабельный */
+}
+
 .text-container {
     width: 90%;
     max-width: 300px;
