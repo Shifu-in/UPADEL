@@ -120,20 +120,20 @@ body, html {
 .text-container {
     width: 70%;
     max-width: 300px;
-    position: absolute;
+    position: relative;
     text-align: left; /* Выравнивание текста по левому краю */
-    margin-top: -160px; /* Добавлено для отодвигания от навигации */
+    margin-top: -60px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-container-him {
-    margin-top: -160px; /* Добавлено для отодвигания от навигации */
+    margin-top: -60px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-background {
     background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
     background-size: cover;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 10px;
     color: #fff;
     text-align: left;
 }
