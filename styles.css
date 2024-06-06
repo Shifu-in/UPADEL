@@ -9,9 +9,6 @@ body, html {
     align-items: center;
     background-color: #000000;
     font-family: 'Discovery', Arial, sans-serif;
-    -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
-    -ms-user-select: none; /* Запрещаем выделение текста на IE */
-    user-select: none; /* Запрещаем выделение текста на всех браузерах */
     touch-action: manipulation; /* Запрещаем жесты масштабирования */
 }
 
@@ -129,7 +126,7 @@ body, html {
 }
 
 .text-container-him {
-    margin-top: 170px; /* Добавлено для отодвигания от навигации */
+    margin-top: 20px; /* Добавлено для отодвигания от навигации */
 }
 
 .text-background {
