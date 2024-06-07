@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
     };
 
+    // Function to save progress to localStorage
     const saveProgress = () => {
         const progress = {
             coins: coins,
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
 
+    // Function to load progress from localStorage
     const loadProgress = () => {
         const savedProgress = localStorage.getItem('gameProgress');
         if (savedProgress) {
@@ -42,18 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Function to hide all pages
     const hideAllPages = () => {
         pages.forEach(page => {
             page.style.display = 'none';
         });
     };
 
+    // Function to show a specific page
     const showPage = (pageId) => {
         hideAllPages();
         document.getElementById(pageId).style.display = 'flex';
         updateNavigation(pageId);
     };
 
+    // Function to update navigation active state
     const updateNavigation = (activePageId) => {
         navItems.forEach(navItem => {
             navItem.classList.remove('active');
@@ -63,12 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // Event listener for navigation items
     navItems.forEach(navItem => {
         navItem.addEventListener('click', () => {
             showPage(navItem.dataset.page);
         });
     });
 
+    // Function to get the price of an upgrade
     const getUpgradePrice = (upgradeType) => {
         const basePrice = autoClickers[upgradeType].basePrice;
         const level = autoClickers[upgradeType].level;
@@ -78,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
     };
 
+    // Function to start an auto clicker
     const startAutoClicker = (upgradeType) => {
         setInterval(() => {
             coins += autoClickers[upgradeType].currentRate;
@@ -87,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     };
 
+    // Function to update upgrade prices and levels
     const updateUpgradePrices = () => {
         upgradeButtons.forEach(button => {
             const upgradeType = button.getAttribute('data-type');
@@ -110,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // Event listener for character clicks
     characterHim.addEventListener('click', (event) => {
         coins += coinsPerTap;
         coinAmountSpan.textContent = coins;
@@ -126,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         saveProgress();
     });
 
+    // Function to show coin animation
     const showCoinAnimation = (x, y, amount) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
@@ -140,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // Event listener for upgrade buttons
     upgradeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const upgradeType = button.getAttribute('data-type');
@@ -163,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Event listener for gender switch inputs
     genderSwitchInputs.forEach(input => {
         input.addEventListener('change', () => {
             if (input.value === 'her') {
@@ -172,9 +185,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 contentHer.style.display = 'none';
                 contentHim.style.display = 'flex';
             }
+            saveProgress();
         });
     });
 
+    // Prevent zoom and scroll on mobile devices
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
