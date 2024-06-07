@@ -114,8 +114,8 @@ body, html {
 .character-her {
     width: 360px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
-    margin-bottom: -5px; /* Перемещение вверх на 5 пикселей */
-    margin-top: -5px; /* Перемещение вверх на 10 пикселей */
+    margin-bottom: -25px; /* Перемещение вверх на 5 пикселей */
+    margin-top: -25px; /* Перемещение вверх на 10 пикселей */
     margin-left: -10px; /* Сдвиг вправо на 5 пикселей */
     position: relative
     cursor: pointer; /* Указываем, что элемент кликабельный */
