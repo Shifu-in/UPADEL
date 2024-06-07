@@ -191,11 +191,11 @@ body, html {
 }
 
 .upgrades {
-    width: 350px; /* Уменьшен контейнер на 20 пикселей */
-    max-width: 360px;
+    width: 340px; /* Уменьшен контейнер на 20 пикселей */
+    max-width: 340px;
     background-color: #1c1c1e;
     border-radius: 20px;
-    margin-top: 120px;
+    margin-top: -120px;
     padding: 20px;
 }
 
