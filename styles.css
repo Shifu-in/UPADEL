@@ -22,8 +22,6 @@ body, html {
     user-select: none; /* Запрещаем выделение текста на всех браузерах */
 }
 
-/* Остальные стили остаются без изменений */
-
 #loading {
     position: absolute;
     top: 0;
@@ -348,6 +346,7 @@ body, html {
     display: flex;
     align-items: center;
     z-index: 1000; /* Установим высокий z-index для отображения монет поверх всего */
+    animation: coin-fade-in 0.5s ease-out, coin-fade-out 0.5s ease-out 1s;
 }
 
 .coin-animation img {
@@ -358,4 +357,26 @@ body, html {
 
 .coin-value {
     color: #ffd700; /* Золотой цвет для значения монет */
+}
+
+@keyframes coin-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes coin-fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 }
