@@ -347,6 +347,7 @@ body, html {
     align-items: center;
     z-index: 1000; /* Установим высокий z-index для отображения монет поверх всего */
     animation: coin-fade-in 0.5s ease-out, coin-fade-out 0.5s ease-out 1s;
+    pointer-events: none; /* Отключаем взаимодействие с анимацией */
 }
 
 .coin-animation img {
