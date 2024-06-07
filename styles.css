@@ -24,7 +24,7 @@ body, html {
     align-items: center;
     position: absolute;
     overflow: hidden; /* Убираем прокрутку */
-    background: url('assets/images/Фон%20общий.png') no-repeat center center;
+    background: url('assets/images/Фон общий.png') no-repeat center center;
     background-size: cover;
 }
 
@@ -128,7 +128,7 @@ body, html {
 }
 
 .text-background {
-    background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
+    background: url('assets/images/Фон для текста.svg') no-repeat center center;
     background-size: cover;
     padding: 20px;
     border-radius: 20px;
@@ -285,7 +285,7 @@ body, html {
 }
 
 .background-room {
-    background: url('assets/images/Фон%20комната.svg') no-repeat center center;
+    background: url('assets/images/Фон комната.svg') no-repeat center center;
     background-size: cover; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
     width: 100%;
     height: 100%;
@@ -305,7 +305,7 @@ body, html {
 
 /* Updated styles for stats-page */
 #stats-page {
-    background: url('assets/images/Фон%20комната.svg') no-repeat center center;
+    background: url('assets/images/Фон комната.svg') no-repeat center center;
     background-size: cover; /* Устанавливаем размер фонового изображения, чтобы оно покрыло весь экран */
     display: flex;
     justify-content: center;
