@@ -164,8 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
         coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> <span class="coin-value">+${clickStrength}</span>`;
-        coinAnimation.style.left = `${Math.random() * 80}%`;
-        coinAnimation.style.top = `${Math.random() * 80}%`;
+        coinAnimation.style.left = `${character.offsetLeft + character.clientWidth / 2}px`;
+        coinAnimation.style.top = `${character.offsetTop}px`;
         document.body.appendChild(coinAnimation);
         setTimeout(() => {
             coinAnimation.remove();
