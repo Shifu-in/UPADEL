@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         const loadingScreen = document.getElementById('loading-screen');
         loadingScreen.style.display = 'none';
-        showPage('home-page'); // Показать домашнюю страницу после загрузки
+        document.getElementById('home-page').style.display = 'flex'; // Показать домашнюю страницу после загрузки
     }, 4000);
 
     // Загрузка сохраненных данных из LocalStorage
@@ -48,8 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         upgradeButtons.forEach(button => {
             const upgradeType = button.getAttribute('data-type');
             const price = getUpgradePrice(upgradeType);
-            const upgradeItem
-const upgradeItem = button.parentElement;
+            const upgradeItem = button.parentElement;
             const priceText = upgradeItem.querySelector('.upgrade-details p');
             const level = autoClickers[upgradeType].level;
             const rate = autoClickers[upgradeType].currentRate;
