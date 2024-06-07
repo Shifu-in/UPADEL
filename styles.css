@@ -46,20 +46,20 @@ body, html {
     color: #fff;
     position: relative;
     top: 5px;
-    left: 5px;
+    left: 15px;
 }
 
 .coin-text {
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
 .coin-amount {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .coin-info img {
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: 34px;
 }
 
 .gender-switch {
@@ -106,7 +106,7 @@ body, html {
     width: 430px; /* Уменьшенный размер на 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
-    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
+    margin-top: -15px; /* Перемещение вверх на 10 пикселей */
     margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
@@ -115,7 +115,7 @@ body, html {
     width: 322px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
-    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
+    margin-top: 25px; /* Перемещение вверх на 10 пикселей */
     margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
