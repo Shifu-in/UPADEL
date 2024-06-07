@@ -160,27 +160,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
 
     // Add click event to the characters
-    const createCoinAnimation = (character, clickStrength) => {
+    const createCoinAnimation = (x, y, clickStrength) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
         coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> <span class="coin-value">+${clickStrength}</span>`;
-        coinAnimation.style.left = `${character.offsetLeft + character.clientWidth / 2}px`;
-        coinAnimation.style.top = `${character.offsetTop}px`;
+        coinAnimation.style.left = `${x}px`;
+        coinAnimation.style.top = `${y}px`;
         document.body.appendChild(coinAnimation);
         setTimeout(() => {
-            coinAnimation.remove();
+            coinAnimation.classList.add('coin-fade-out');
+            setTimeout(() => {
+                coinAnimation.remove();
+            }, 1000);
         }, 1000);
     };
 
-    characterHer.addEventListener('click', () => {
+    characterHer.addEventListener('click', (event) => {
         coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(characterHer, clickStrength);
+        createCoinAnimation(event.clientX, event.clientY, clickStrength);
     });
 
-    characterHim.addEventListener('click', () => {
+    characterHim.addEventListener('click', (event) => {
         coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(characterHim, clickStrength);
+        createCoinAnimation(event.clientX, event.clientY, clickStrength);
     });
 });
