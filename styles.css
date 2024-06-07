@@ -14,30 +14,6 @@ body, html {
     user-select: none; /* Запрещаем выделение текста на всех браузерах */
 }
 
-#loading-screen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #000;
-    z-index: 10000; /* Высокий z-index для отображения поверх всего */
-}
-
-#loading-gif {
-    width: 100px; /* Установите нужный размер для гиф */
-    height: auto;
-}
-
-#loading-text {
-    font-family: 'Discovery', Arial, sans-serif;
-    font-size: 10px;
-    color: #fff;
-    margin-top: 10px;
-}
-
 .main-screen {
     width: 100%;
     height: 100%;
