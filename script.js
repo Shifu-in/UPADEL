@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const loadingScreen = document.getElementById('loading');
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
@@ -10,12 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
 
-    // Load balance from localStorage
-    let coins = parseInt(localStorage.getItem('coins')) || 0;
-    coinAmountSpan.textContent = coins;
-
-    let clickStrength = 1;
-
+    let coins = 0; // Инициализация баланса монет с 0
+    let coinsPerTap = 1; // Начальная сила клика
     let autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
         aiTap: { level: 0, basePrice: 50000, increment: 5, currentRate: 0 },
@@ -23,123 +18,121 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
     };
 
-    const updateCoinAmount = () => {
-        coinAmountSpan.textContent = coins;
-        localStorage.setItem('coins', coins);
-    };
-
-    const autoIncrementCoins = () => {
-        let incrementAmount = 0;
-        for (let key in autoClickers) {
-            if (key !== 'gym') {
-                incrementAmount += autoClickers[key].currentRate;
-            }
-        }
-        coins += incrementAmount;
-        updateCoinAmount();
-    };
-
-    setInterval(autoIncrementCoins, 1000);
-
-    const buyUpgrade = (upgradeKey) => {
-        const upgrade = autoClickers[upgradeKey];
-        const price = Math.floor(upgrade.basePrice * Math.pow(1.5, upgrade.level));
-        if (coins >= price) {
-            coins -= price;
-            upgrade.level++;
-            if (upgradeKey === 'gym') {
-                clickStrength += upgrade.increment * 1.5; // Увеличение силы клика на 50%
-            } else {
-                upgrade.currentRate += upgrade.increment * 1.5; // Увеличение доходности на 50%
-            }
-            updateUpgradeDetails(upgradeKey);
-            updateCoinAmount();
-            saveUpgrades();
-        }
-    };
-
-    const updateUpgradeDetails = (upgradeKey) => {
-        const upgrade = autoClickers[upgradeKey];
-        const upgradeItem = document.querySelector(`.upgrade-button[data-upgrade="${upgradeKey}"]`).parentElement;
-        upgradeItem.querySelector('.upgrade-level').textContent = upgrade.level;
-        if (upgradeKey === 'gym') {
-            upgradeItem.querySelector('.upgrade-rate').textContent = `Power tap ${clickStrength.toFixed(1)}`;
-        } else {
-            upgradeItem.querySelector('.upgrade-rate').textContent = `${upgrade.currentRate.toFixed(1)} Young coin - sec`;
-        }
-    };
-
-    upgradeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const upgradeKey = button.getAttribute('data-upgrade');
-            buyUpgrade(upgradeKey);
-        });
-    });
-
-    const updateButtonState = () => {
-        upgradeButtons.forEach(button => {
-            const upgradeKey = button.getAttribute('data-upgrade');
-            const upgrade = autoClickers[upgradeKey];
-            const price = Math.floor(upgrade.basePrice * Math.pow(1.5, upgrade.level));
-            if (coins >= price) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
+    const hideAllPages = () => {
+        pages.forEach(page => {
+            page.style.display = 'none';
         });
     };
 
-    setInterval(updateButtonState, 100);
-
-    // Загрузка сохраненных данных об апгрейдах из localStorage
-    const loadUpgrades = () => {
-        const savedUpgrades = JSON.parse(localStorage.getItem('autoClickers')) || autoClickers;
-        for (let key in savedUpgrades) {
-            if (autoClickers[key]) {
-                autoClickers[key] = savedUpgrades[key];
-                updateUpgradeDetails(key);
-            }
-        }
-    };
-
-    // Сохранение данных об апгрейдах в localStorage
-    const saveUpgrades = () => {
-        localStorage.setItem('autoClickers', JSON.stringify(autoClickers));
-    };
-
-    // Загрузка баланса и апгрейдов из localStorage
-    const loadGameState = () => {
-        coins = parseInt(localStorage.getItem('coins')) || 0;
-        coinAmountSpan.textContent = coins;
-        loadUpgrades();
-    };
-
-    // Сохранение баланса и апгрейдов в localStorage
-    const saveGameState = () => {
-        localStorage.setItem('coins', coins);
-        saveUpgrades();
-    };
-
-    // Инициализация состояния игры
-    loadGameState();
-
-    // Автоматическое сохранение состояния игры каждые 5 секунд
-    setInterval(saveGameState, 5000);
-
-    const switchPage = (pageId) => {
-        pages.forEach(page => page.style.display = 'none');
+    const showPage = (pageId) => {
+        hideAllPages();
         document.getElementById(pageId).style.display = 'flex';
+        updateNavigation(pageId);
+    };
+
+    const updateNavigation = (activePageId) => {
+        navItems.forEach(navItem => {
+            navItem.classList.remove('active');
+            if (navItem.dataset.page === activePageId) {
+                navItem.classList.add('active');
+            }
+        });
     };
 
     navItems.forEach(navItem => {
         navItem.addEventListener('click', () => {
-            const pageId = navItem.dataset.page;
-            switchPage(pageId);
+            showPage(navItem.dataset.page);
         });
     });
 
-    // Set initial page
-    switchPage('home-page');
+    const getUpgradePrice = (upgradeType) => {
+        const basePrice = autoClickers[upgradeType].basePrice;
+        const level = autoClickers[upgradeType].level;
+        return Math.floor(basePrice * Math.pow(1.5, level));
+    };
+
+    const startAutoClicker = (upgradeType) => {
+        setInterval(() => {
+            coins += autoClickers[upgradeType].currentRate;
+            coinAmountSpan.textContent = coins;
+            updateUpgradePrices();
+        }, 1000);
+    };
+
+    const updateUpgradePrices = () => {
+        upgradeButtons.forEach(button => {
+            const upgradeItem = button.parentElement;
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
+            const priceText = upgradeItem.querySelector('.upgrade-details p');
+            const level = autoClickers[upgradeType].level;
+            const rate = autoClickers[upgradeType].currentRate;
+
+            if (upgradeType === "gym") {
+                priceText.innerHTML = `${price} | level ${level}/10<br>${rate + coinsPerTap} Young coin per tap`;
+            } else {
+                priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
+            }
+            
+            if (coins >= price) {
+                button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
+            } else {
+                button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
+            }
+        });
+    };
+
+    characterHim.addEventListener('click', (event) => {
+        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        updateUpgradePrices();
+    });
+
+    characterHer.addEventListener('click', (event) => {
+        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        updateUpgradePrices();
+    });
+
+    const showCoinAnimation = (x, y) => {
+        const coinAnimation = document.createElement('div');
+        coinAnimation.classList.add('coin-animation');
+        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
+        document.body.appendChild(coinAnimation);
+
+        // Позиционирование анимации монеты рядом с местом клика
+        coinAnimation.style.left = `${x}px`;
+        coinAnimation.style.top = `${y}px`;
+
+        // Удаление анимации монеты после завершения анимации
+        coinAnimation.addEventListener('animationend', () => {
+            coinAnimation.remove();
+        });
+    };
+
+    upgradeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const upgradeItem = button.parentElement;
+            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const price = getUpgradePrice(upgradeType);
+
+            if (coins >= price) {
+                coins -= price;
+                coinAmountSpan.textContent = coins;
+                autoClickers[upgradeType].level++;
+                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
+                if (upgradeType === "gym") {
+                    coinsPerTap += autoClickers[upgradeType].increment; // Увеличиваем силу клика
+                }
+                if (autoClickers[upgradeType].level === 1) {
+                    startAutoClicker(upgradeType);
+                }
+                updateUpgradePrices();
+            }
+        });
+    });
 
     genderSwitchInputs.forEach(input => {
         input.addEventListener('change', () => {
@@ -153,43 +146,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Show loading screen for 4 seconds
-    setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        switchPage('home-page');
-    }, 4000);
+    // Предотвращаем зум и скролл на мобильных устройствах
+    document.addEventListener('gesturestart', (e) => e.preventDefault());
+    document.addEventListener('gesturechange', (e) => e.preventDefault());
+    document.addEventListener('gestureend', (e) => e.preventDefault());
 
-    // Add click event to the characters
-    const createCoinAnimation = (x, y, clickStrength) => {
-        const coinAnimation = document.createElement('div');
-        coinAnimation.classList.add('coin-animation');
-        coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> <span class="coin-value">+${clickStrength}</span>`;
-        coinAnimation.style.left = `${x}px`;
-        coinAnimation.style.top = `${y}px`;
-        document.body.appendChild(coinAnimation);
-        setTimeout(() => {
-            coinAnimation.classList.add('coin-fade-out');
-            setTimeout(() => {
-                coinAnimation.remove();
-            }, 1000);
-        }, 1000);
-    };
+    // Предотвращаем двойной тап для зума и масштабирования
+    let lastTouchEnd = 0;
+    document.addEventListener('touchstart', function(event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false });
 
-    characterHer.addEventListener('click', (event) => {
-        const rect = characterHer.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        coins += clickStrength;
-        updateCoinAmount();
-        createCoinAnimation(x, y, clickStrength);
-    });
+    document.addEventListener('touchend', (event) => {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
 
-    characterHim.addEventListener('click', (event) => {
-        const rect = characterHim.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        coins += clickStrength;
-        updateCoinAmount();
-        createCoinAnimation(x, y, clickStrength);
-    });
+    showPage('home-page'); // Показать домашнюю страницу по умолчанию
 });
