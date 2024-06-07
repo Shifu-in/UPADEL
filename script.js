@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
 
-    let coins = 0; // Инициализация баланса монет с 0
-    let coinsPerTap = 1; // Начальная сила клика
+    let coins = 0;
+    let coinsPerTap = 1;
+    let clickCount = 0;
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
@@ -18,10 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
     };
 
-    // URL вашего веб-приложения Google Apps Script
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxBHtD6OCU0A76pJ55uk77qtVgzhfQBxf4pT_XwScVdZXhUBILmAmG1hH64bNMdYwhE/exec';
-
-    // Локальное сохранение с помощью localStorage
     const saveProgressLocal = () => {
         const progress = {
             coins: coins,
@@ -43,46 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
-        }
-    };
-
-    // Сохранение прогресса на Google Sheets
-    const saveProgressServer = async () => {
-        const progress = {
-            userId: 'user1', // Замените на уникальный идентификатор пользователя
-            coins: coins,
-            coinsPerTap: coinsPerTap,
-            autoClickers: autoClickers,
-        };
-        try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(progress),
-            });
-        } catch (error) {
-            console.error('Error saving progress to server:', error);
-        }
-    };
-
-    const loadProgressServer = async () => {
-        try {
-            const response = await fetch(`${scriptURL}?userId=user1`);
-            if (response.ok) {
-                const progress = await response.json();
-                coins = progress.coins;
-                coinsPerTap = progress.coinsPerTap;
-                Object.keys(autoClickers).forEach(key => {
-                    autoClickers[key].level = progress.autoClickers[key].level;
-                    autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
-                });
-                coinAmountSpan.textContent = coins;
-                updateUpgradePrices();
-            }
-        } catch (error) {
-            console.error('Error loading progress from server:', error);
         }
     };
 
@@ -127,8 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
             coins += autoClickers[upgradeType].currentRate;
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
-            saveProgressLocal();
-            saveProgressServer();
         }, 1000);
     };
 
@@ -155,23 +110,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    characterHim.addEventListener('click', (event) => {
+    const handleClick = (event) => {
         coins += coinsPerTap;
+        clickCount++;
         coinAmountSpan.textContent = coins;
         showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
-        saveProgressLocal();
-        saveProgressServer();
-    });
 
-    characterHer.addEventListener('click', (event) => {
-        coins += coinsPerTap;
-        coinAmountSpan.textContent = coins;
-        showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
-        updateUpgradePrices();
-        saveProgressLocal();
-        saveProgressServer();
-    });
+        if (clickCount % 20 === 0) {
+            saveProgressLocal();
+        }
+    };
+
+    characterHim.addEventListener('click', handleClick);
+    characterHer.addEventListener('click', handleClick);
 
     const showCoinAnimation = (x, y, amount) => {
         const coinAnimation = document.createElement('div');
@@ -206,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 updateUpgradePrices();
                 saveProgressLocal();
-                saveProgressServer();
             }
         });
     });
@@ -221,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 contentHim.style.display = 'flex';
             }
             saveProgressLocal();
-            saveProgressServer();
         });
     });
 
@@ -231,7 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showPage('home-page');
     loadProgressLocal();
-    loadProgressServer();
 });
 
 function subscribeChannel(url, partnerId) {
