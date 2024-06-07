@@ -393,8 +393,8 @@ body, html {
     background-color: #ff3b30; /* New red color for buttons */
     color: #fff;
     border: none;
-    border-radius: 0px;
-    padding: 5px 15px;
+    border-radius: 3px;
+    padding: 10px 15px;
     cursor: pointer;
     font-size: 14px;
 }
