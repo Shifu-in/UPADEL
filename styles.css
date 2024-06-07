@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Discovery';
+    src: url('assets/fonts/discovery font.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -8,12 +15,14 @@ body, html {
     justify-content: center;
     align-items: center;
     background-color: #000000;
-    font-family: 'Discovery', Arial, sans-serif;
+    font-family: 'Discovery', Arial, sans-serif; /* Указываем подключенный шрифт */
     touch-action: manipulation; /* Запрещаем жесты масштабирования */
     -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
     -ms-user-select: none; /* Запрещаем выделение текста на IE */
     user-select: none; /* Запрещаем выделение текста на всех браузерах */
 }
+
+/* Остальные стили остаются без изменений */
 
 #loading {
     position: absolute;
