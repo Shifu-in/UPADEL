@@ -11,7 +11,6 @@
             src: url('assets/fonts/discovery font.woff') format('woff');
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 </head>
 <body>
     <div class="main-screen" id="home-page">
@@ -50,22 +49,6 @@
                         <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Game Container -->
-        <div class="container">
-            <canvas id="canvas"></canvas>
-            <div id="scoreBoard">
-                <p>Score: <span id="score">0</span></p>
-            </div>
-            <div id="mainMenu">
-                <h1>JUMP!</h1>
-                <a href="#" class="button" onclick="init()">Start</a>
-            </div>
-            <div id="gameOverMenu">
-                <h2>Game Over</h2>
-                <p id="go_score">You scored 0 points!</p>
-                <a href="#" class="button" onclick="reset()">Restart</a>
             </div>
         </div>
     </div>
@@ -128,7 +111,21 @@
     </div>
 
     <div class="main-screen" id="wallet-page" style="display: none;">
-        <p class="coming-soon">Coming Soon</p>
+        <div class="container">
+            <canvas id="canvas"></canvas>
+            <div id="scoreBoard">
+                <p>Score: <span id="score">0</span></p>
+            </div>
+            <div id="mainMenu">
+                <h1>JUMP!</h1>
+                <a href="#" class="button" onclick="init()">Start</a>
+            </div>
+            <div id="gameOverMenu">
+                <h2>Game Over</h2>
+                <p id="go_score">You scored 0 points!</p>
+                <a href="#" class="button" onclick="reset()">Restart</a>
+            </div>
+        </div>
     </div>
 
     <div class="main-screen" id="stats-page" style="display: none;">
@@ -143,28 +140,7 @@
     </div>
 
     <div class="main-screen" id="fun-page" style="display: none;">
-        <div class="partner-container">
-            <div class="partner" id="partner1">
-                <div class="text-background">
-                    <p class="text-main">ShifuCrypto</p>
-                    <p class="text-sub">Подпишитесь на наш канал.</p>
-                    <div class="button-container">
-                        <button class="subscribe-button" onclick="subscribeChannel('https://t.me/shifucrypto', 'partner1')">Подписаться</button>
-                        <button class="confirm-button" onclick="confirmSubscription('partner1')" style="display: none;">Подтвердить подписку</button>
-                    </div>
-                </div>
-            </div>
-            <div class="partner" id="partner2">
-                <div class="text-background">
-                    <p class="text-main">Tai Lung Airdrop</p>
-                    <p class="text-sub">Подпишитесь на наш канал.</p>
-                    <div class="button-container">
-                        <button class="subscribe-button" onclick="subscribeChannel('https://t.me/tailungairdrop', 'partner2')">Подписаться</button>
-                        <button class="confirm-button" onclick="confirmSubscription('partner2')" style="display: none;">Подтвердить подписку</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <p class="coming-soon">Coming Soon</p>
     </div>
 
     <div class="navigation">
@@ -174,11 +150,11 @@
         <div class="nav-item" id="nav-store" data-page="store-page">
             <img src="assets/images/store.svg" alt="Store">
         </div>
-        <div class="nav-item" id="nav-stats" data-page="stats-page">
-            <img src="assets/images/stats-up-square.svg" alt="Stats">
-        </div>
         <div class="nav-item" id="nav-wallet" data-page="wallet-page">
             <img src="assets/images/wallet.svg" alt="Wallet">
+        </div>
+        <div class="nav-item" id="nav-stats" data-page="stats-page">
+            <img src="assets/images/stats-up-square.svg" alt="Stats">
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page">
             <img src="assets/images/fun.svg" alt="Fun">
