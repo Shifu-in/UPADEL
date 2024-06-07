@@ -336,6 +336,46 @@ body, html {
     flex-direction: column;
 }
 
+.partner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the partner blocks */
+    justify-content: center;
+    width: 100%;
+}
+
+.partner {
+    margin-bottom: 20px;
+    width: 80%; /* Adjust width to ensure it doesn't stretch too much */
+    position: relative; /* Ensure relative positioning for the checkmark */
+}
+
+.text-background {
+    font-size: 1.5em; /* Increase font size by 1.5 times */
+}
+
+.subscribe-button, .confirm-button {
+    background-color: #ff3b30; /* New red color for buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.subscribe-button:hover, .confirm-button:hover {
+    background-color: #ff5e57;
+}
+
+.checkmark {
+    position: absolute;
+    top: 10px; /* Top right corner */
+    right: 10px; /* Top right corner */
+    width: 20px;
+    height: 20px;
+}
+
 /* Стили для анимации монет */
 .coin-animation {
     position: absolute;
