@@ -338,7 +338,6 @@ body, html {
     font-weight: bold;
     display: flex;
     align-items: center;
-    animation: coin-fall 1s ease-out forwards;
     z-index: 1000; /* Установим высокий z-index для отображения монет поверх всего */
 }
 
@@ -350,15 +349,4 @@ body, html {
 
 .coin-value {
     color: #ffd700; /* Золотой цвет для значения монет */
-}
-
-@keyframes coin-fall {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
 }
