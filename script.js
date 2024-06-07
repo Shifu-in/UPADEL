@@ -43,7 +43,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ваш существующий код...
 
-    // Добавление события сохранения при обновлении баланса и апгрейдов
+    const pages = document.querySelectorAll('.main-screen');
+    const navItems = document.querySelectorAll('.nav-item');
+    const characterHer = document.getElementById('character-her');
+    const characterHim = document.getElementById('character');
+    const upgradeButtons = document.querySelectorAll('.upgrade-button');
+    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
+    const contentHer = document.getElementById('content-her');
+    const contentHim = document.getElementById('content-him');
+
+    const hideAllPages = () => {
+        pages.forEach(page => {
+            page.style.display = 'none';
+        });
+    };
+
+    const showPage = (pageId) => {
+        hideAllPages();
+        document.getElementById(pageId).style.display = 'flex';
+        updateNavigation(pageId);
+    };
+
+    const updateNavigation = (activePageId) => {
+        navItems.forEach(navItem => {
+            navItem.classList.remove('active');
+            if (navItem.dataset.page === activePageId) {
+                navItem.classList.add('active');
+            }
+        });
+    };
+
+    navItems.forEach(navItem => {
+        navItem.addEventListener('click', () => {
+            showPage(navItem.dataset.page);
+        });
+    });
+
+    const getUpgradePrice = (upgradeType) => {
+        const basePrice = autoClickers[upgradeType].basePrice;
+        const level = autoClickers[upgradeType].level;
+        if (level === 0) {
+            return basePrice;
+        }
+        return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
+    };
+
     const updateUpgradePrices = () => {
         upgradeButtons.forEach(button => {
             const upgradeType = button.getAttribute('data-type');
@@ -107,49 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    // Функции переключения страниц и обновления навигации
-    const pages = document.querySelectorAll('.main-screen');
-    const navItems = document.querySelectorAll('.nav-item');
-    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
-    const contentHer = document.getElementById('content-her');
-    const contentHim = document.getElementById('content-him');
-
-    const hideAllPages = () => {
-        pages.forEach(page => {
-            page.style.display = 'none';
-        });
-    };
-
-    const showPage = (pageId) => {
-        hideAllPages();
-        document.getElementById(pageId).style.display = 'flex';
-        updateNavigation(pageId);
-    };
-
-    const updateNavigation = (activePageId) => {
-        navItems.forEach(navItem => {
-            navItem.classList.remove('active');
-            if (navItem.dataset.page === activePageId) {
-                navItem.classList.add('active');
-            }
-        });
-    };
-
-    navItems.forEach(navItem => {
-        navItem.addEventListener('click', () => {
-            showPage(navItem.dataset.page);
-        });
-    });
-
-    const getUpgradePrice = (upgradeType) => {
-        const basePrice = autoClickers[upgradeType].basePrice;
-        const level = autoClickers[upgradeType].level;
-        if (level === 0) {
-            return basePrice;
-        }
-        return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
-    };
 
     const showCoinAnimation = (x, y, amount) => {
         const coinAnimation = document.createElement('div');
