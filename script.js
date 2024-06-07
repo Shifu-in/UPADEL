@@ -176,14 +176,20 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     characterHer.addEventListener('click', (event) => {
+        const rect = characterHer.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
         coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(event.clientX, event.clientY, clickStrength);
+        createCoinAnimation(x, y, clickStrength);
     });
 
     characterHim.addEventListener('click', (event) => {
+        const rect = characterHim.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
         coins += clickStrength;
         updateCoinAmount();
-        createCoinAnimation(event.clientX, event.clientY, clickStrength);
+        createCoinAnimation(x, y, clickStrength);
     });
 });
