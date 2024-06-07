@@ -11,6 +11,7 @@
             src: url('assets/fonts/discovery font.woff') format('woff');
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 </head>
 <body>
     <div class="main-screen" id="home-page">
@@ -49,6 +50,22 @@
                         <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- Game Container -->
+        <div class="container">
+            <canvas id="canvas"></canvas>
+            <div id="scoreBoard">
+                <p>Score: <span id="score">0</span></p>
+            </div>
+            <div id="mainMenu">
+                <h1>JUMP!</h1>
+                <a href="#" class="button" onclick="init()">Start</a>
+            </div>
+            <div id="gameOverMenu">
+                <h2>Game Over</h2>
+                <p id="go_score">You scored 0 points!</p>
+                <a href="#" class="button" onclick="reset()">Restart</a>
             </div>
         </div>
     </div>
@@ -168,249 +185,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const pages = document.querySelectorAll('.main-screen');
-            const navItems = document.querySelectorAll('.nav-item');
-            const coinAmountSpan = document.querySelector('.coin-amount');
-            const characterHer = document.getElementById('character-her');
-            const characterHim = document.getElementById('character');
-            const upgradeButtons = document.querySelectorAll('.upgrade-button');
-            const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
-            const contentHer = document.getElementById('content-her');
-            const contentHim = document.getElementById('content-him');
-
-            let coins = 0; // Инициализация баланса монет с 0
-            let coinsPerTap = 1; // Начальная сила клика
-            const autoClickers = {
-                gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                airdrop: { level: 0, basePrice: 100000, increment: 6, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
-            };
-
-            const hideAllPages = () => {
-                pages.forEach(page => {
-                    page.style.display = 'none';
-                });
-            };
-
-            const showPage = (pageId) => {
-                hideAllPages();
-                document.getElementById(pageId).style.display = 'flex';
-                updateNavigation(pageId);
-            };
-
-            const updateNavigation = (activePageId) => {
-                navItems.forEach(navItem => {
-                    navItem.classList.remove('active');
-                    if (navItem.dataset.page === activePageId) {
-                        navItem.classList.add('active');
-                    }
-                });
-            };
-
-            navItems.forEach(navItem => {
-                navItem.addEventListener('click', () => {
-                    showPage(navItem.dataset.page);
-                });
-            });
-
-            const getUpgradePrice = (upgradeType) => {
-                const basePrice = autoClickers[upgradeType].basePrice;
-                const level = autoClickers[upgradeType].level;
-                if (level === 0) {
-                    return basePrice;
-                }
-                return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
-            };
-
-            const startAutoClicker = (upgradeType) => {
-                setInterval(() => {
-                    coins += autoClickers[upgradeType].currentRate;
-                    coinAmountSpan.textContent = coins;
-                    updateUpgradePrices();
-                }, 1000);
-            };
-
-            const updateUpgradePrices = () => {
-                upgradeButtons.forEach(button => {
-                    const upgradeType = button.getAttribute('data-type');
-                    const price = getUpgradePrice(upgradeType);
-                    const upgradeItem = button.parentElement;
-                    const priceText = upgradeItem.querySelector('.upgrade-details p');
-                    const level = autoClickers[upgradeType].level;
-                    const rate = autoClickers[upgradeType].currentRate;
-
-                    if (upgradeType === "gym") {
-                        priceText.innerHTML = `${price} | level ${level}/10<br>${rate + coinsPerTap} Young coin per tap`;
-                    } else {
-                        priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
-                    }
-
-                    if (coins >= price) {
-                        button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
-                    } else {
-                        button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
-                    }
-                });
-            };
-
-            characterHim.addEventListener('click', (event) => {
-                coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-                coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-                showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
-                updateUpgradePrices();
-            });
-
-            characterHer.addEventListener('click', (event) => {
-                coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-                coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-                showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
-                updateUpgradePrices();
-            });
-
-            const showCoinAnimation = (x, y, amount) => {
-                const coinAnimation = document.createElement('div');
-                coinAnimation.classList.add('coin-animation');
-                coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"><span>+${amount}</span>`;
-                document.body.appendChild(coinAnimation);
-
-                // Позиционирование анимации монеты рядом с местом клика
-                coinAnimation.style.left = `${x}px`;
-                coinAnimation.style.top = `${y}px`;
-
-                // Удаление анимации монеты после завершения анимации
-                coinAnimation.addEventListener('animationend', () => {
-                    coinAnimation.remove();
-                });
-            };
-
-            upgradeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const upgradeType = button.getAttribute('data-type');
-                    const price = getUpgradePrice(upgradeType);
-
-                    if (coins >= price && autoClickers[upgradeType].level < 10) {
-                        coins -= price;
-                        coinAmountSpan.textContent = coins;
-                        autoClickers[upgradeType].level++;
-                        if (upgradeType === "gym") {
-                            coinsPerTap *= autoClickers[upgradeType].multiplier; // Увеличиваем силу клика
-                        } else {
-                            autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
-                        }
-                        if (autoClickers[upgradeType].level === 1) {
-                            startAutoClicker(upgradeType);
-                        }
-                        updateUpgradePrices();
-                    }
-                });
-            });
-
-            genderSwitchInputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    if (input.value === 'her') {
-                        contentHer.style.display = 'flex';
-                        contentHim.style.display = 'none';
-                    } else {
-                        contentHer.style.display = 'none';
-                        contentHim.style.display = 'flex';
-                    }
-                });
-            });
-
-            // Предотвращаем зум и скролл на мобильных устройствах
-            document.addEventListener('gesturestart', (e) => e.preventDefault());
-            document.addEventListener('gesturechange', (e) => e.preventDefault());
-            document.addEventListener('gestureend', (e) => e.preventDefault());
-
-            // Предотвращаем двойной тап для зума и масштабирования
-            let lastTouchEnd = 0;
-            document.addEventListener('touchstart', function(event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchend', (event) => {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-
-            showPage('home-page'); // Показать домашнюю страницу по умолчанию
-        });
-
-        function subscribeChannel(url, partnerId) {
-            window.open(url, '_blank');
-            document.querySelector(`#${partnerId} .confirm-button`).style.display = 'inline-block';
-        }
-
-        function confirmSubscription(partnerId) {
-            const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
-            const checkmark = document.createElement('img');
-            checkmark.src = 'assets/images/checkmark-gold.svg'; // Добавьте изображение золотой галочки в assets/images
-            checkmark.classList.add('checkmark');
-            confirmButton.parentElement.appendChild(checkmark);
-
-            confirmButton.style.display = 'none';
-        }
-    </script>
-    <style>
-        .partner-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .partner {
-            margin: 10px 0;
-            width: 90%;
-            max-width: 300px;
-            position: relative;
-        }
-
-        .text-background {
-            background: url('assets/images/Фон для текста.svg') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 20px;
-            color: #fff;
-            text-align: left;
-            position: relative;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .subscribe-button, .confirm-button {
-            background-color: #ff3b30;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Discovery', Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .checkmark {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 20px;
-            height: 20px;
-        }
-    </style>
+    <script src="script.js"></script>
 </body>
 </html>
