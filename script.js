@@ -1,22 +1,120 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const pages = document.querySelectorAll('.main-screen');
-    const navItems = document.querySelectorAll('.nav-item');
-    const coinAmountSpan = document.querySelector('.coin-amount');
-    const characterHer = document.getElementById('character-her');
-    const characterHim = document.getElementById('character');
-    const upgradeButtons = document.querySelectorAll('.upgrade-button');
-    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
-    const contentHer = document.getElementById('content-her');
-    const contentHim = document.getElementById('content-him');
+    // Код для скрытия окна загрузки через 4 секунды
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.display = 'none';
+        showPage('home-page'); // Показать домашнюю страницу после загрузки
+    }, 4000);
 
-    let coins = 0; // Инициализация баланса монет с 0
+    // Загрузка сохраненных данных из LocalStorage
+    let coins = localStorage.getItem('coins') ? parseInt(localStorage.getItem('coins')) : 0;
     let coinsPerTap = 1; // Начальная сила клика
-    const autoClickers = {
+    const autoClickers = JSON.parse(localStorage.getItem('autoClickers')) || {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
         airdrop: { level: 0, basePrice: 100000, increment: 6, currentRate: 0, priceFactor: 3, multiplier: 2 },
         defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
     };
+
+    const coinAmountSpan = document.querySelector('.coin-amount');
+    coinAmountSpan.textContent = coins;
+
+    // Сохранение данных в LocalStorage
+    const saveData = () => {
+        localStorage.setItem('coins', coins);
+        localStorage.setItem('autoClickers', JSON.stringify(autoClickers));
+    };
+
+    const startAutoClicker = (upgradeType) => {
+        setInterval(() => {
+            coins += autoClickers[upgradeType].currentRate;
+            coinAmountSpan.textContent = coins;
+            updateUpgradePrices();
+            saveData();
+        }, 1000);
+    };
+
+    // Запуск авто-кликеров при загрузке страницы
+    Object.keys(autoClickers).forEach(upgradeType => {
+        if (autoClickers[upgradeType].level > 0) {
+            startAutoClicker(upgradeType);
+        }
+    });
+
+    // Ваш существующий код...
+
+    // Добавление события сохранения при обновлении баланса и апгрейдов
+    const updateUpgradePrices = () => {
+        upgradeButtons.forEach(button => {
+            const upgradeType = button.getAttribute('data-type');
+            const price = getUpgradePrice(upgradeType);
+            const upgradeItem
+const upgradeItem = button.parentElement;
+            const priceText = upgradeItem.querySelector('.upgrade-details p');
+            const level = autoClickers[upgradeType].level;
+            const rate = autoClickers[upgradeType].currentRate;
+
+            if (upgradeType === "gym") {
+                priceText.innerHTML = `${price} | level ${level}/10<br>${rate + coinsPerTap} Young coin per tap`;
+            } else {
+                priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
+            }
+
+            if (coins >= price) {
+                button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
+            } else {
+                button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
+            }
+        });
+
+        saveData(); // Сохранение данных при обновлении цен
+    };
+
+    characterHim.addEventListener('click', (event) => {
+        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
+        updateUpgradePrices();
+        saveData(); // Сохранение данных при клике
+    });
+
+    characterHer.addEventListener('click', (event) => {
+        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
+        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
+        updateUpgradePrices();
+        saveData(); // Сохранение данных при клике
+    });
+
+    upgradeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const upgradeType = button.getAttribute('data-type');
+            const price = getUpgradePrice(upgradeType);
+
+            if (coins >= price && autoClickers[upgradeType].level < 10) {
+                coins -= price;
+                coinAmountSpan.textContent = coins;
+                autoClickers[upgradeType].level++;
+                if (upgradeType === "gym") {
+                    coinsPerTap *= autoClickers[upgradeType].multiplier; // Увеличиваем силу клика
+                } else {
+                    autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
+                }
+                if (autoClickers[upgradeType].level === 1) {
+                    startAutoClicker(upgradeType);
+                }
+                updateUpgradePrices();
+                saveData(); // Сохранение данных при апгрейде
+            }
+        });
+    });
+
+    // Функции переключения страниц и обновления навигации
+    const pages = document.querySelectorAll('.main-screen');
+    const navItems = document.querySelectorAll('.nav-item');
+    const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
+    const contentHer = document.getElementById('content-her');
+    const contentHim = document.getElementById('content-him');
 
     const hideAllPages = () => {
         pages.forEach(page => {
@@ -54,51 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
     };
 
-    const startAutoClicker = (upgradeType) => {
-        setInterval(() => {
-            coins += autoClickers[upgradeType].currentRate;
-            coinAmountSpan.textContent = coins;
-            updateUpgradePrices();
-        }, 1000);
-    };
-
-    const updateUpgradePrices = () => {
-        upgradeButtons.forEach(button => {
-            const upgradeType = button.getAttribute('data-type');
-            const price = getUpgradePrice(upgradeType);
-            const upgradeItem = button.parentElement;
-            const priceText = upgradeItem.querySelector('.upgrade-details p');
-            const level = autoClickers[upgradeType].level;
-            const rate = autoClickers[upgradeType].currentRate;
-
-            if (upgradeType === "gym") {
-                priceText.innerHTML = `${price} | level ${level}/10<br>${rate + coinsPerTap} Young coin per tap`;
-            } else {
-                priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
-            }
-            
-            if (coins >= price) {
-                button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
-            } else {
-                button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
-            }
-        });
-    };
-
-    characterHim.addEventListener('click', (event) => {
-        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
-        updateUpgradePrices();
-    });
-
-    characterHer.addEventListener('click', (event) => {
-        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
-        updateUpgradePrices();
-    });
-
     const showCoinAnimation = (x, y, amount) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
@@ -114,28 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
             coinAnimation.remove();
         });
     };
-
-    upgradeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const upgradeType = button.getAttribute('data-type');
-            const price = getUpgradePrice(upgradeType);
-
-            if (coins >= price && autoClickers[upgradeType].level < 10) {
-                coins -= price;
-                coinAmountSpan.textContent = coins;
-                autoClickers[upgradeType].level++;
-                if (upgradeType === "gym") {
-                    coinsPerTap *= autoClickers[upgradeType].multiplier; // Увеличиваем силу клика
-                } else {
-                    autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
-                }
-                if (autoClickers[upgradeType].level === 1) {
-                    startAutoClicker(upgradeType);
-                }
-                updateUpgradePrices();
-            }
-        });
-    });
 
     genderSwitchInputs.forEach(input => {
         input.addEventListener('change', () => {
@@ -172,3 +203,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showPage('home-page'); // Показать домашнюю страницу по умолчанию
 });
+
+function subscribeChannel(url, partnerId) {
+    window.open(url, '_blank');
+    document.querySelector(`#${partnerId} .confirm-button`).style.display = 'inline-block';
+}
+
+function confirmSubscription(partnerId) {
+    const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
+    const checkmark = document.createElement('img');
+    checkmark.src = 'assets/images/checkmark-gold.svg'; // Добавьте изображение золотой галочки в assets/images
+    checkmark.classList.add('checkmark');
+    confirmButton.parentElement.appendChild(checkmark);
+
+    confirmButton.style.display = 'none';
+}
