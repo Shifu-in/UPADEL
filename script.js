@@ -1,13 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tg = window.Telegram.WebApp;
-    let userId;
-
-    tg.ready(() => {
-        userId = tg.initDataUnsafe.user.id;
-        console.log("User ID:", userId); // Debugging: ensure we get the user ID correctly
-        loadProgress();
-    });
-
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
@@ -18,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
 
-    let coins = 0;
-    let coinsPerTap = 1;
+    let coins = 0; // Инициализация баланса монет с 0
+    let coinsPerTap = 1; // Начальная сила клика
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
@@ -27,17 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
         defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
     };
 
-    const saveProgress = () => {
+    // URL вашего веб-приложения Google Apps Script
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxBHtD6OCU0A76pJ55uk77qtVgzhfQBxf4pT_XwScVdZXhUBILmAmG1hH64bNMdYwhE/exec';
+
+    // Локальное сохранение с помощью localStorage
+    const saveProgressLocal = () => {
         const progress = {
             coins: coins,
             coinsPerTap: coinsPerTap,
             autoClickers: autoClickers,
         };
-        localStorage.setItem(`gameProgress_${userId}`, JSON.stringify(progress));
+        localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
 
-    const loadProgress = () => {
-        const savedProgress = localStorage.getItem(`gameProgress_${userId}`);
+    const loadProgressLocal = () => {
+        const savedProgress = localStorage.getItem('gameProgress');
         if (savedProgress) {
             const progress = JSON.parse(savedProgress);
             coins = progress.coins;
@@ -48,6 +43,46 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
+        }
+    };
+
+    // Сохранение прогресса на Google Sheets
+    const saveProgressServer = async () => {
+        const progress = {
+            userId: 'user1', // Замените на уникальный идентификатор пользователя
+            coins: coins,
+            coinsPerTap: coinsPerTap,
+            autoClickers: autoClickers,
+        };
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(progress),
+            });
+        } catch (error) {
+            console.error('Error saving progress to server:', error);
+        }
+    };
+
+    const loadProgressServer = async () => {
+        try {
+            const response = await fetch(`${scriptURL}?userId=user1`);
+            if (response.ok) {
+                const progress = await response.json();
+                coins = progress.coins;
+                coinsPerTap = progress.coinsPerTap;
+                Object.keys(autoClickers).forEach(key => {
+                    autoClickers[key].level = progress.autoClickers[key].level;
+                    autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
+                });
+                coinAmountSpan.textContent = coins;
+                updateUpgradePrices();
+            }
+        } catch (error) {
+            console.error('Error loading progress from server:', error);
         }
     };
 
@@ -92,7 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
             coins += autoClickers[upgradeType].currentRate;
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
-            saveProgress();
+            saveProgressLocal();
+            saveProgressServer();
         }, 1000);
     };
 
@@ -110,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
             }
-            
+
             if (coins >= price) {
                 button.style.backgroundColor = '#00ff00';
             } else {
@@ -124,7 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
         coinAmountSpan.textContent = coins;
         showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
-        saveProgress();
+        saveProgressLocal();
+        saveProgressServer();
     });
 
     characterHer.addEventListener('click', (event) => {
@@ -132,7 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
         coinAmountSpan.textContent = coins;
         showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
-        saveProgress();
+        saveProgressLocal();
+        saveProgressServer();
     });
 
     const showCoinAnimation = (x, y, amount) => {
@@ -167,7 +205,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     startAutoClicker(upgradeType);
                 }
                 updateUpgradePrices();
-                saveProgress();
+                saveProgressLocal();
+                saveProgressServer();
             }
         });
     });
@@ -181,7 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 contentHer.style.display = 'none';
                 contentHim.style.display = 'flex';
             }
-            saveProgress();
+            saveProgressLocal();
+            saveProgressServer();
         });
     });
 
@@ -189,19 +229,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
 
-    document.addEventListener('touchstart', function(event) {
-        if (event.touches.length > 1) {
-            event.preventDefault();
-        }
-    }, { passive: false });
-
-    document.addEventListener('touchend', (event) => {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, false);
-
-    window.addEventListener('beforeunload', saveProgress);
+    showPage('home-page');
+    loadProgressLocal();
+    loadProgressServer();
 });
+
+function subscribeChannel(url, partnerId) {
+    window.open(url, '_blank');
+    document.querySelector(`#${partnerId} .confirm-button`).style.display = 'inline-block';
+}
+
+function confirmSubscription(partnerId) {
+    const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
+    const checkmark = document.createElement('img');
+    checkmark.src = 'assets/images/checkmark-gold.svg';
+    checkmark.classList.add('checkmark');
+    confirmButton.parentElement.appendChild(checkmark);
+
+    confirmButton.style.display = 'none';
+}
