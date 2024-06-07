@@ -84,8 +84,6 @@ body, html {
 .coin-info img {
     width: 30px;
     height: 30px;
-    position: relative;
-    top: 3px; /* Lower the coin image by 3px */
 }
 
 .gender-switch {
@@ -280,7 +278,7 @@ body, html {
     color: #fff;
     border: none;
     border-radius: 10px;
-    padding: 10px 17px; /* Make buttons narrower */
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 14px;
 }
@@ -374,16 +372,12 @@ body, html {
     align-items: center; /* Center the partner blocks */
     justify-content: center;
     width: 100%;
-    height: 100%; /* Ensure full height */
 }
 
 .partner {
     margin-bottom: 20px;
     width: 80%; /* Adjust width to ensure it doesn't stretch too much */
     position: relative; /* Ensure relative positioning for the checkmark */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .text-background {
@@ -395,7 +389,7 @@ body, html {
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 17px; /* Make buttons narrower */
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 14px;
 }
