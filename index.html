@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Game App</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Screen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'Discovery';
+            src: url('assets/fonts/discovery%20font.woff') format('woff');
+        }
+    </style>
 </head>
 <body>
-    <div id="loading">
-        <img src="assets/images/loading.gif" alt="Loading...">
-    </div>
-    <div class="main-screen" id="home-page" style="display: none;">
+    <div class="main-screen" id="home-page">
         <div class="header">
             <div class="coin-info">
                 <span class="coin-text">Young coin</span>
@@ -30,6 +33,9 @@
                 <div class="text-background">
                     <p class="text-main">Your game welcome instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,6 +45,9 @@
                 <div class="text-background">
                     <p class="text-main">Your game welcome instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,9 +63,9 @@
                     </div>
                     <div class="upgrade-details">
                         <h3>GYM</h3>
-                        <p>50 | level <span class="upgrade-level">0</span>/10<br><span class="upgrade-rate">1</span> Young coin - sec</p>
+                        <p>50 | level 0/10<br>1 Young coin per tap</p>
                     </div>
-                    <button class="upgrade-button" data-upgrade="gym">BUY</button>
+                    <button class="upgrade-button">BUY</button>
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
@@ -64,9 +73,9 @@
                     </div>
                     <div class="upgrade-details">
                         <h3>AI-TAP</h3>
-                        <p>50,000 | level <span class="upgrade-level">0</span>/10<br><span class="upgrade-rate">5</span> Young coin - sec</p>
+                        <p>50,000 | level 0/10<br>5 Young coin / sec</p>
                     </div>
-                    <button class="upgrade-button" data-upgrade="aiTap">BUY</button>
+                    <button class="upgrade-button">BUY</button>
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
@@ -74,9 +83,9 @@
                     </div>
                     <div class="upgrade-details">
                         <h3>AIRDROP</h3>
-                        <p>500,000 | level <span class="upgrade-level">0</span>/10<br><span class="upgrade-rate">15</span> Young coin - sec</p>
+                        <p>500,000 | level 0/10<br>15 Young coin / sec</p>
                     </div>
-                    <button class="upgrade-button" data-upgrade="airdrop">BUY</button>
+                    <button class="upgrade-button">BUY</button>
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
@@ -84,15 +93,18 @@
                     </div>
                     <div class="upgrade-details">
                         <h3>DeFi</h3>
-                        <p>1,000,000 | level <span class="upgrade-level">0</span>/10<br><span class="upgrade-rate">30</span> Young coin - sec</p>
+                        <p>1,000,000 | level 0/10<br>30 Young coin / sec</p>
                     </div>
-                    <button class="upgrade-button" data-upgrade="defi">BUY</button>
+                    <button class="upgrade-button">BUY</button>
                 </div>
             </div>
             <div class="text-container-store">
                 <div class="text-background">
                     <p class="text-main">Upgrades? instruction</p>
                     <p class="text-sub">For designers who dare to think differently.</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,7 +119,7 @@
             <div class="text-container-room">
                 <div class="text-background">
                     <p class="text-main">Это дом вашего персонажа</p>
-                    <p class="text-sub">Он/она скоро вернётся домой и ваше приключение начнётся...</p>
+                    <p class="text-sub">Персонаж скоро вернётся домой и ваше приключение начнётся...</p>
                 </div>
             </div>
         </div>
