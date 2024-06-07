@@ -84,6 +84,8 @@ body, html {
 .coin-info img {
     width: 30px;
     height: 30px;
+    position: relative;
+    top: 3px; /* Lower the coin image by 3px */
 }
 
 .gender-switch {
@@ -378,6 +380,9 @@ body, html {
     margin-bottom: 20px;
     width: 80%; /* Adjust width to ensure it doesn't stretch too much */
     position: relative; /* Ensure relative positioning for the checkmark */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .text-background {
