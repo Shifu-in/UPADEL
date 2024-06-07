@@ -13,13 +13,6 @@
     </style>
 </head>
 <body>
-    <script>
-        // Проверка, отображался ли уже экран загрузки
-        if (!sessionStorage.getItem('loadingScreenShown')) {
-            sessionStorage.setItem('loadingScreenShown', 'true');
-            window.location.href = "loading_screen/loading.html";
-        } else {
-            document.write(`
     <div class="main-screen" id="home-page">
         <div class="header">
             <div class="coin-info">
