@@ -62,7 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const upgrade = autoClickers[upgradeKey];
         const upgradeItem = document.querySelector(`.upgrade-button[data-upgrade="${upgradeKey}"]`).parentElement;
         upgradeItem.querySelector('.upgrade-level').textContent = upgrade.level;
-        upgradeItem.querySelector('.upgrade-rate').textContent = upgrade.currentRate.toFixed(1);
+        if (upgradeKey === 'gym') {
+            upgradeItem.querySelector('.upgrade-rate').textContent = `Power tap ${clickStrength.toFixed(1)}`;
+        } else {
+            upgradeItem.querySelector('.upgrade-rate').textContent = `${upgrade.currentRate.toFixed(1)} Young coin - sec`;
+        }
     };
 
     upgradeButtons.forEach(button => {
@@ -162,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"> <span class="coin-value">+${clickStrength}</span>`;
         coinAnimation.style.left = `${Math.random() * 80}%`;
         coinAnimation.style.top = `${Math.random() * 80}%`;
-        character.appendChild(coinAnimation);
+        document.body.appendChild(coinAnimation);
         setTimeout(() => {
             coinAnimation.remove();
         }, 1000);
