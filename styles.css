@@ -1,10 +1,3 @@
-@font-face {
-    font-family: 'Discovery';
-    src: url('assets/fonts/discovery font.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body, html {
     margin: 0;
     padding: 0;
@@ -15,35 +8,17 @@ body, html {
     justify-content: center;
     align-items: center;
     background-color: #000000;
-    font-family: 'Discovery', Arial, sans-serif; /* Указываем подключенный шрифт */
-    touch-action: manipulation; /* Запрещаем жесты масштабирования */
+    font-family: 'Discovery', Arial, sans-serif;
     -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
     -ms-user-select: none; /* Запрещаем выделение текста на IE */
     user-select: none; /* Запрещаем выделение текста на всех браузерах */
-}
-
-#loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000000;
-    z-index: 1000;
-}
-
-#loading img {
-    width: 100px;
-    height: 100px;
+    touch-action: manipulation; /* Запрещаем жесты масштабирования */
 }
 
 .main-screen {
     width: 100%;
     height: 100%;
-    display: none; /* Скрываем страницы по умолчанию */
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -61,7 +36,7 @@ body, html {
     display: flex;
     justify-content: space-between; /* Размещаем элементы по краям */
     width: 100%;
-    padding: 25px; /* Увеличено на 5 пикселей */
+    padding: 20px;
     position: relative;
 }
 
@@ -70,8 +45,8 @@ body, html {
     align-items: center;
     color: #fff;
     position: relative;
-    top: 10px; /* Увеличено на 5 пикселей */
-    left: 15px; /* Увеличено на 5 пикселей */
+    top: 5px;
+    left: 5px;
 }
 
 .coin-text {
@@ -91,11 +66,11 @@ body, html {
     display: flex;
     align-items: center;
     background-color: #f0f0f0;
-    border-radius: 20px;
-    padding: 10px; /* Увеличено на 5 пикселей */
+    border-radius: 25px;
+    padding: 5px;
     position: relative;
-    top: 10px; /* Увеличено на 5 пикселей */
-    right: 10px; /* Увеличено на 5 пикселей */
+    top: 5px;
+    right: 5px;
 }
 
 .gender-switch input[type="radio"] {
@@ -122,47 +97,41 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Центрируем по вертикали */
+    justify-content: center;
     position: relative;
     flex-grow: 1;
 }
 
 .character {
-    width: 420px; /* Уменьшено на 10 пикселей */
+    width: 430px; /* Уменьшенный размер на 10 пикселей */
     height: auto;
-    margin-bottom: -35px;
-    margin-top: 70px;
-    margin-left: -20px;
-    position: relative;
+    margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
+    margin-top: 15px; /* Перемещение вверх на 10 пикселей */
+    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
 .character-her {
-    width: 382px; /* Уменьшенный размер на 20% + 10 пикселей */
+    width: 322px; /* Уменьшенный размер на 20% + 10 пикселей */
     height: auto;
     margin-bottom: -35px; /* Перемещение вверх на 5 пикселей */
     margin-top: 15px; /* Перемещение вверх на 10 пикселей */
-    margin-left: -20px; /* Сдвиг правее на 5 пикселей */
+    margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
 }
 
 .text-container {
-    width: 300px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 420px;
+    width: 90%;
+    max-width: 300px;
     position: relative;
-    margin: 0 auto; /* Центрирование по горизонтали */
-    text-align: left;
-}
-
-.content-group {
-    margin-top: 50px; /* Опущен на 150 пикселей */
+    text-align: left; /* Выравнивание текста по левому краю */
 }
 
 .text-background {
     background: url('assets/images/Фон%20для%20текста.svg') no-repeat center center;
     background-size: cover;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 20px;
     color: #fff;
     text-align: left;
 }
@@ -175,6 +144,21 @@ body, html {
 .text-sub {
     font-size: 14px;
     margin: 10px 0 20px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+}
+
+/* Убираем элементы dots */
+.page-controls {
+    display: none;
 }
 
 .navigation {
@@ -209,12 +193,11 @@ body, html {
 }
 
 .upgrades {
-    width: 300px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 320px;
+    width: 380px; /* Уменьшен контейнер на 20 пикселей */
+    max-width: 380px;
     background-color: #1c1c1e;
     border-radius: 20px;
     padding: 20px;
-    margin-top: -150px; /* Опущен на 150 пикселей */
 }
 
 .upgrades h2 {
@@ -280,32 +263,25 @@ body, html {
     background-color: #ff5e57;
 }
 
-.upgrade-button.active {
-    background-color: #28a745; /* Зелёный цвет при достаточном балансе */
-}
-
 .coming-soon {
     color: #fff;
     font-size: 24px;
     text-align: center;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Занимает всю высоту экрана */
+    margin-top: 20px;
 }
 
 .text-container-store {
-    width: 270px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 270px;
+    width: 280px; /* Уменьшен контейнер на 10 пикселей */
+    max-width: 280px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
-    margin-top: 70px; /* Опущен на 50 пикселей */
+    margin-top: 20px; /* Adjust the margin as needed */
+    margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
     text-align: left;
 }
 
 .content-group {
-    margin-top: 150px; /* Опущен на 150 пикселей */
+    margin-top: 150px; /* Lower the group of containers by 150px */
 }
 
 .background-room {
@@ -322,7 +298,7 @@ body, html {
 .text-container-room {
     width: 90%;
     max-width: 300px;
-    margin-top: 420px; /* Опущен контейнер текста на 200 пикселей */
+    margin-top: 420px; /* Опустить контейнер текста на 200 пикселей */
     margin-left: 20px; /* Сдвиг правее на 20 пикселей */
     text-align: left;
 }
@@ -345,9 +321,8 @@ body, html {
     font-weight: bold;
     display: flex;
     align-items: center;
+    animation: coin-fall 1s ease-out forwards;
     z-index: 1000; /* Установим высокий z-index для отображения монет поверх всего */
-    animation: coin-fade-in 0.5s ease-out, coin-fade-out 0.5s ease-out 1s;
-    pointer-events: none; /* Отключаем взаимодействие с анимацией */
 }
 
 .coin-animation img {
@@ -356,28 +331,13 @@ body, html {
     margin-right: 5px;
 }
 
-.coin-value {
-    color: #ffd700; /* Золотой цвет для значения монет */
-}
-
-@keyframes coin-fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
+@keyframes coin-fall {
+    0% {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@keyframes coin-fade-out {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
+    100% {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-50px);
     }
 }
