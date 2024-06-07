@@ -1,10 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        loadingScreen.style.display = 'none';
-        document.getElementById('home-page').style.display = 'flex';
-    }, 4000);
-    
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
@@ -15,13 +9,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
 
-    let coins = 0; // Инициализация баланса монет с 0
-    let coinsPerTap = 1; // Начальная сила клика
+    let coins = 0;
+    let coinsPerTap = 1;
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
         airdrop: { level: 0, basePrice: 100000, increment: 6, currentRate: 0, priceFactor: 3, multiplier: 2 },
         defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
+    };
+
+    const saveProgress = () => {
+        const progress = {
+            coins: coins,
+            coinsPerTap: coinsPerTap,
+            autoClickers: autoClickers,
+        };
+        localStorage.setItem('gameProgress', JSON.stringify(progress));
+    };
+
+    const loadProgress = () => {
+        const savedProgress = localStorage.getItem('gameProgress');
+        if (savedProgress) {
+            const progress = JSON.parse(savedProgress);
+            coins = progress.coins;
+            coinsPerTap = progress.coinsPerTap;
+            Object.keys(autoClickers).forEach(key => {
+                autoClickers[key].level = progress.autoClickers[key].level;
+                autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
+            });
+            coinAmountSpan.textContent = coins;
+            updateUpgradePrices();
+        }
     };
 
     const hideAllPages = () => {
@@ -65,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             coins += autoClickers[upgradeType].currentRate;
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
+            saveProgress();
         }, 1000);
     };
 
@@ -84,25 +103,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             if (coins >= price) {
-                button.style.backgroundColor = '#00ff00'; // Зеленый цвет при достаточном количестве монет
+                button.style.backgroundColor = '#00ff00';
             } else {
-                button.style.backgroundColor = '#ff3b30'; // Красный цвет при недостаточном количестве монет
+                button.style.backgroundColor = '#ff3b30';
             }
         });
     };
 
     characterHim.addEventListener('click', (event) => {
-        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
+        coins += coinsPerTap;
+        coinAmountSpan.textContent = coins;
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
+        saveProgress();
     });
 
     characterHer.addEventListener('click', (event) => {
-        coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
-        coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
+        coins += coinsPerTap;
+        coinAmountSpan.textContent = coins;
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
+        saveProgress();
     });
 
     const showCoinAnimation = (x, y, amount) => {
@@ -111,11 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
         coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"><span>+${amount}</span>`;
         document.body.appendChild(coinAnimation);
 
-        // Позиционирование анимации монеты рядом с местом клика
         coinAnimation.style.left = `${x}px`;
         coinAnimation.style.top = `${y}px`;
 
-        // Удаление анимации монеты после завершения анимации
         coinAnimation.addEventListener('animationend', () => {
             coinAnimation.remove();
         });
@@ -131,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 coinAmountSpan.textContent = coins;
                 autoClickers[upgradeType].level++;
                 if (upgradeType === "gym") {
-                    coinsPerTap *= autoClickers[upgradeType].multiplier; // Увеличиваем силу клика
+                    coinsPerTap *= autoClickers[upgradeType].multiplier;
                 } else {
                     autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
                 }
@@ -139,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     startAutoClicker(upgradeType);
                 }
                 updateUpgradePrices();
+                saveProgress();
             }
         });
     });
@@ -155,13 +175,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Предотвращаем зум и скролл на мобильных устройствах
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
 
-    // Предотвращаем двойной тап для зума и масштабирования
-    let lastTouchEnd = 0;
     document.addEventListener('touchstart', function(event) {
         if (event.touches.length > 1) {
             event.preventDefault();
@@ -176,5 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
         lastTouchEnd = now;
     }, false);
 
-    showPage('home-page'); // Показать домашнюю страницу по умолчанию
+    loadProgress();
+    showPage('home-page');
 });
