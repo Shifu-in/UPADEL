@@ -12,7 +12,6 @@ body, html {
     -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
     -ms-user-select: none; /* Запрещаем выделение текста на IE */
     user-select: none; /* Запрещаем выделение текста на всех браузерах */
-    touch-action: manipulation; /* Запрещаем жесты масштабирования */
 }
 
 .main-screen {
@@ -192,10 +191,11 @@ body, html {
 }
 
 .upgrades {
-    width: 380px; /* Уменьшен контейнер на 20 пикселей */
-    max-width: 380px;
+    width: 350px; /* Уменьшен контейнер на 20 пикселей */
+    max-width: 360px;
     background-color: #1c1c1e;
     border-radius: 20px;
+    margin-top: 120px;
     padding: 20px;
 }
 
@@ -271,10 +271,10 @@ body, html {
 
 .text-container-store {
     width: 280px; /* Уменьшен контейнер на 10 пикселей */
-    max-width: 280px;
+    max-width: 300px;
     position: relative;
     margin: 0 auto; /* Центрирование по горизонтали */
-    margin-top: 20px; /* Adjust the margin as needed */
+    margin-top: 0px; /* Adjust the margin as needed */
     margin-bottom: 20px; /* Add margin-bottom to avoid overlapping with navigation */
     text-align: left;
 }
