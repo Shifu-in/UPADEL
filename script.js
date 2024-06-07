@@ -61,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateUpgradePrices = () => {
         upgradeButtons.forEach(button => {
-            const upgradeItem = button.parentElement;
-            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const upgradeType = button.getAttribute('data-type');
             const price = getUpgradePrice(upgradeType);
+            const upgradeItem = button.parentElement;
             const priceText = upgradeItem.querySelector('.upgrade-details p');
             const level = autoClickers[upgradeType].level;
             const rate = autoClickers[upgradeType].currentRate;
@@ -85,21 +85,21 @@ document.addEventListener("DOMContentLoaded", () => {
     characterHim.addEventListener('click', (event) => {
         coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
         updateUpgradePrices();
     });
 
     characterHer.addEventListener('click', (event) => {
         coins += coinsPerTap; // Увеличиваем баланс монет на силу клика
         coinAmountSpan.textContent = coins; // Обновляем отображение баланса
-        showCoinAnimation(event.clientX, event.clientY); // Показ анимации монеты
+        showCoinAnimation(event.clientX, event.clientY, coinsPerTap); // Показ анимации монеты
         updateUpgradePrices();
     });
 
-    const showCoinAnimation = (x, y) => {
+    const showCoinAnimation = (x, y, amount) => {
         const coinAnimation = document.createElement('div');
         coinAnimation.classList.add('coin-animation');
-        coinAnimation.innerHTML = '<img src="assets/images/coins.svg" alt="Coin"><span>+1</span>';
+        coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"><span>+${amount}</span>`;
         document.body.appendChild(coinAnimation);
 
         // Позиционирование анимации монеты рядом с местом клика
@@ -114,8 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     upgradeButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const upgradeItem = button.parentElement;
-            const upgradeType = upgradeItem.querySelector('.upgrade-details h3').textContent.toLowerCase();
+            const upgradeType = button.getAttribute('data-type');
             const price = getUpgradePrice(upgradeType);
 
             if (coins >= price) {
