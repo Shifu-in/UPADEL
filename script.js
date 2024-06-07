@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let coins = 0; // Инициализация баланса монет с 0
     let coinsPerTap = 1; // Начальная сила клика
-    let autoClickers = {
-        gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0 },
-        aiTap: { level: 0, basePrice: 50000, increment: 5, currentRate: 0 },
-        airdrop: { level: 0, basePrice: 500000, increment: 15, currentRate: 0 },
-        defi: { level: 0, basePrice: 1000000, increment: 30, currentRate: 0 },
+    const autoClickers = {
+        gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
+        aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
+        airdrop: { level: 0, basePrice: 100000, increment: 6, currentRate: 0, priceFactor: 3, multiplier: 2 },
+        defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
     };
 
     const hideAllPages = () => {
@@ -48,7 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const getUpgradePrice = (upgradeType) => {
         const basePrice = autoClickers[upgradeType].basePrice;
         const level = autoClickers[upgradeType].level;
-        return Math.floor(basePrice * Math.pow(1.5, level));
+        if (level === 0) {
+            return basePrice;
+        }
+        return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
     };
 
     const startAutoClicker = (upgradeType) => {
@@ -117,13 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const upgradeType = button.getAttribute('data-type');
             const price = getUpgradePrice(upgradeType);
 
-            if (coins >= price) {
+            if (coins >= price && autoClickers[upgradeType].level < 10) {
                 coins -= price;
                 coinAmountSpan.textContent = coins;
                 autoClickers[upgradeType].level++;
-                autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment;
                 if (upgradeType === "gym") {
-                    coinsPerTap += autoClickers[upgradeType].increment; // Увеличиваем силу клика
+                    coinsPerTap *= autoClickers[upgradeType].multiplier; // Увеличиваем силу клика
+                } else {
+                    autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
                 }
                 if (autoClickers[upgradeType].level === 1) {
                     startAutoClicker(upgradeType);
