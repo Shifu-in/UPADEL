@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Код для скрытия окна загрузки через 4 секунды
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.display = 'none';
+        document.getElementById('home-page').style.display = 'flex'; // Показать домашнюю страницу после загрузки
+    }, 4000);
+    
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
     const coinAmountSpan = document.querySelector('.coin-amount');
