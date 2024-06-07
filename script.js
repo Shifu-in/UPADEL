@@ -208,6 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
         lastTouchEnd = now;
     }, false);
 
+    // Load progress when the app starts
     loadProgress();
+
+    // Save progress when the app is about to be closed
+    window.addEventListener('beforeunload', saveProgress);
+
     showPage('home-page');
 });
