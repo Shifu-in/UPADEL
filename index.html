@@ -10,25 +10,6 @@
             font-family: 'Discovery';
             src: url('assets/fonts/discovery font.woff') format('woff');
         }
-
-        /* Медиазапросы для улучшения отзывчивости */
-        @media (max-width: 600px) {
-            .character {
-                width: 220px;
-            }
-            .character-her {
-                width: 185px;
-            }
-            .text-container {
-                width: 95%;
-            }
-            .upgrades {
-                width: 95%;
-            }
-            .text-container-store {
-                width: 95%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -37,7 +18,7 @@
             <div class="coin-info">
                 <span class="coin-text">Young coin</span>
                 <span class="coin-amount">0</span>
-                <img src="assets/images/coins.svg" alt="Coins" loading="lazy">
+                <img src="assets/images/coins.svg" alt="Coins">
             </div>
             <div class="gender-switch">
                 <input type="radio" id="for-her" name="gender" value="her">
@@ -47,7 +28,7 @@
             </div>
         </div>
         <div class="content" id="content-her" style="display: none;">
-            <img src="assets/images/Adel.png" alt="Character" class="character character-her" id="character-her" loading="lazy">
+            <img src="assets/images/Adel.png" alt="Character" class="character character-her" id="character-her">
             <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</p>
@@ -56,7 +37,7 @@
             </div>
         </div>
         <div class="content" id="content-him">
-            <img src="assets/images/Ai.svg" alt="Character" class="character" id="character" loading="lazy">
+            <img src="assets/images/Ai.svg" alt="Character" class="character" id="character">
             <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</п>
@@ -72,7 +53,7 @@
                 <h2>UPGRADES</h2>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
-                        <img src="assets/images/апгрейд 1.svg" alt="GYM" loading="lazy">
+                        <img src="assets/images/апгрейд 1.svg" alt="GYM">
                     </div>
                     <div class="upgrade-details">
                         <h3>GYM</h3>
@@ -82,7 +63,7 @@
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
-                        <img src="assets/images/апгрейд 2.svg" alt="AI-TAP" loading="lazy">
+                        <img src="assets/images/апгрейд 2.svg" alt="AI-TAP">
                     </div>
                     <div class="upgrade-details">
                         <h3>AI-TAP</h3>
@@ -92,7 +73,7 @@
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
-                        <img src="assets/images/апгрейд 3.svg" alt="AIRDROP" loading="lazy">
+                        <img src="assets/images/апгрейд 3.svg" alt="AIRDROP">
                     </div>
                     <div class="upgrade-details">
                         <h3>AIRDROP</h3>
@@ -102,7 +83,7 @@
                 </div>
                 <div class="upgrade-item">
                     <div class="upgrade-icon">
-                        <img src="assets/images/апгрейд 4.svg" alt="DeFi" loading="lazy">
+                        <img src="assets/images/апгрейд 4.svg" alt="DeFi">
                     </div>
                     <div class="upgrade-details">
                         <h3>DeFi</h3>
@@ -116,7 +97,7 @@
                     <п class="text-main">Инструкция</п>
                     <п class="text-sub">Покупайте апгрейды, копите монеты!</п>
                     <div class="button-container">
-                        <img src="assets/images/Button.svg" alt="Button" class="button" loading="lazy">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
                     </div>
                 </div>
             </div>
@@ -165,340 +146,22 @@
 
     <div class="navigation">
         <div class="nav-item" id="nav-home" data-page="home-page">
-            <img src="assets/images/home.svg" alt="Home" loading="lazy">
+            <img src="assets/images/home.svg" alt="Home">
         </div>
         <div class="nav-item" id="nav-store" data-page="store-page">
-            <img src="assets/images/store.svg" alt="Store" loading="lazy">
+            <img src="assets/images/store.svg" alt="Store">
         </div>
         <div class="nav-item" id="nav-stats" data-page="stats-page">
-            <img src="assets/images/stats-up-square.svg" alt="Stats" loading="lazy">
+            <img src="assets/images/stats-up-square.svg" alt="Stats">
         </div>
         <div class="nav-item" id="nav-wallet" data-page="wallet-page">
-            <img src="assets/images/wallet.svg" alt="Wallet" loading="lazy">
+            <img src="assets/images/wallet.svg" alt="Wallet">
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page">
-            <img src="assets/images/fun.svg" alt="Fun" loading="lazy">
+            <img src="assets/images/fun.svg" alt="Fun">
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const tg = window.Telegram.WebApp;
-            let userId;
-
-            try {
-                tg.ready(() => {
-                    userId = tg.initDataUnsafe.user.id;
-                    console.log("User ID:", userId);
-                    loadProgress();
-                });
-            } catch (error) {
-                console.error("Error initializing Telegram WebApp:", error);
-                alert("Failed to initialize Telegram WebApp. Please try again.");
-            }
-
-            const pages = document.querySelectorAll('.main-screen');
-            const navItems = document.querySelectorAll('.nav-item');
-            const coinAmountSpan = document.querySelector('.coin-amount');
-            const characterHer = document.getElementById('character-her');
-            const characterHim = document.getElementById('character');
-            const upgradeButtons = document.querySelectorAll('.upgrade-button');
-            const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
-            const contentHer = document.getElementById('content-her');
-            const contentHim = document.getElementById('content-him');
-
-            let coins = 0;
-            let coinsPerTap = 1;
-            const autoClickers = {
-                gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                airdrop: { level: 0, basePrice: 100000, increment: 6, currentRate: 0, priceFactor: 3, multiplier: 2 },
-                defi: { level: 0, basePrice: 10000000, increment: 10, currentRate: 0, priceFactor: 3, multiplier: 2 },
-            };
-
-            const saveProgress = () => {
-                try {
-                    const progress = {
-                        coins: coins,
-                        coinsPerTap: coinsPerTap,
-                        autoClickers: autoClickers,
-                    };
-                    localStorage.setItem(`gameProgress_${userId}`, JSON.stringify(progress));
-                } catch (error) {
-                    console.error("Error saving progress:", error);
-                }
-            };
-
-            const loadProgress = () => {
-                try {
-                    const savedProgress = localStorage.getItem(`gameProgress_${userId}`);
-                    if (savedProgress) {
-                        const progress = JSON.parse(savedProgress);
-                        coins = progress.coins;
-                        coinsPerTap = progress.coinsPerTap;
-                        Object.keys(autoClickers).forEach(key => {
-                            autoClickers[key].level = progress.autoClickers[key].level;
-                            autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
-                        });
-                        coinAmountSpan.textContent = coins;
-                        updateUpgradePrices();
-                    }
-                } catch (error) {
-                    console.error("Error loading progress:", error);
-                }
-            };
-
-            const hideAllPages = () => {
-                pages.forEach(page => {
-                    page.style.display = 'none';
-                });
-            };
-
-            const showPage = (pageId) => {
-                hideAllPages();
-                document.getElementById(pageId).style.display = 'flex';
-                updateNavigation(pageId);
-            };
-
-            const updateNavigation = (activePageId) => {
-                navItems.forEach(navItem => {
-                    navItem.classList.remove('active');
-                    if (navItem.dataset.page === activePageId) {
-                        navItem.classList.add('active');
-                    }
-                });
-            };
-
-            navItems.forEach(navItem => {
-                navItem.addEventListener('click', () => {
-                    showPage(navItem.dataset.page);
-                });
-            });
-
-            const getUpgradePrice = (upgradeType) => {
-                const basePrice = autoClickers[upgradeType].basePrice;
-                const level = autoClickers[upgradeType].level;
-                if (level === 0) {
-                    return basePrice;
-                }
-                return Math.floor(basePrice * Math.pow(autoClickers[upgradeType].priceFactor, level));
-            };
-
-            const startAutoClicker = (upgradeType) => {
-                setInterval(() => {
-                    coins += autoClickers[upgradeType].currentRate;
-                    coinAmountSpan.textContent = coins;
-                    updateUpgradePrices();
-                    saveProgress();
-                }, 1000);
-            };
-
-            const updateUpgradePrices = () => {
-                upgradeButtons.forEach(button => {
-                    const upgradeType = button.getAttribute('data-type');
-                    const price = getUpgradePrice(upgradeType);
-                    const upgradeItem = button.parentElement;
-                    const priceText = upgradeItem.querySelector('.upgrade-details p');
-                    const level = autoClickers[upgradeType].level;
-                    const rate = autoClickers[upgradeType].currentRate;
-
-                    if (upgradeType === "gym") {
-                        priceText.innerHTML = `${price} | level ${level}/10<br>${rate + coinsPerTap} Young coin per tap`;
-                    } else {
-                        priceText.innerHTML = `${price} | level ${level}/10<br>${rate} Young coin / sec`;
-                    }
-
-                    if (coins >= price) {
-                        button.style.backgroundColor = '#00ff00';
-                    } else {
-                        button.style.backgroundColor = '#ff3b30';
-                    }
-                });
-            };
-
-            characterHim.addEventListener('click', (event) => {
-                coins += coinsPerTap;
-                coinAmountSpan.textContent = coins;
-                showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
-                updateUpgradePrices();
-                saveProgress();
-            });
-
-            characterHer.addEventListener('click', (event) => {
-                coins += coinsPerTap;
-                coinAmountSpan.textContent = coins;
-                showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
-                updateUpgradePrices();
-                saveProgress();
-            });
-
-            const showCoinAnimation = (x, y, amount) => {
-                const coinAnimation = document.createElement('div');
-                coinAnimation.classList.add('coin-animation');
-                coinAnimation.innerHTML = `<img src="assets/images/coins.svg" alt="Coin"><span>+${amount}</span>`;
-                document.body.appendChild(coinAnimation);
-
-                coinAnimation.style.left = `${x}px`;
-                coinAnimation.style.top = `${y}px`;
-
-                coinAnimation.addEventListener('animationend', () => {
-                    coinAnimation.remove();
-                });
-            };
-
-            upgradeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const upgradeType = button.getAttribute('data-type');
-                    const price = getUpgradePrice(upgradeType);
-
-                    if (coins >= price && autoClickers[upgradeType].level < 10) {
-                        coins -= price;
-                        coinAmountSpan.textContent = coins;
-                        autoClickers[upgradeType].level++;
-                        if (upgradeType === "gym") {
-                            coinsPerTap *= autoClickers[upgradeType].multiplier;
-                        } else {
-                            autoClickers[upgradeType].currentRate += autoClickers[upgradeType].increment * autoClickers[upgradeType].multiplier ** (autoClickers[upgradeType].level - 1);
-                        }
-                        if (autoClickers[upgradeType].level === 1) {
-                            startAutoClicker(upgradeType);
-                        }
-                        updateUpgradePrices();
-                        saveProgress();
-                    }
-                });
-            });
-
-            genderSwitchInputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    if (input.value === 'her') {
-                        contentHer.style.display = 'flex';
-                        contentHim.style.display = 'none';
-                    } else {
-                        contentHer.style.display = 'none';
-                        contentHim.style.display = 'flex';
-                    }
-                    saveProgress();
-                });
-            });
-
-            document.addEventListener('gesturestart', (e) => e.preventDefault());
-            document.addEventListener('gesturechange', (e) => e.preventDefault());
-            document.addEventListener('gestureend', (e) => e.preventDefault());
-
-            document.addEventListener('touchstart', function(event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchend', (event) => {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-
-            window.addEventListener('beforeunload', saveProgress);
-        });
-
-        function subscribeChannel(url, partnerId) {
-            window.open(url, '_blank');
-            document.querySelector(`#${partnerId} .confirm-button`).style.display = 'inline-block';
-        }
-
-        function confirmSubscription(partnerId) {
-            const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
-            const checkmark = document.createElement('img');
-            checkmark.src = 'assets/images/checkmark-gold.svg';
-            checkmark.classList.add('checkmark');
-            confirmButton.parentElement.appendChild(checkmark);
-
-            confirmButton.style.display = 'none';
-        }
-    </script>
-    <style>
-        .partner-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .partner {
-            margin: 10px 0;
-            width: 90%;
-            max-width: 300px;
-            position: relative;
-        }
-
-        .text-background {
-            background: url('assets/images/Фон для текста.svg') no-repeat center center;
-            background-size: cover;
-            padding: 20px;
-            border-radius: 20px;
-            color: #fff;
-            text-align: left;
-            position: relative;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .subscribe-button, .confirm-button {
-            background-color: #ff3b30;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Discovery', Arial, sans-serif;
-            font-size: 14px;
-        }
-
-        .checkmark {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Стили для анимации монет */
-        .coin-animation {
-            position: absolute;
-            color: #ffd700;
-            font-size: 18px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            animation: coin-fall 1s ease-out forwards;
-            z-index: 1000;
-        }
-
-        .coin-animation img {
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
-        }
-
-        @keyframes coin-fall {
-            0% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-        }
-    </style>
+    <script src="script.js"></script>
 </body>
 </html>
