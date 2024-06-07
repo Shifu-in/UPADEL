@@ -750,4 +750,3 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmButton.style.display = 'none';
     }
 });
-
