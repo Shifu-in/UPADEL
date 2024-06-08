@@ -8,10 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
+    const languageSwitchInputs = document.querySelectorAll('.language-switch input');
+    const referralLinkContainer = document.querySelector('.referral-link-container');
+    const generateReferralButton = document.querySelector('.generate-referral-button');
+    const shareButton = document.querySelector('.share-button');
+    const referralLinkSpan = document.getElementById('referral-link');
 
     let coins = 0;
     let coinsPerTap = 1;
     let clickCount = 0;
+    let referralGenerated = false;
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
@@ -24,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             coins: coins,
             coinsPerTap: coinsPerTap,
             autoClickers: autoClickers,
+            referralGenerated: referralGenerated
         };
         localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
@@ -34,11 +41,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const progress = JSON.parse(savedProgress);
             coins = progress.coins;
             coinsPerTap = progress.coinsPerTap;
+            referralGenerated = progress.referralGenerated;
             Object.keys(autoClickers).forEach(key => {
                 autoClickers[key].level = progress.autoClickers[key].level;
                 autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
             });
             coinAmountSpan.textContent = coins;
+            if (referralGenerated) {
+                showReferralLink();
+            }
             updateUpgradePrices();
         }
     };
@@ -175,12 +186,72 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const generateReferralLink = () => {
+        if (!referralGenerated) {
+            coins += 5000;
+            coinAmountSpan.textContent = coins;
+            saveProgressLocal();
+
+            const notification = document.createElement('div');
+            notification.classList.add('notification');
+            notification.textContent = 'Вам начислено 5,000 монет Young!';
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+
+            referralGenerated = true;
+            const referralLink = 'https://example.com/ref=' + Date.now();
+            referralLinkSpan.textContent = referralLink;
+            generateReferralButton.style.display = 'none';
+            referralLinkContainer.style.display = 'flex';
+            shareButton.style.display = 'block';
+            saveProgressLocal();
+        }
+    };
+
+    const copyReferralLink = () => {
+        const referralLink = referralLinkSpan.textContent;
+        navigator.clipboard.writeText(referralLink).then(() => {
+            alert('Реферальная ссылка скопирована!');
+        });
+    };
+
+    const shareReferralLink = () => {
+        const referralLink = referralLinkSpan.textContent;
+        const url = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Присоединяйтесь по моей реферальной ссылке!`;
+        window.open(url, '_blank');
+    };
+
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
 
     showPage('home-page');
     loadProgressLocal();
+
+    const updateLanguage = (lang) => {
+        const elements = document.querySelectorAll('[data-lang-en], [data-lang-ru]');
+        elements.forEach(el => {
+            el.innerHTML = el.getAttribute(`data-lang-${lang}`);
+        });
+    };
+
+    languageSwitchInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            if (input.checked) {
+                updateLanguage(input.value);
+            }
+        });
+    });
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('home-page').style.display = 'flex';
+        }, 5000);
+    });
 });
 
 function subscribeChannel(url, partnerId) {
@@ -197,10 +268,3 @@ function confirmSubscription(partnerId) {
 
     confirmButton.style.display = 'none';
 }
-
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        document.getElementById('home-page').style.display = 'flex';
-    }, 5000);
-});
