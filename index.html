@@ -155,12 +155,12 @@
     <div class="main-screen" id="partners-page" style="display: none;">
         <h1 class="partners-title">Партнёры</h1>
         <div class="referral-container">
-            <button class="generate-referral-button" onclick="generateReferralLink()">Сгенерировать реф-ссылку</button>
+            <button class="generate-referral-button" onclick="showReferralLink()">Получить ссылку</button>
             <div class="referral-link-container" style="display: none;">
-                <span class="referral-link" id="referral-link"></span>
+                <input type="text" class="referral-link" id="referral-link" value="https://t.me/YYTON_bot/yyton" readonly>
                 <button class="copy-button" onclick="copyReferralLink()">Копировать</button>
+                <button class="share-button" onclick="shareReferralLink()">Поделиться</button>
             </div>
-            <button class="share-button" style="display: none;" onclick="shareReferralLink()">Поделиться</button>
         </div>
     </div>
 
