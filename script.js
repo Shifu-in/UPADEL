@@ -197,6 +197,24 @@ document.addEventListener("DOMContentLoaded", () => {
         window.open(url, '_blank');
     };
 
+    const showNotification = (message) => {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.opacity = 1;
+        }, 100); // Delay to trigger CSS transition
+
+        setTimeout(() => {
+            notification.style.opacity = 0;
+            setTimeout(() => {
+                notification.remove();
+            }, 500); // Wait for transition to complete
+        }, 3000); // Duration the notification is visible
+    };
+
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
@@ -234,10 +252,4 @@ function subscribeChannel(url, partnerId) {
 
 function confirmSubscription(partnerId) {
     const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
-    const checkmark = document.createElement('img');
-    checkmark.src = 'assets/images/checkmark-gold.svg';
-    checkmark.classList.add('checkmark');
-    confirmButton.parentElement.appendChild(checkmark);
-
-    confirmButton.style.display = 'none';
-}
+    const checkmark =
