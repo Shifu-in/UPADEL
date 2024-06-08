@@ -152,6 +152,18 @@
         </div>
     </div>
 
+    <div class="main-screen" id="partners-page" style="display: none;">
+        <h1 class="partners-title">Партнёры</h1>
+        <div class="referral-container">
+            <button class="generate-referral-button" onclick="generateReferralLink()">Сгенерировать реф-ссылку</button>
+            <div class="referral-link-container" style="display: none;">
+                <span class="referral-link" id="referral-link"></span>
+                <button class="copy-button" onclick="copyReferralLink()">Копировать</button>
+            </div>
+            <button class="share-button" style="display: none;" onclick="shareReferralLink()">Поделиться</button>
+        </div>
+    </div>
+
     <div class="navigation">
         <div class="nav-item" id="nav-home" data-page="home-page">
             <img src="assets/images/home.svg" alt="Home">
@@ -167,6 +179,9 @@
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page" style="display: none;"> <!-- Hiding the FUN tab -->
             <img src="assets/images/fun.svg" alt="Fun">
+        </div>
+        <div class="nav-item" id="nav-partners" data-page="partners-page">
+            <img src="assets/images/fren.svg" alt="Partners">
         </div>
     </div>
 
