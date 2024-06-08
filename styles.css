@@ -443,3 +443,42 @@ body, html {
     max-width: 100%;
     height: auto;
 }
+
+.partners-title {
+    margin-top: 30px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.referral-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.generate-referral-button, .copy-button, .share-button {
+    background-color: #ff3b30;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.generate-referral-button:hover, .copy-button:hover, .share-button:hover {
+    background-color: #ff5e57;
+}
+
+.referral-link-container {
+    display: flex;
+    align-items: center;
+}
+
+.referral-link {
+    color: #fff;
+    margin-right: 10px;
+}
