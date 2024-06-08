@@ -13,13 +13,21 @@
     </style>
 </head>
 <body>
-    <div class="main-screen" id="home-page">
+    <div id="loading-screen">
+        <img src="assets/images/loading.gif" alt="Loading" id="loading-gif">
+        <div id="loading-text">
+            <p class="loading-main-text">YOUNG</p>
+            <p class="loading-sub-text">ver.beta</p>
+        </div>
+    </div>
+
+    <div class="main-screen" id="home-page" style="display: none;">
         <div class="header">
             <div class="coin-info">
                 <div class="coin-text">Young coin</div>
                 <div>
                     <span class="coin-amount">0</span>
-                    <img src="assets/images/coins.svg" alt="Coins">
+                    <img src="assets/images/coins.svg" alt="Coins" class="coin-icon">
                 </div>
             </div>
             <div class="gender-switch">
