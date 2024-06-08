@@ -191,34 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
         generateReferralButton.style.display = 'none';
     };
 
-    const copyReferralLink = () => {
-        const referralLink = referralLinkInput.value;
-        navigator.clipboard.writeText(referralLink).then(() => {
-            showNotification('Вам начислено 5,000 монет Young!');
-            coins += 5000;
-            coinAmountSpan.textContent = coins;
-            saveProgressLocal();
-        });
-    };
-
-    const showNotification = (message) => {
-        const notification = document.createElement('div');
-        notification.classList.add('notification');
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.style.opacity = 1;
-        }, 100); // Delay to trigger CSS transition
-
-        setTimeout(() => {
-            notification.style.opacity = 0;
-            setTimeout(() => {
-                notification.remove();
-            }, 500); // Wait for transition to complete
-        }, 3000); // Duration the notification is visible
-    };
-
     const shareReferralLink = () => {
         const referralLink = referralLinkInput.value;
         const url = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Присоединяйтесь по моей реферальной ссылке!`;
