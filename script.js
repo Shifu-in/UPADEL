@@ -236,13 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-            document.getElementById('home-page').style.display = 'flex';
-        }, 5000);
-    });
 });
 
 function subscribeChannel(url, partnerId) {
@@ -252,4 +245,10 @@ function subscribeChannel(url, partnerId) {
 
 function confirmSubscription(partnerId) {
     const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
-    const checkmark =
+    const checkmark = document.createElement('img');
+    checkmark.src = 'assets/images/checkmark-gold.svg';
+    checkmark.classList.add('checkmark');
+    confirmButton.parentElement.appendChild(checkmark);
+
+    confirmButton.style.display = 'none';
+}
