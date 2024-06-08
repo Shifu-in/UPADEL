@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const referralLinkContainer = document.querySelector('.referral-link-container');
     const generateReferralButton = document.querySelector('.generate-referral-button');
     const shareButton = document.querySelector('.share-button');
-    const referralLinkSpan = document.getElementById('referral-link');
+    const referralLinkInput = document.getElementById('referral-link');
 
     let coins = 0;
     let coinsPerTap = 1;
@@ -186,40 +186,41 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const generateReferralLink = () => {
-        if (!referralGenerated) {
-            coins += 5000;
-            coinAmountSpan.textContent = coins;
-            saveProgressLocal();
-
-            const notification = document.createElement('div');
-            notification.classList.add('notification');
-            notification.textContent = 'Вам начислено 5,000 монет Young!';
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-
-            referralGenerated = true;
-            const referralLink = 'https://example.com/ref=' + Date.now();
-            referralLinkSpan.textContent = referralLink;
-            generateReferralButton.style.display = 'none';
-            referralLinkContainer.style.display = 'flex';
-            shareButton.style.display = 'block';
-            saveProgressLocal();
-        }
+    const showReferralLink = () => {
+        referralLinkContainer.style.display = 'flex';
+        generateReferralButton.style.display = 'none';
     };
 
     const copyReferralLink = () => {
-        const referralLink = referralLinkSpan.textContent;
+        const referralLink = referralLinkInput.value;
         navigator.clipboard.writeText(referralLink).then(() => {
-            alert('Реферальная ссылка скопирована!');
+            showNotification('Вам начислено 5,000 монет Young!');
+            coins += 5000;
+            coinAmountSpan.textContent = coins;
+            saveProgressLocal();
         });
     };
 
+    const showNotification = (message) => {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.opacity = 1;
+        }, 100); // Delay to trigger CSS transition
+
+        setTimeout(() => {
+            notification.style.opacity = 0;
+            setTimeout(() => {
+                notification.remove();
+            }, 500); // Wait for transition to complete
+        }, 3000); // Duration the notification is visible
+    };
+
     const shareReferralLink = () => {
-        const referralLink = referralLinkSpan.textContent;
+        const referralLink = referralLinkInput.value;
         const url = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Присоединяйтесь по моей реферальной ссылке!`;
         window.open(url, '_blank');
     };
