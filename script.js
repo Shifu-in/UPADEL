@@ -197,3 +197,10 @@ function confirmSubscription(partnerId) {
 
     confirmButton.style.display = 'none';
 }
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('home-page').style.display = 'flex';
+    }, 5000);
+});
