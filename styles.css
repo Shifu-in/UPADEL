@@ -49,16 +49,18 @@ body, html {
 
 .language-switch {
     position: absolute;
-    top: 10px;
+    top: 50%; /* Center vertically in the middle third */
     left: 10px;
+    transform: translateY(-50%);
     color: #fff;
     font-family: 'Discovery', Arial, sans-serif;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .language-switch label {
-    margin-right: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
 }
@@ -480,7 +482,7 @@ body, html {
     margin-top: 40px;
 }
 
-.generate-referral-button, .copy-button, .share-button {
+.generate-referral-button, .share-button {
     background-color: #ff3b30;
     color: #fff;
     border: none;
@@ -491,22 +493,25 @@ body, html {
     margin-bottom: 10px;
 }
 
-.generate-referral-button:hover, .copy-button:hover, .share-button:hover {
+.generate-referral-button:hover, .share-button:hover {
     background-color: #ff5e57;
 }
 
 .referral-link-container {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .referral-link {
     color: #fff;
-    margin-right: 10px;
+    margin-bottom: 10px;
     padding: 10px;
     background-color: #1c1c1e;
     border: none;
     border-radius: 10px;
+    text-align: center;
+    width: 80%;
 }
 
 .copy-icon {
