@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
     const languageSwitchInputs = document.querySelectorAll('.language-switch input');
+    const linkInput = document.getElementById('linkInput');
+    const copyButton = document.getElementById('copyButton');
 
     let coins = 0;
     let coinsPerTap = 1;
@@ -176,15 +178,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const copyLink = () => {
-        var copyText = document.getElementById("friend-link");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999); // For mobile devices
-        document.execCommand("copy");
+    copyButton.addEventListener('click', () => {
+        linkInput.select();
+        linkInput.setSelectionRange(0, 99999); // Для мобильных устройств
 
-        // Alert message for copy confirmation
-        alert("Ссылка скопирована: " + copyText.value);
-    };
+        // Копируем выделенный текст в буфер обмена
+        navigator.clipboard.writeText(linkInput.value).then(() => {
+            alert('Ссылка скопирована!');
+        });
+    });
 
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
