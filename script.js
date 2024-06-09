@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
             coins: coins,
             coinsPerTap: coinsPerTap,
             autoClickers: autoClickers,
-            rewardGiven: rewardGiven
+            rewardGiven: rewardGiven,
+            lastActive: Date.now()
         };
         localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
@@ -40,13 +41,29 @@ document.addEventListener("DOMContentLoaded", () => {
             coins = progress.coins;
             coinsPerTap = progress.coinsPerTap;
             rewardGiven = progress.rewardGiven;
+            const lastActive = progress.lastActive || Date.now();
+            const timeElapsed = Math.floor((Date.now() - lastActive) / 1000);
             Object.keys(autoClickers).forEach(key => {
                 autoClickers[key].level = progress.autoClickers[key].level;
                 autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
             });
+            calculateOfflineEarnings(timeElapsed);
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
+            Object.keys(autoClickers).forEach(key => {
+                if (autoClickers[key].level > 0) {
+                    startAutoClicker(key);
+                }
+            });
         }
+    };
+
+    const calculateOfflineEarnings = (timeElapsed) => {
+        let offlineCoins = 0;
+        Object.keys(autoClickers).forEach(key => {
+            offlineCoins += autoClickers[key].currentRate * timeElapsed;
+        });
+        coins += offlineCoins;
     };
 
     const hideAllPages = () => {
@@ -90,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
             coins += autoClickers[upgradeType].currentRate;
             coinAmountSpan.textContent = coins;
             updateUpgradePrices();
+            saveProgressLocal();
         }, 1000);
     };
 
@@ -123,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showCoinAnimation(event.clientX, event.clientY, coinsPerTap);
         updateUpgradePrices();
 
-        if (clickCount % 20 === 0) {
+        if (clickCount % 5 === 0) {
             saveProgressLocal();
         }
     };
@@ -219,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
+    document.addEventListener('dblclick', (e) => e.preventDefault());
 
     showPage('home-page');
     loadProgressLocal();
@@ -244,4 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('home-page').style.display = 'flex';
         }, 5000);
     });
+
+    window.addEventListener('beforeunload', saveProgressLocal);
 });
