@@ -176,13 +176,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const copyFriendLink = () => {
-        const friendLink = document.getElementById('friend-link');
-        friendLink.select();
-        friendLink.setSelectionRange(0, 99999); // For mobile devices
-        navigator.clipboard.writeText(friendLink.value).then(() => {
-            alert('Ссылка скопирована: ' + friendLink.value);
-        });
+    const copyLink = () => {
+        var copyText = document.getElementById("friend-link");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        document.execCommand("copy");
+
+        // Alert message for copy confirmation
+        alert("Ссылка скопирована: " + copyText.value);
     };
 
     document.addEventListener('gesturestart', (e) => e.preventDefault());
