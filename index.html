@@ -13,7 +13,15 @@
     </style>
 </head>
 <body>
-    <div class="main-screen" id="home-page">
+    <div id="loading-screen">
+        <img src="assets/images/loading.gif" alt="Loading" id="loading-gif">
+        <div id="loading-text">
+            <p class="loading-main-text">YOUNG</p>
+            <p class="loading-sub-text">ver.beta</p>
+        </div>
+    </div>
+
+    <div class="main-screen" id="home-page" style="display: none;">
         <div class="header">
             <div class="coin-info">
                 <div class="coin-text">Young coin</div>
@@ -24,27 +32,17 @@
             </div>
             <div class="gender-switch">
                 <input type="radio" id="for-her" name="gender" value="her">
-                <label for="for-her">Она</label>
+                <label for="for-her">For her</label>
                 <input type="radio" id="for-him" name="gender" value="him" checked>
-                <label for="for-him">Он</label>
+                <label for="for-him">For him</label>
             </div>
-        </div>
-        <div class="language-switch">
-            <label>
-                <input type="radio" name="language" value="ru" checked>
-                <span class="lang-text">RU</span>
-            </label>
-            <label>
-                <input type="radio" name="language" value="en">
-                <span class="lang-text">EN</span>
-            </label>
         </div>
         <div class="content" id="content-her" style="display: none;">
             <img src="assets/images/Adel.png" alt="Character" class="character character-her" id="character-her">
             <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</p>
-                    <p class="text-sub">Пока вы можете переключаться между ними. Для получения Young, тапайте по экрану!</p>
+                    <p class="text-sub">Пока вы можете переключаться между ними. В скором времени вам придётся выбрать одного. Это будет влиять на многое!</p>
                 </div>
             </div>
         </div>
@@ -53,7 +51,7 @@
             <div class="text-container" style="margin-bottom: 50px;">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</p>
-                    <p class="text-sub">Пока вы можете переключаться между ними. Для получения Young, тапайте по экрану!</p>
+                    <p class="text-sub">Пока вы можете переключаться между ними. В скором времени вам придётся выбрать одного. Это будет влиять на многое!</p>
                 </div>
             </div>
         </div>
@@ -106,15 +104,18 @@
             </div>
             <div class="text-container-store">
                 <div class="text-background">
-                    <p class="text-main">Описание</p>
-                    <p class="text-sub">Покупка первого апгрейда усиливает мощность тапа. Последующие апгрейды открывают авто-начисление монет Young.</p>
+                    <p class="text-main">Инструкция</p>
+                    <p class="text-sub">Покупайте апгрейды, копите монеты!</p>
+                    <div class="button-container">
+                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="main-screen" id="wallet-page" style="display: none;">
-        <img src="assets/images/Solutions.svg" alt="Solutions" class="centered-image"> <!-- Added image -->
+        <p class="coming-soon">Coming Soon</p>
     </div>
 
     <div class="main-screen" id="stats-page" style="display: none;">
@@ -122,7 +123,7 @@
             <div class="text-container-room">
                 <div class="text-background">
                     <p class="text-main">Это первый дом вашего персонажа</p>
-                    <p class="text-sub">Он/она скоро вернётся домой и ваше приключение начнётся...</p>
+                    <p class="text-sub">Она/он скоро вернётся домой и ваше приключение начнётся...</p>
                 </div>
             </div>
         </div>
@@ -153,17 +154,6 @@
         </div>
     </div>
 
-    <div class="main-screen" id="partners-page" style="display: none;">
-        <h1 class="partners-title">Реферальная программа</h1>
-        <div class="referral-container">
-            <button class="generate-referral-button" onclick="showReferralLink()">Получить ссылку</button>
-            <div class="referral-link-container" style="display: none;">
-                <input type="text" class="referral-link" id="referral-link" value="https://t.me/YYTON_bot/yyton" readonly>
-                <button class="share-button" onclick="shareReferralLink()">Поделиться</button>
-            </div>
-        </div>
-    </div>
-
     <div class="navigation">
         <div class="nav-item" id="nav-home" data-page="home-page">
             <img src="assets/images/home.svg" alt="Home">
@@ -179,9 +169,6 @@
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page" style="display: none;"> <!-- Hiding the FUN tab -->
             <img src="assets/images/fun.svg" alt="Fun">
-        </div>
-        <div class="nav-item" id="nav-partners" data-page="partners-page">
-            <img src="assets/images/fren.svg" alt="Partners">
         </div>
     </div>
 
