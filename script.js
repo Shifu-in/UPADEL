@@ -176,6 +176,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const copyFriendLink = () => {
+        const friendLink = document.getElementById('friend-link');
+        friendLink.select();
+        friendLink.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(friendLink.value).then(() => {
+            alert('Ссылка скопирована: ' + friendLink.value);
+        });
+    };
+
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
