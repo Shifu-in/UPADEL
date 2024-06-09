@@ -151,6 +151,14 @@
         </div>
     </div>
 
+    <div class="main-screen" id="friends-page" style="display: none;">
+        <h1 class="friends-title">Друзья</h1>
+        <div class="link-container">
+            <input type="text" class="referral-link" id="friend-link" value="https://t.me/maayytest_bot/T2TTT" readonly>
+            <button class="copy-button" onclick="copyFriendLink()">Копировать</button>
+        </div>
+    </div>
+
     <div class="navigation">
         <div class="nav-item" id="nav-home" data-page="home-page">
             <img src="assets/images/home.svg" alt="Home">
@@ -166,6 +174,9 @@
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page" style="display: none;"> <!-- Hiding the FUN tab -->
             <img src="assets/images/fun.svg" alt="Fun">
+        </div>
+        <div class="nav-item" id="nav-friends" data-page="friends-page">
+            <img src="assets/images/fren.svg" alt="Friends">
         </div>
     </div>
 
