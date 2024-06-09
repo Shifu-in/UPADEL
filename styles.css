@@ -110,7 +110,7 @@ body, html {
     width: 30px;
     height: 30px;
     position: relative;
-    top: 3px; /* Lower the coin image by 3px */
+    top: 1px; /* Lower the coin image by 3px */
 }
 
 .gender-switch {
@@ -156,7 +156,7 @@ body, html {
 .character {
     width: 420px; /* Уменьшенный размер на 10 пикселей */
     height: auto;
-    margin-bottom: -65px; /* Перемещение вверх на 5 пикселей */
+    margin-bottom: -60px; /* Перемещение вверх на 5 пикселей */
     margin-top: 45px; /* Перемещение вверх на 10 пикселей */
     margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
