@@ -32,9 +32,9 @@
             </div>
             <div class="gender-switch">
                 <input type="radio" id="for-her" name="gender" value="her">
-                <label for="for-her">For her</label>
+                <label for="for-her">Она</label>
                 <input type="radio" id="for-him" name="gender" value="him" checked>
-                <label for="for-him">For him</label>
+                <label for="for-him">Он</label>
             </div>
         </div>
         <div class="content" id="content-her" style="display: none;">
@@ -42,7 +42,7 @@
             <div class="text-container">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</p>
-                    <p class="text-sub">Пока вы можете переключаться между ними. В скором времени вам придётся выбрать одного. Это будет влиять на многое!</p>
+                    <p class="text-sub">Пока вы можете переключаться между ними. Для получения Young, тапайте по эрану!</p>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="text-container" style="margin-bottom: 50px;">
                 <div class="text-background">
                     <p class="text-main">Знакомьтесь - это ваш персонаж</p>
-                    <p class="text-sub">Пока вы можете переключаться между ними. В скором времени вам придётся выбрать одного. Это будет влиять на многое!</p>
+                    <p class="text-sub">Пока вы можете переключаться между ними. Для получения Young, тапайте по эрану!</p>
                 </div>
             </div>
         </div>
@@ -104,10 +104,8 @@
             </div>
             <div class="text-container-store">
                 <div class="text-background">
-                    <p class="text-main">Инструкция</p>
-                    <p class="text-sub">Покупайте апгрейды, копите монеты!</p>
-                    <div class="button-container">
-                        <img src="assets/images/Button.svg" alt="Button" class="button">
+                    <p class="text-main">Описание</p>
+                    <p class="text-sub">Покупка первого апргрейда усиливает мощность тапа. Последующие апгрейды открывают авто-начисление монет Young.</p>
                     </div>
                 </div>
             </div>
@@ -115,7 +113,7 @@
     </div>
 
     <div class="main-screen" id="wallet-page" style="display: none;">
-        <p class="coming-soon">Coming Soon</p>
+        <img src="assets/images/Solutions.svg" alt="Solutions" class="centered-image"> <!-- Added image -->
     </div>
 
     <div class="main-screen" id="stats-page" style="display: none;">
@@ -123,7 +121,7 @@
             <div class="text-container-room">
                 <div class="text-background">
                     <p class="text-main">Это первый дом вашего персонажа</p>
-                    <p class="text-sub">Она/он скоро вернётся домой и ваше приключение начнётся...</p>
+                    <p class="text-sub">Он/она скоро вернётся домой и ваше приключение начнётся...</p>
                 </div>
             </div>
         </div>
@@ -154,6 +152,18 @@
         </div>
     </div>
 
+    <div class="main-screen" id="partners-page" style="display: none;">
+        <h1 class="partners-title">Партнёры</h1>
+        <div class="referral-container">
+            <button class="generate-referral-button" onclick="showReferralLink()">Получить ссылку</button>
+            <div class="referral-link-container" style="display: none;">
+                <input type="text" class="referral-link" id="referral-link" value="https://t.me/YYTON_bot/yyton" readonly>
+                <button class="copy-button" onclick="copyReferralLink()">Копировать</button>
+                <button class="share-button" onclick="shareReferralLink()">Поделиться</button>
+            </div>
+        </div>
+    </div>
+
     <div class="navigation">
         <div class="nav-item" id="nav-home" data-page="home-page">
             <img src="assets/images/home.svg" alt="Home">
@@ -169,6 +179,9 @@
         </div>
         <div class="nav-item" id="nav-fun" data-page="fun-page" style="display: none;"> <!-- Hiding the FUN tab -->
             <img src="assets/images/fun.svg" alt="Fun">
+        </div>
+        <div class="nav-item" id="nav-partners" data-page="partners-page">
+            <img src="assets/images/fren.svg" alt="Partners">
         </div>
     </div>
 
