@@ -154,9 +154,9 @@ body, html {
 }
 
 .character {
-    width: 440px; /* Уменьшенный размер на 10 пикселей */
+    width: 420px; /* Уменьшенный размер на 10 пикселей */
     height: auto;
-    margin-bottom: -45px; /* Перемещение вверх на 5 пикселей */
+    margin-bottom: -65px; /* Перемещение вверх на 5 пикселей */
     margin-top: 45px; /* Перемещение вверх на 10 пикселей */
     margin-left: -20px; /* Сдвиг вправо на 5 пикселей */
     cursor: pointer; /* Указываем, что элемент кликабельный */
@@ -175,13 +175,6 @@ body, html {
     width: 90%;
     max-width: 300px;
     text-align: left; /* Выравнивание текста по левому краю */
-    -webkit-touch-callout: none; /* Prevent callout to copy image, etc when tap to hold */
-    -webkit-user-select: none; /* Prevent selecting / copying text, double tap to zoom */
-    -khtml-user-select: none; /* Prevent selecting / copying text, double tap to zoom */
-    -moz-user-select: none; /* Prevent selecting / copying text, double tap to zoom */
-    -ms-user-select: none; /* Prevent selecting / copying text, double tap to zoom */
-    user-select: none; /* Prevent selecting / copying text, double tap to zoom */
-    touch-action: manipulation; /* Disables zooming on double-tap for touch devices */
 }
 
 .text-background {
@@ -460,7 +453,7 @@ body, html {
 
 .invite-text {
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
     margin-top: 20px;
 }
