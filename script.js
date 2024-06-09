@@ -9,15 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
     const languageSwitchInputs = document.querySelectorAll('.language-switch input');
-    const referralLinkContainer = document.querySelector('.referral-link-container');
-    const generateReferralButton = document.querySelector('.generate-referral-button');
-    const shareButton = document.querySelector('.share-button');
-    const referralLinkInput = document.getElementById('referral-link');
 
     let coins = 0;
     let coinsPerTap = 1;
     let clickCount = 0;
-    let referralGenerated = false;
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
@@ -29,8 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const progress = {
             coins: coins,
             coinsPerTap: coinsPerTap,
-            autoClickers: autoClickers,
-            referralGenerated: referralGenerated
+            autoClickers: autoClickers
         };
         localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
@@ -41,15 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const progress = JSON.parse(savedProgress);
             coins = progress.coins;
             coinsPerTap = progress.coinsPerTap;
-            referralGenerated = progress.referralGenerated;
             Object.keys(autoClickers).forEach(key => {
                 autoClickers[key].level = progress.autoClickers[key].level;
                 autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
             });
             coinAmountSpan.textContent = coins;
-            if (referralGenerated) {
-                showReferralLink();
-            }
             updateUpgradePrices();
         }
     };
@@ -186,45 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const showReferralLink = () => {
-        referralLinkContainer.style.display = 'flex';
-        generateReferralButton.style.display = 'none';
-    };
-
-    const copyReferralLink = () => {
-        const referralLink = referralLinkInput.value;
-        navigator.clipboard.writeText(referralLink).then(() => {
-            showNotification('Вам начислено 5,000 монет Young!');
-            coins += 5000;
-            coinAmountSpan.textContent = coins;
-            saveProgressLocal();
-        });
-    };
-
-    const showNotification = (message) => {
-        const notification = document.createElement('div');
-        notification.classList.add('notification');
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.style.opacity = 1;
-        }, 100); // Delay to trigger CSS transition
-
-        setTimeout(() => {
-            notification.style.opacity = 0;
-            setTimeout(() => {
-                notification.remove();
-            }, 500); // Wait for transition to complete
-        }, 3000); // Duration the notification is visible
-    };
-
-    const shareReferralLink = () => {
-        const referralLink = referralLinkInput.value;
-        const url = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Присоединяйтесь по моей реферальной ссылке!`;
-        window.open(url, '_blank');
-    };
-
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('gesturechange', (e) => e.preventDefault());
     document.addEventListener('gestureend', (e) => e.preventDefault());
@@ -254,18 +205,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     });
 });
-
-function subscribeChannel(url, partnerId) {
-    window.open(url, '_blank');
-    document.querySelector(`#${partnerId} .confirm-button`).style.display = 'inline-block';
-}
-
-function confirmSubscription(partnerId) {
-    const confirmButton = document.querySelector(`#${partnerId} .confirm-button`);
-    const checkmark = document.createElement('img');
-    checkmark.src = 'assets/images/checkmark-gold.svg';
-    checkmark.classList.add('checkmark');
-    confirmButton.parentElement.appendChild(checkmark);
-
-    confirmButton.style.display = 'none';
-}
