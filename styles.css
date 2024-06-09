@@ -47,6 +47,22 @@ body, html {
     margin: 0;
 }
 
+.language-switch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-family: 'Discovery', Arial, sans-serif;
+}
+
+.language-switch label {
+    margin-right: 10px;
+}
+
+.language-switch input {
+    margin-right: 5px;
+}
+
 .main-screen {
     width: 100%;
     height: 100%;
@@ -419,4 +435,68 @@ body, html {
     right: 10px; /* Top right corner */
     width: 20px;
     height: 20px;
+}
+
+.centered-image {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.partners-title {
+    margin-top: 30px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.referral-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.generate-referral-button, .copy-button, .share-button {
+    background-color: #ff3b30;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.generate-referral-button:hover, .copy-button:hover, .share-button:hover {
+    background-color: #ff5e57;
+}
+
+.referral-link-container {
+    display: flex;
+    align-items: center;
+}
+
+.referral-link {
+    color: #fff;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #1c1c1e;
+    border: none;
+    border-radius: 10px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #32CD32;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
 }
