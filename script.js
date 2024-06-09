@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let coins = 0;
     let coinsPerTap = 1;
     let clickCount = 0;
+    let rewardGiven = false;
     const autoClickers = {
         gym: { level: 0, basePrice: 50, increment: 1, currentRate: 0, priceFactor: 3, multiplier: 2 },
         aiTap: { level: 0, basePrice: 20000, increment: 2, currentRate: 0, priceFactor: 3, multiplier: 2 },
@@ -26,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const progress = {
             coins: coins,
             coinsPerTap: coinsPerTap,
-            autoClickers: autoClickers
+            autoClickers: autoClickers,
+            rewardGiven: rewardGiven
         };
         localStorage.setItem('gameProgress', JSON.stringify(progress));
     };
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const progress = JSON.parse(savedProgress);
             coins = progress.coins;
             coinsPerTap = progress.coinsPerTap;
+            rewardGiven = progress.rewardGiven;
             Object.keys(autoClickers).forEach(key => {
                 autoClickers[key].level = progress.autoClickers[key].level;
                 autoClickers[key].currentRate = progress.autoClickers[key].currentRate;
@@ -178,13 +181,38 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const showNotification = (message) => {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.opacity = 1;
+        }, 100); // Delay to trigger CSS transition
+
+        setTimeout(() => {
+            notification.style.opacity = 0;
+            setTimeout(() => {
+                notification.remove();
+            }, 500); // Wait for transition to complete
+        }, 3000); // Duration the notification is visible
+    };
+
     copyButton.addEventListener('click', () => {
         linkInput.select();
         linkInput.setSelectionRange(0, 99999); // Для мобильных устройств
 
         // Копируем выделенный текст в буфер обмена
         navigator.clipboard.writeText(linkInput.value).then(() => {
-            alert('Ссылка скопирована!');
+            showNotification('Ссылка скопирована!');
+            if (!rewardGiven) {
+                coins += 5000;
+                coinAmountSpan.textContent = coins;
+                showNotification('Вам начислено 5,000 монет Young!');
+                rewardGiven = true;
+                saveProgressLocal();
+            }
         });
     });
 
