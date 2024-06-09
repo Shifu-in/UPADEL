@@ -443,3 +443,42 @@ body, html {
     max-width: 100%;
     height: auto;
 }
+
+.friends-title {
+    margin-top: 30px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.copy-button {
+    background-color: #ff3b30;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.copy-button:hover {
+    background-color: #ff5e57;
+}
+
+.referral-link {
+    color: #fff;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #1c1c1e;
+    border: none;
+    border-radius: 10px;
+    width: 300px; /* Fixed width */
+}
