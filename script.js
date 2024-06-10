@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const languageSwitchInputs = document.querySelectorAll('.language-switch input');
     const linkInput = document.getElementById('linkInput');
     const copyButton = document.getElementById('copyButton');
+    const timerElement = document.getElementById('tap-timer');
 
     let coins = 0;
     let coinsPerTap = 1;
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     isTapBlocked = false;
                     tapCount = 0;
                     showNotification('Вы снова можете тапать!');
+                    timerElement.style.display = 'none'; // Скрыть таймер после разблокировки
                 } else {
                     startBlockTimeout(blockDuration - timeSinceBlock);
                 }
@@ -192,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
             isTapBlocked = false;
             tapCount = 0;
             showNotification('Вы снова можете тапать!');
+            timerElement.style.display = 'none'; // Скрыть таймер после разблокировки
             saveProgressLocal();
         }, remainingTime);
 
@@ -199,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const updateTimer = (remainingSeconds) => {
-        const timerElement = document.getElementById('tap-timer');
         timerElement.style.display = 'block';
 
         const interval = setInterval(() => {
@@ -211,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             remainingSeconds--;
             const minutes = Math.floor(remainingSeconds / 60);
             const seconds = remainingSeconds % 60;
-            timerElement.textContent = `Подождите: ${minutes}м ${seconds}с`;
+            timerElement.textContent = `${minutes}м ${seconds}с`;
         }, 1000);
     };
 
