@@ -26,12 +26,27 @@
             -ms-user-select: none; /* Запрещаем выделение текста на IE */
             user-select: none; /* Запрещаем выделение текста на всех браузерах */
         }
+
+        #tap-timer {
+            display: none;
+            color: white;
+            position: absolute;
+            top: 80px;
+            right: 20px; /* Таймер будет справа под переключателем "Он/Она" */
+            font-size: 10px;
+            z-index: 10000; /* Увеличенный z-index для отображения поверх других элементов */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- Таймер блокировки тапов -->
-    <div id="tap-timer" style="display:none; color: white; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 16px;"></div>
-
     <div id="loading-screen">
         <img src="assets/images/loading.gif" alt="Loading" id="loading-gif">
         <div id="loading-text">
@@ -56,6 +71,7 @@
                 <label for="for-him">Он</label>
             </div>
         </div>
+        <div id="tap-timer"></div>
         <div class="content" id="content-her" style="display: none;">
             <img src="assets/images/Adel.png" alt="Character" class="character character-her" id="character-her">
             <div class="text-container">
