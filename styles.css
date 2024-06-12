@@ -38,12 +38,12 @@ body, html {
 }
 
 .loading-main-text {
-    font-size: 14px;
+    font-size: 24px;
     margin: 10px 0 5px 0;
 }
 
 .loading-sub-text {
-    font-size: 10px;
+    font-size: 12px;
     margin: 0;
 }
 
