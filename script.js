@@ -8,10 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const genderSwitchInputs = document.querySelectorAll('.gender-switch input');
     const contentHer = document.getElementById('content-her');
     const contentHim = document.getElementById('content-him');
-    const languageSwitchInputs = document.querySelectorAll('.language-switch input');
     const linkInput = document.getElementById('linkInput');
     const copyButton = document.getElementById('copyButton');
     const timerElement = document.getElementById('tap-timer');
+
+    const languageSwitcher = document.getElementById('language-switch');
+    const currentLanguage = document.querySelector('.current-language');
+    const languageList = document.querySelector('.language-list');
 
     let coins = 0;
     let coinsPerTap = 1;
@@ -314,18 +317,28 @@ document.addEventListener("DOMContentLoaded", () => {
     loadProgressLocal();
 
     const updateLanguage = (lang) => {
-        const elements = document.querySelectorAll('[data-lang-en], [data-lang-ru]');
+        const elements = document.querySelectorAll('[data-lang-ru], [data-lang-en], [data-lang-fr], [data-lang-uz], [data-lang-ch], [data-lang-sp]');
         elements.forEach(el => {
-            el.innerHTML = el.getAttribute(`data-lang-${lang}`);
+            el.innerHTML = el.getAttribute(`data-lang-${lang.toLowerCase()}`);
+            if (lang.toLowerCase() === 'uz' && el.classList.contains('upgrade-button')) {
+                el.innerHTML = 'BUY'; // For Uzbek language, set upgrade button text to "BUY"
+            }
         });
     };
 
-    languageSwitchInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            if (input.checked) {
-                updateLanguage(input.value);
-            }
-        });
+    languageSwitcher.addEventListener('click', () => {
+        if (languageList.style.display === 'none') {
+            languageList.style.display = 'block';
+        } else {
+            languageList.style.display = 'none';
+        }
+    });
+
+    languageList.addEventListener('click', (event) => {
+        const selectedLang = event.target.getAttribute('data-lang');
+        currentLanguage.textContent = selectedLang;
+        updateLanguage(selectedLang);
+        languageList.style.display = 'none';
     });
 
     window.addEventListener('load', () => {
