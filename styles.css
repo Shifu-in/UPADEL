@@ -27,7 +27,7 @@ body, html {
 }
 
 #loading-gif {
-    width: 200px; /* Установите нужный размер для гиф */
+    width: 100px; /* Установите нужный размер для гиф */
     height: auto;
 }
 
@@ -38,12 +38,12 @@ body, html {
 }
 
 .loading-main-text {
-    font-size: 22px;
+    font-size: 14px;
     margin: 10px 0 5px 0;
 }
 
 .loading-sub-text {
-    font-size: 12px;
+    font-size: 10px;
     margin: 0;
 }
 
@@ -52,7 +52,7 @@ body, html {
     top: 120px; /* Опущен еще на 50 пикселей */
     left: 35px; /* 5px правее предыдущего положения */
     transform: translateY(-50%);
-    color #000;
+    color: #fff;
     font-family: 'Discovery', Arial, sans-serif;
     cursor: pointer;
     z-index: 10001; /* Ensure it is on top of other elements */
@@ -82,7 +82,7 @@ body, html {
 }
 
 .language-switch .language-list div:hover {
-    background-color: #000;
+    background-color: #555;
 }
 
 .main-screen {
