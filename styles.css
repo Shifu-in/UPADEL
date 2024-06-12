@@ -61,7 +61,7 @@ body, html {
 .language-switch .current-language {
     font-size: 20px;
     padding: 5px 10px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 5px;
 }
 
@@ -69,7 +69,7 @@ body, html {
     position: absolute;
     top: 40px;
     left: 0;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
     z-index: 10002; /* Ensure it is on top of other elements */
@@ -82,7 +82,7 @@ body, html {
 }
 
 .language-switch .language-list div:hover {
-    background-color: #555;
+    background-color: #fff;
 }
 
 .main-screen {
