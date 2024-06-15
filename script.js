@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
@@ -15,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const languageSwitcher = document.getElementById('language-switch');
     const currentLanguage = document.querySelector('.current-language');
     const languageList = document.querySelector('.language-list');
-    const walletImage = document.querySelector('#wallet-page img'); // Добавлено для смены изображения на странице кошелька
 
     let coins = 0;
     let coinsPerTap = 1;
@@ -309,51 +309,129 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    document.addEventListener('gesturestart', (e) => e.preventDefault());
-    document.addEventListener('gesturechange', (e) => e.preventDefault());
-    document.addEventListener('gestureend', (e) => e.preventDefault());
-    document.addEventListener('dblclick', (e) => e.preventDefault());
-
-    showPage('home-page');
-    loadProgressLocal();
-
-    const updateLanguage = (lang) => {
-        const elements = document.querySelectorAll('[data-lang-ru], [data-lang-en], [data-lang-fr], [data-lang-uz], [data-lang-ch], [data-lang-sp]');
-        elements.forEach(el => {
-            el.innerHTML = el.getAttribute(`data-lang-${lang.toLowerCase()}`);
-            if (lang.toLowerCase() === 'uz' && el.classList.contains('upgrade-button')) {
-                el.innerHTML = 'BUY'; // For Uzbek language, set upgrade button text to "BUY"
-            }
-        });
-
-        // Добавить код для изменения изображения на странице кошелька
-        const imageSrc = walletImage.getAttribute(`data-lang-${lang.toLowerCase()}`);
-        if (imageSrc) {
-            walletImage.src = imageSrc;
+    document.addEventListener('copy', (event) => {
+        event.preventDefault();
+        if (event.clipboardData) {
+            event.clipboardData.setData('text/plain', linkInput.value);
+            showNotification('Ссылка скопирована!');
         }
-    };
+    });
 
     languageSwitcher.addEventListener('click', () => {
-        if (languageList.style.display === 'none') {
-            languageList.style.display = 'block';
-        } else {
-            languageList.style.display = 'none';
-        }
+        languageList.style.display = languageList.style.display === 'none' ? 'block' : 'none';
     });
 
     languageList.addEventListener('click', (event) => {
-        const selectedLang = event.target.getAttribute('data-lang');
-        currentLanguage.textContent = selectedLang;
-        updateLanguage(selectedLang);
+        const selectedLanguage = event.target.dataset.lang;
+        currentLanguage.textContent = selectedLanguage;
+        setLanguage(selectedLanguage);
         languageList.style.display = 'none';
     });
 
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-            document.getElementById('home-page').style.display = 'flex';
-        }, 5000);
+    const setLanguage = (lang) => {
+        const elements = document.querySelectorAll('[data-lang-ru]');
+        elements.forEach(element => {
+            const text = element.getAttribute(`data-lang-${lang.toLowerCase()}`);
+            if (text) {
+                element.textContent = text;
+            }
+        });
+    };
+
+    const referralsCountSpan = document.getElementById('referrals-count');
+    const daysCountSpan = document.getElementById('days-count');
+    const minusReferralsBtn = document.getElementById('minus-referrals');
+    const plusReferralsBtn = document.getElementById('plus-referrals');
+    const minusDaysBtn = document.getElementById('minus-days');
+    const plusDaysBtn = document.getElementById('plus-days');
+    const rewardItems = document.querySelectorAll('.reward-item');
+
+    let referralsCount = 0;
+    let daysCount = 0;
+
+    minusReferralsBtn.addEventListener('click', () => {
+        if (referralsCount > 0) {
+            referralsCount--;
+            referralsCountSpan.textContent = referralsCount;
+            updateRewards();
+        }
     });
 
-    window.addEventListener('beforeunload', saveProgressLocal);
+    plusReferralsBtn.addEventListener('click', () => {
+        if (referralsCount < 99) { // Добавляем ограничение на максимальное значение
+            referralsCount++;
+            referralsCountSpan.textContent = referralsCount;
+            updateRewards();
+        }
+    });
+
+    minusDaysBtn.addEventListener('click', () => {
+        if (daysCount > 0) {
+            daysCount--;
+            daysCountSpan.textContent = daysCount;
+            updateRewards();
+        }
+    });
+
+    plusDaysBtn.addEventListener('click', () => {
+        if (daysCount < 99) { // Добавляем ограничение на максимальное значение
+            daysCount++;
+            daysCountSpan.textContent = daysCount;
+            updateRewards();
+        }
+    });
+
+    const updateRewards = () => {
+        rewardItems.forEach(item => {
+            const [referralThreshold, dayThreshold] = item.dataset.threshold.split(',').map(Number);
+            const progressBar = item.querySelector('.progress');
+            const progressPercentage = item.querySelector('.progress-percent');
+
+            let progress = Math.min((referralsCount / referralThreshold) * 100, (daysCount / dayThreshold) * 100);
+            progress = Math.min(progress, 100); // Ensure the progress doesn't exceed 100%
+
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.textContent = `${progress.toFixed(1)}%`;
+
+            if (progress >= 100) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+        });
+    };
+
+    // Show main screen after 4 seconds
+    setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('home-page').style.display = 'flex';
+    }, 4000);
+
+    // Load progress from local storage
+    loadProgressLocal();
+
+    // Save progress every 30 seconds
+    setInterval(saveProgressLocal, 30000);
 });
+
+const subscribeChannel = (url, partnerId) => {
+    window.open(url, '_blank');
+    const partnerElement = document.getElementById(partnerId);
+    const subscribeButton = partnerElement.querySelector('.subscribe-button');
+    const confirmButton = partnerElement.querySelector('.confirm-button');
+    subscribeButton.style.display = 'none';
+    confirmButton.style.display = 'block';
+};
+
+const confirmSubscription = (partnerId) => {
+    const partnerElement = document.getElementById(partnerId);
+    const subscribeButton = partnerElement.querySelector('.subscribe-button');
+    const confirmButton = partnerElement.querySelector('.confirm-button');
+    subscribeButton.style.display = 'none';
+    confirmButton.style.display = 'none';
+
+    const checkmark = document.createElement('img');
+    checkmark.src = 'assets/images/checkmark.svg';
+    checkmark.classList.add('checkmark');
+    partnerElement.appendChild(checkmark);
+};
