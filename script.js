@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const pages = document.querySelectorAll('.main-screen');
     const navItems = document.querySelectorAll('.nav-item');
