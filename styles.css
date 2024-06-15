@@ -510,7 +510,7 @@ body, html {
     background-color: #1c1c1e;
     border: none;
     border-radius: 10px;
-    width: 300px; /* Fixed width */
+    width: 300px; /* Фиксированная ширина */
 }
 
 .notification {
@@ -525,4 +525,166 @@ body, html {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 0.5s;
+}
+
+/* Airdrop Page Styles */
+.airdrop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; /* Уменьшение отступа до 10 пикселей */
+    color: white;
+    -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
+    -ms-user-select: none; /* Запрещаем выделение текста на IE */
+    user-select: none; /* Запрещаем выделение текста на всех браузерах */
+}
+
+.airdrop-container h1 {
+    font-size: 24px; /* Измените размер шрифта здесь */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.counter-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px; /* Отступы от боковых границ экрана */
+}
+
+.counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+}
+
+.counter-controls {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    background-size: cover;
+    background-color: transparent; /* Убираем фон */
+    position: relative; /* Добавляем позиционирование для абсолютного размещения кнопок */
+    width: 150px; /* Увеличиваем ширину контейнера для кнопок */
+}
+
+.counter-controls button {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    font-size: 14px; /* Уменьшаем иконки на 3 пикселя */
+    cursor: pointer;
+    touch-action: manipulation; /* Устранение приближения при двойном нажатии */
+    position: absolute; /* Абсолютное позиционирование кнопок */
+}
+
+.counter-controls button#minus-referrals, .counter-controls button#minus-days {
+    left: 4px; /* Размещаем кнопку минус слева */
+}
+
+.counter-controls button#plus-referrals, .counter-controls button#plus-days {
+    right: 4px; /* Размещаем кнопку плюс справа */
+}
+
+.counter-controls span {
+    margin: 0 30px; /* Увеличиваем отступы между кнопками и числом */
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff; /* Изменение цвета текста */
+    margin-left: 62px; /* Сдвиг вправо на 5 пикселей */
+    position: relative;
+
+}
+
+.rewards-container {
+    width: calc(100% - 20px); /* Оставляем отступ по 10 пикселей с каждой стороны */
+    text-align: left;
+}
+
+.rewards-list {
+    list-style: none;
+    padding: 0;
+}
+
+.reward-item {
+    list-style-type: none;
+    border: 2px solid #9d53ff;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Темный полупрозрачный фон */
+    margin: 10px 0;
+}
+
+.reward-container {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Уменьшение ширины для соблюдения отступов */
+}
+
+.reward-image {
+    width: 100px; /* Увеличение размера иконок до 100 пикселей */
+    height: auto;
+    margin-right: 10px;
+    margin-left: 10px; /* Перемещение иконки влево */
+}
+
+.reward-info {
+    flex-grow: 1;
+}
+
+.reward-title {
+    font-size: 18px; /* Изменение размера шрифта */
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: #fff; /* Цвет текста белый */
+}
+
+.progress-bar {
+    flex-grow: 1; /* Расширяем прогресс-бар */
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+    position: relative;
+    width: calc(100% - 25px); /* Уменьшение ширины прогресс бара */
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: #ff3b30;
+    border-radius: 5px;
+}
+
+.progress-percent {
+    position: absolute;
+    bottom: -20px; /* Перемещение под прогресс бар */
+    left: 50%; /* Выравнивание по центру */
+    transform: translateX(-50%);
+    font-size: 14px; /* Уменьшаем размер шрифта */
+    color: #fff;
+    text-align: center; /* Центрирование текста */
+}
+
+.counter-container {
+    -webkit-touch-callout: none; /* Запрещаем вызов контекстного меню на iOS */
+    -webkit-user-select: none; /* Запрещаем выделение текста на iOS */
+    -ms-user-select: none; /* Запрещаем выделение текста на IE */
+    user-select: none; /* Запрещаем выделение текста на всех браузерах */
+}
+
+@keyframes levitate {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
